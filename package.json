@@ -1,0 +1,21 @@
+{
+  "name": "nuxt",
+  "version": "1.0.0",
+  "description": "测试nuxt",
+  "author": "13751139402",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "element-ui": "^2.4.11"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0"
+  }
+}
