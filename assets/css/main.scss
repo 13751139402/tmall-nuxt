@@ -1,18 +1,32 @@
-em, i {
-     font-style: normal;
+em,
+i {
+    font-style: normal;
 }
+
 * {
     margin: 0;
     padding: 0;
 }
-head,footer{
-    font-family: "Microsoft YaHei",tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
+
+head,
+footer {
+    font-family: "Microsoft YaHei", tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
 }
-body, button, input, select, textarea {
-    font: 12px/1.5 tahoma,arial,"\5b8b\4f53";
+
+body,
+button,
+input,
+select,
+textarea {
+    font: 12px/1.5 tahoma, arial, "\5b8b\4f53";
     -ms-overflow-style: scrollbar;
 }
-a{
+
+a {
     cursor: pointer;
     text-decoration: blink;
+}
+
+button {
+    border: 0;
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-02 16:08:19
+ * @LastEditTime : 2020-01-03 16:52:00
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -19,23 +19,48 @@
           :default-active="activeIndex"
           class="el-menu-quick-menu"
           mode="horizontal"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          background-color="#f63a00"
           @select="handleSelect"
         >
           <el-submenu index="2">
-            <template slot="title">我的淘宝</template>
+            <template slot="title">
+              <i>我的淘宝</i>
+            </template>
             <el-menu-item index="2-1">已买到的宝贝</el-menu-item>
             <el-menu-item index="2-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
-          <el-menu-item index="3">购物车</el-menu-item>
-          <el-menu-item index="8">手机版</el-menu-item>
-          <el-menu-item index="9">淘宝网</el-menu-item>
+          <el-menu-item index="3">
+            <i class="iconfont icongouwuchexuanzhong"></i>
+            <i>购物车</i>
+          </el-menu-item>
+          <el-submenu index="80">
+            <template slot="title">
+              <i>收藏夹</i>
+            </template>
+            <el-menu-item index="4-1">收藏的宝贝</el-menu-item>
+            <el-menu-item index="4-2">收藏的店铺</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="8">
+            <i class="iconfont iconshouji"></i>
+            <i>手机版</i>
+          </el-menu-item>
+          <el-menu-item index="9">
+            <i>淘宝网</i>
+          </el-menu-item>
           <el-submenu index="4">
-            <template slot="title">商家支持</template>
+            <template slot="title">
+              <i>商家支持</i>
+            </template>
             <el-menu-item index="4-1">已买到的宝贝</el-menu-item>
             <el-menu-item index="4-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
           <el-submenu index="10">
-            <template slot="title">网站导航</template>
+            <template slot="title">
+              <i class="iconfont iconliebiao"></i>
+              <i>网站导航</i>
+            </template>
             <el-menu-item index="10-1">已买到的宝贝</el-menu-item>
             <el-menu-item index="10-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
@@ -72,8 +97,7 @@ export default {
   justify-content: center;
   color: #fff;
   font-family: "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB",
-    "\5b8b\4f53", sans-serif !important;
-  font: 12px/1.5 tahoma, arial, "\5b8b\4f53" !important;
+    "\5b8b\4f53", sans-serif;
 }
 #tmall_head a {
   color: #fff;
@@ -81,7 +105,6 @@ export default {
 .content {
   width: 1230px;
   height: 32px;
-  background: gray;
   display: flex;
   justify-content: space-between;
 }
@@ -93,5 +116,8 @@ export default {
 }
 .el-menu-quick-menu {
   height: 100%;
+}
+.el-menu-quick-menu i {
+  color: #fff;
 }
 </style>
