@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-03 16:52:00
+ * @LastEditTime : 2020-01-06 17:52:55
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
  -->
 <template>
-  <nav id="tmall_head">
+  <nav id="site-nav">
     <article class="content">
       <section class="login-info">
         <em>喵，欢迎来天猫</em>
@@ -89,7 +89,7 @@ export default {
 
 <style  scoped lang='scss'>
 @import "@/assets/css/menu.scss";
-#tmall_head {
+#site-nav {
   height: 40px;
   width: 100%;
   background: #f63a00;
@@ -99,7 +99,7 @@ export default {
   font-family: "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB",
     "\5b8b\4f53", sans-serif;
 }
-#tmall_head a {
+#site-nav a {
   color: #fff;
 }
 .content {
@@ -119,5 +119,13 @@ export default {
 }
 .el-menu-quick-menu i {
   color: #fff;
+}
+#site-nav {
+  position: relative !important;
+  border-bottom-color: transparent !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  z-index: 99999;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: content-box;
 }
 </style>
