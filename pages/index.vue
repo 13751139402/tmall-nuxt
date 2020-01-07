@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-06 18:21:48
+ * @LastEditTime : 2020-01-07 16:11:18
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -11,6 +11,7 @@
     <nav>
       <site-nav></site-nav>
     </nav>
+
     <header>
       <article id="header_layout">
         <h1 id="mallLogo" title="天猫Tmall.com">天猫Tmall.com</h1>
@@ -20,7 +21,9 @@
         </section>
       </article>
     </header>
+
     <content>
+      <!------- 主导航条 ------->
       <article class="main-nav">
         <div class="inner-con0">
           <div class="inner-con1">
@@ -69,66 +72,32 @@
           </div>
         </div>
       </article>
-      <article class="category-con">
-        <section class="category-inner-con">
-          <figure class="logo-con">
-            <img
-              class="tmall-logo-img"
-              src="//img.alicdn.com/tfs/TB1MaLKRXXXXXaWXFXXXXXXXXXX-480-260.png"
-              style="margin: 1px auto; display: none;"
-              width="240px"
-              height="130px"
-            />
-            <figure>
-              <a
-                class="j_doodleLink"
-                style="display:block;height:100%;width:100%;"
-                href="https://nianhuo.tmall.com?wh_weex=true&amp;wh_biz=tm&amp;pos=1&amp;wx_navbar_hidden=true&amp;wh_bizStageId=1287&amp;acm=201603169.1003.2.7198992&amp;wx_main_hc=true&amp;scm=1003.2.201603169.ITEM_1579871047453_7198992"
-              >
-                <img src="https://gw.alicdn.com/tfs/TB1KT.bsuL2gK0jSZFmXXc7iXXa-290-130.gif" />
-              </a>
-            </figure>
-          </figure>
-          <ul class="category-tab-nav">
-            <li class="category-tab-nav-item" nav-target="pannel-normal">商品分类</li>
-            <li class="category-tab-nav-item meeting-tab selected" nav-target="pannel-meeting">年货节</li>
-          </ul>
-        </section>
-        <section class="banner">
-          <el-carousel arrow="never" height="500px">
-            <el-carousel-item v-for="(item,index) in bannerList" :key="index">
-              <a href>
-                <img :src="item.src" alt />
-              </a>
-            </el-carousel-item>
-          </el-carousel>
-        </section>
-      </article>
+      <!------- 分类 ------->
+      <category-view></category-view>
+      <!------- 活动 ------->
+      <activity-view></activity-view>
     </content>
+
     <footer></footer>
   </div>
 </template>
 
 <script>
 import Logo from "~/components/Logo.vue";
-import siteNav from "~/components/site-nav.vue";
+import siteNav from "~/components/home/site-nav.vue";
+import category from "~/components/home/category";
+import activity from "~/components/home/activity.vue";
 
 export default {
   components: {
     Logo,
-    "site-nav": siteNav
+    "site-nav": siteNav,
+    "category-view": category,
+    "activity-view": activity
   },
   data() {
     return {
-      search_key: "",
-      bannerList: [
-        { href: "", src: "/_nuxt/assets/images/banner/1.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/2.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/3.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/4.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/5.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/6.jpg" }
-      ]
+      search_key: ""
     };
   }
 };
@@ -161,15 +130,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-width: 2px 0 2px 2px;
   border: 2px solid #ff0036;
-
+  border-width: 2px 0 2px 2px;
+  box-sizing: border-box;
   .search_input {
     width: 491px;
     height: 100%;
     border: 0;
     font: 16px/22px arial;
     padding: 5px 3px 5px 5px;
+    box-sizing: border-box;
   }
   .search_button {
     width: 132px;
@@ -203,6 +173,7 @@ export default {
       width: 1230px;
       margin: 0 auto;
       padding-right: 30px;
+      box-sizing: content-box;
       .inner-con2 {
         background-color: white;
         border-style: solid;
@@ -238,79 +209,4 @@ export default {
 }
 
 // -------------------- content category
-.category-con {
-  position: relative;
-  height: 500px;
-  width: 100%;
-  .category-inner-con {
-    width: 1230px;
-    padding-right: 30px;
-    position: relative;
-    height: 0;
-    z-index: 100;
-    margin: 0 auto;
-    .logo-con {
-      height: 130px;
-      width: 290px;
-      position: absolute;
-      z-index: 100000;
-      margin-top: -167px;
-      margin-left: -45px;
-      img {
-        width: 290px;
-        height: 130px;
-        position: absolute;
-        bottom: 0;
-      }
-    }
-    .category-tab-nav {
-      position: absolute;
-      z-index: 100;
-      margin-top: -36px;
-      height: 36px;
-      width: 200px;
-      color: #fff;
-      line-height: 36px;
-      .category-tab-nav-item {
-        float: left;
-        width: 100px;
-        text-align: center;
-        font-size: 14px;
-        color: #f0f0f0;
-        cursor: pointer;
-        background-color: #c60a0a;
-        &.meeting-tab {
-          position: relative;
-          color: #ffe013;
-          &.selected {
-            color: #fff;
-            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAAA1BMVEUYFRXvJ83tAAAAAXRSTlPM0jRW/QAAAApJREFUCNdjAAIAAAQAASDSLW8AAAAASUVORK5CYII=);
-          }
-        }
-        &.selected {
-          color: #dd2727;
-          background-color: #eee;
-          background-color: rgba(238, 238, 238, 0.95);
-        }
-      }
-    }
-  }
-  .banner {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-    position: relative;
-    z-index: 0;
-    width: 1230px;
-    margin: 0 auto;
-    height: 500px;
-    img {
-      width: 100%;
-    }
-    /deep/.el-carousel__button {
-      width: 25px;
-      height: 5px;
-    }
-  }
-}
 </style>

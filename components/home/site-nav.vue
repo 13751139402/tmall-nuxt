@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-06 17:52:55
+ * @LastEditTime : 2020-01-07 10:03:13
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -20,8 +20,8 @@
           class="el-menu-quick-menu"
           mode="horizontal"
           text-color="#fff"
-          active-text-color="#ffd04b"
-          background-color="#f63a00"
+          active-text-color="#d91e1c"
+          background-color="#d91e1c"
           @select="handleSelect"
         >
           <el-submenu index="2">
@@ -92,7 +92,7 @@ export default {
 #site-nav {
   height: 40px;
   width: 100%;
-  background: #f63a00;
+  background: #d91e1c;
   display: flex;
   justify-content: center;
   color: #fff;
@@ -127,5 +127,8 @@ export default {
   z-index: 99999;
   border-bottom: 1px solid #e5e5e5;
   box-sizing: content-box;
+}
+* {
+  box-sizing: border-box;
 }
 </style>
