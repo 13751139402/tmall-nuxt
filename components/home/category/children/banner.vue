@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-07 14:27:29
- * @LastEditTime : 2020-01-07 16:13:24
+ * @LastEditTime : 2020-01-08 09:54:35
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\category\children\banner.vue
@@ -19,7 +19,7 @@
     <el-carousel arrow="never" height="500px">
       <el-carousel-item v-for="(item,index) in bannerList" :key="index">
         <a href>
-          <img :src="item.src" alt />
+          <img src="~/assets/images/banner/1.jpg" alt />
         </a>
       </el-carousel-item>
     </el-carousel>

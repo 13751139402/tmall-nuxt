@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-07 16:11:18
+ * @LastEditTime : 2020-01-08 18:00:00
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -9,10 +9,12 @@
 <template>
   <div class="mallPage">
     <nav>
+      <!------- 顶级导航条 ------->
       <site-nav></site-nav>
     </nav>
 
     <header>
+      <!------- 搜索栏 ------->
       <article id="header_layout">
         <h1 id="mallLogo" title="天猫Tmall.com">天猫Tmall.com</h1>
         <section id="header_input">
@@ -76,6 +78,8 @@
       <category-view></category-view>
       <!------- 活动 ------->
       <activity-view></activity-view>
+      <!------- 猜你喜欢 ----->
+      <wonderful-view></wonderful-view>
     </content>
 
     <footer></footer>
@@ -86,14 +90,16 @@
 import Logo from "~/components/Logo.vue";
 import siteNav from "~/components/home/site-nav.vue";
 import category from "~/components/home/category";
-import activity from "~/components/home/activity.vue";
+import activity from "~/components/home/activity";
+import wonderful from "~/components/home/wonderful";
 
 export default {
   components: {
     Logo,
     "site-nav": siteNav,
     "category-view": category,
-    "activity-view": activity
+    "activity-view": activity,
+    "wonderful-view": wonderful
   },
   data() {
     return {
