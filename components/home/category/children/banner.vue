@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-07 14:27:29
- * @LastEditTime : 2020-01-08 09:54:35
+ * @LastEditTime : 2020-01-09 16:34:09
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\category\children\banner.vue
@@ -19,7 +19,7 @@
     <el-carousel arrow="never" height="500px">
       <el-carousel-item v-for="(item,index) in bannerList" :key="index">
         <a href>
-          <img src="~/assets/images/banner/1.jpg" alt />
+          <img :src="item.src" alt />
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -31,12 +31,12 @@ export default {
   data() {
     return {
       bannerList: [
-        { href: "", src: "/_nuxt/assets/images/banner/1.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/2.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/3.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/4.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/5.jpg" },
-        { href: "", src: "/_nuxt/assets/images/banner/6.jpg" }
+        { href: "", src: "http://hsid.top/images/1578558771089-1.jpg" },
+        { href: "", src: "http://hsid.top/images/1578558773748-2.jpg" },
+        { href: "", src: "http://hsid.top/images/1578558775749-3.jpg" },
+        { href: "", src: "http://hsid.top/images/1578558778163-4.jpg" },
+        { href: "", src: "http://hsid.top/images/1578558780547-5.jpg" },
+        { href: "", src: "http://hsid.top/images/1578558782602-6.jpg" }
       ]
     };
   }

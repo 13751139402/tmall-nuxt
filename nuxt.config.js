@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-03 15:48:14
+ * @LastEditTime : 2020-01-09 10:16:25
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -33,7 +33,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/main.scss',
-    '@/assets/css/iconfont.css/'
+    '@/assets/iconfont/iconfont.css'
   ],
   /*
   ** Plugins to load before mounting the App
