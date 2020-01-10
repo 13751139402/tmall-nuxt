@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 17:59:34
- * @LastEditTime : 2020-01-08 18:05:30
+ * @LastEditTime : 2020-01-10 18:06:03
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\wonderful\index.vue
@@ -13,11 +13,41 @@
         <i class="iconfont iconzan fp-iconfont"></i>猜你喜欢
       </span>
     </h2>
+    <div class="infinite-list-wrapper" style="overflow:auto">
+      <floor-item
+        v-for="item in list"
+        :key="item.spu_no"
+        :price="item.price"
+        href="/"
+        :name="item.goods_name"
+        :img="item.cover"
+        style="margin: 0;"
+      ></floor-item>
+    </div>
+    <div class="tm-end show"></div>
   </article>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import floorItem from "@/components/home/activity-view/children/floor-line-con-item";
+export default {
+  components: {
+    "floor-item": floorItem
+  },
+  data() {
+    return {
+      list: []
+    };
+  },
+  beforeMount() {
+    axios
+      .get("http://localhost:3000/goods/randGoods?num=60")
+      .then(({ data }) => {
+        this.list = data;
+      });
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -63,5 +93,25 @@ export default {};
       }
     }
   }
+}
+.infinite-list-wrapper {
+  overflow: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.wonderful-con .tm-end {
+  background: url(//img.alicdn.com/tps/TB1wQDAPXXXXXXgaFXXXXXXXXXX-62-35.png)
+    no-repeat;
+  position: relative;
+  display: none;
+  content: "\20";
+  text-align: center;
+  width: 80px;
+  height: 45px;
+  margin: 0 auto 10px;
+  background-size: cover;
+  z-index: 9;
 }
 </style>

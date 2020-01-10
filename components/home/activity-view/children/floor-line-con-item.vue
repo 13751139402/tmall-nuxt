@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 15:54:45
- * @LastEditTime : 2020-01-08 17:29:30
+ * @LastEditTime : 2020-01-10 17:19:49
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\activity\children\floor-line-con-item.vue
@@ -26,7 +26,7 @@ export default {
       type: String
     },
     price: {
-      type: Number
+      type: String
     },
     href: {
       type: String,
@@ -91,5 +91,46 @@ export default {
     width: 185px;
     height: 185px;
   }
+}
+.grid {
+  .title {
+    position: absolute;
+    top: 20px;
+    left: 25px;
+    width: 220px;
+    font-size: 18px;
+    z-index: 10;
+    line-height: 24px;
+    height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+    color: #000;
+    white-space: nowrap;
+  }
+  .sub-title {
+    position: absolute;
+    top: 49px;
+    left: 25px;
+    width: 220px;
+    font-size: 14px;
+    z-index: 10;
+    line-height: 18px;
+    height: 18px;
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+.grid .sub-title,
+.tab-item-title {
+  color: #7a45e5;
+}
+
+.Boutique {
+  width: 170px;
+  height: 170px;
+  margin: 90px 33px 42px 32px;
 }
 </style>

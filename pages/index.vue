@@ -1,7 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-09 18:28:41
+ * @LastEditTime : 2020-01-10 17:46:16
+ * @LastEditors  : Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \nuxt\pages\index.vue
+ -->
+<!--
+ * @Author: your name
+ * @Date: 2019-12-31 09:37:11
+ * @LastEditTime : 2020-01-10 10:05:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -112,139 +120,538 @@
         <!------- 分类 ------->
         <category-view></category-view>
         <!------- 活动 ------->
-        <activity-view></activity-view>
+        <article class="activity-bg">
+          <!------- 活动区域 ------->
+          <activity-area class="activityArea"></activity-area>
+          <div class="area-con"></div>
+          <!------- 品牌闪购 ------->
+          <section class="brandWall" v-if="download.brandWall">
+            <brand-item
+              cn="品牌闪购"
+              en="BRAND SALE"
+              image="https://img.alicdn.com/tfs/TB1ctCQJhTpK1RjSZR0XXbEwXXa-468-644.jpg_320x5000q100.jpg_.webp"
+              href
+              :width="234"
+            ></brand-item>
+            <brand-item
+              cn="聚名品"
+              en="LUXURY CHANNEL"
+              image="https://img.alicdn.com/tfs/TB1ZkoLukCWBuNjy0FaXXXUlXXa-966-644.jpg_490x490q100.jpg_.webp"
+              href
+            ></brand-item>
+            <brand-item
+              style="width: 485px;margin-right: 0;"
+              cn="品牌活动"
+              en="BRAND ACTIVITY"
+              image="https://img.alicdn.com/tps/i4/TB1UrovrYr1gK0jSZFDSuv9yVXa.jpg_490x490q100.jpg_.webp"
+              href
+            ></brand-item>
+          </section>
+          <!------- 热门品牌 ------->
+          <section class="brandHot" v-if="download.brandHot">
+            <div class="module-body">
+              <div class="brand-list">
+                <ul class="brand-item-body">
+                  <brand-hot
+                    v-for="(item,index) of brandList"
+                    :key="index"
+                    :img="item.img"
+                    :name="item.name"
+                  ></brand-hot>
+                </ul>
+                <div>
+                  <a href="#" class="refresh-btn">
+                    <i class="iconfont iconhuanyipi1 rotate-icon"></i>
+                    <span class="btn-text">换一批</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--- 活动楼层 --->
+          <section class="floor-con">
+            <!------- 天猫超市 ------>
+            <floor-line
+              id="tmall-shop"
+              v-if="download.tmallShop"
+              httpRequest="http://localhost:3000/goods/randGoods?num=6"
+            >
+              <template v-slot:title>
+                <img src="https://img.alicdn.com/tfs/TB1Q67hXPihSKJjy0FeXXbJtpXa-428-50.png" />
+              </template>
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tfs/TB1XjMYnfb2gK0jSZK9XXaEgFXa-468-1236.jpg"
+                  category="天猫超市"
+                  title1="1499抢"
+                  title2="飞天茅台"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-two-item></floor-two-item>
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 天猫国际 ------>
+            <floor-line
+              id="tmall-international"
+              v-if="download.tmallInternational"
+              httpRequest="http://localhost:3000/goods/randGoods?num=7"
+            >
+              <template v-slot:title>
+                <img src="https://img.alicdn.com/tfs/TB1R.slXGagSKJjy0FgXXcRqFXa-428-50.png" />
+              </template>
+              <template v-slot:bigBanner>
+                <div style="display: flex;flex-direction: column;float: left;">
+                  <floor-banner
+                    img="https://img.alicdn.com/tfs/TB1fQ1VeMoQMeJjy0FpXXcTxpXa-235-301.png"
+                    category="奢享人生"
+                    title1="急速发货"
+                    title2="全球低价"
+                    style="height:301px;border-bottom: 15px solid #f5f5f5;"
+                  ></floor-banner>
+                  <floor-banner
+                    img="https://img.alicdn.com/tfs/TB1xvaReMoQMeJjy1XaXXcSsFXa-235-301.png"
+                    category="春季上新"
+                    title1="日本专业级"
+                    title2="瘦脸美容仪"
+                    style="height:301px"
+                  ></floor-banner>
+                </div>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item>
+                  <div class="floor-item-content-wrap">
+                    <div class="title">识货</div>
+                    <div class="sub-title">每日精选新鲜好货</div>
+                    <img
+                      src="https://img.alicdn.com/tps/i4/TB1Njg2bjuhSKJjSspmSuwQDpXa.jpg"
+                      class="Boutique"
+                    />
+                    <div class="item-activity-icon" style="display:none"></div>
+                  </div>
+                </floor-item>
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 居家生活 ------>
+            <floor-line
+              title="居家生活"
+              subTitle="GROCERY & HEALTH"
+              v-if="download.surplus"
+              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+            >
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tps/i4/TB1iAupe8Kw3KVjSZFOSuurDVXa.jpg"
+                  category="家具建材"
+                  title1="年货狂欢"
+                  title2="不只5折"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 潮电酷玩 ------>
+            <floor-line
+              title="潮电酷玩"
+              subTitle="ELECTRONICS"
+              v-if="download.surplus"
+              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+            >
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tps/i4/TB1sgSzhFcJL1JjSZFOwu3WlXXa.png"
+                  category="明星同款"
+                  title1="畅想音乐"
+                  title2="耳机发烧友"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 美丽人生 ------>
+            <floor-line
+              title="美丽人生"
+              subTitle="FASHION & BEAUTY"
+              v-if="download.surplus"
+              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+            >
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tfs/TB1RX6OsF67gK0jSZPfXXahhFXa-468-1236.jpg"
+                  category="鸿运内衣"
+                  title1="新年钜惠"
+                  title2="不只五折"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 户外出行 ------>
+            <floor-line
+              title="户外出行"
+              subTitle="FASHION & BEAUTY"
+              v-if="download.surplus"
+              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+            >
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tfs/TB1Hux3rbY1gK0jSZTEXXXDQVXa-468-1236.jpg"
+                  category="鸿运内衣"
+                  title1="新年钜惠"
+                  title2="不只五折"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+            <!------- 打造爱巢 ------>
+            <floor-line
+              title="打造爱巢"
+              subTitle="HOME"
+              v-if="download.surplus"
+              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+            >
+              <template v-slot:bigBanner>
+                <floor-banner
+                  img="https://img.alicdn.com/tfs/TB1pQNMkuT2gK0jSZFvXXXnFXXa-468-1236.jpg"
+                  category="年终大促"
+                  title1="爆款直降"
+                  title2="24期免息"
+                ></floor-banner>
+              </template>
+              <template v-slot:default="{list}">
+                <floor-item
+                  v-for="item in list"
+                  :key="item.spu_no"
+                  :price="item.price"
+                  href="/"
+                  :name="item.goods_name"
+                  :img="item.cover"
+                ></floor-item>
+              </template>
+            </floor-line>
+          </section>
+        </article>
         <!------- 猜你喜欢 ----->
-        <wonderful-view></wonderful-view>
+        <wonderful-view v-if="download.likes"></wonderful-view>
       </content>
 
       <footer></footer>
     </main>
     <!--------- top搜索 ---------->
-    <aside class="search-shelter" :class="{'show':searchShow}"></aside>
-    <aside class="search-con" :class="{'show':searchShow}">
-      <div class="attached-search-container">
-        <div class="fp-iconfont-new">
-          <i class="iconfont iconTMALLLOGO1" style="font-size: 80px;"></i>
-          <i class="iconfont icontianmao" style="font-size: 46px;line-height: 24px;margin-left:3px"></i>
-        </div>
-        <div id="mallSearch">
-          <form
-            name="searchTop"
-            action="//list.tmall.com/search_product.htm"
-            class="mallSearch-form clearfix"
-            target="_top"
-            accept-charset="gbk"
-          >
-            <fieldset>
-              <legend>天猫搜索</legend>
-              <div class="mallSearch-input clearfix">
-                <div class="s-combobox" id="s-combobox-138">
-                  <div class="s-combobox-input-wrap">
-                    <input
-                      type="text"
-                      id="mq"
-                      class="s-combobox-input"
-                      title="请输入搜索文字"
-                      placeholder="搜索 天猫 商品/品牌/店铺"
-                    />
-                  </div>
-                </div>
-                <button type="submit">搜索</button>
-              </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </aside>
+    <search-view :searchShow="show.search" v-if="download.search"></search-view>
     <!--------- 锚点导航 ---------->
-    <aside class="mui-lift" v-show="liftShow">
-      <div class="sn-nav-wrapper" style="display: block;">
-        <div class="mui-lift-nav nav-header">导航</div>
-        <div data-spm="fpLift">
-          <a href="#" class="mui-lift-nav color-type-green">
-            <div class="mui-lift-nav-name">天猫超市</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-purple">
-            <div class="mui-lift-nav-name">天猫国际</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-green">
-            <div class="mui-lift-nav-name">居家生活</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-pink">
-            <div class="mui-lift-nav-name">美丽人生</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-blue">
-            <div class="mui-lift-nav-name">潮电酷玩</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-cyan">
-            <div class="mui-lift-nav-name">户外出行</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav color-type-red">
-            <div class="mui-lift-nav-name">打造爱巢</div>
-          </a>
-
-          <a href="#" class="mui-lift-nav">
-            <div class="mui-lift-nav-name">猜你喜欢</div>
-          </a>
-          <a href="#mallPage" class="mui-lift-nav nav-back j_navBack">
-            <i class="iconfont iconqiehuanqishang"></i>
-            <div>顶部</div>
-          </a>
-        </div>
-      </div>
-    </aside>
+    <mui-lift :liftShow="show.lift" v-if="download.lift"></mui-lift>
   </div>
 </template>
 
 <script>
-import Logo from "~/components/Logo.vue";
 import siteNav from "~/components/home/site-nav.vue";
-import category from "~/components/home/category";
-import activity from "~/components/home/activity";
-import wonderful from "~/components/home/wonderful";
+import serachView from "~/components/home/search-view.vue";
+import category from "~/components/home/category-view";
+import activity from "~/components/home/activity-view";
+import wonderful from "~/components/home/wonderful-view";
+import muiLift from "~/components/home/mui-lift";
+import brandItem from "~/components/home/activity-view/children/brand-item";
+import brandHot from "~/components/home/activity-view/children/brand-hot";
+import floorLine from "~/components/home/activity-view/children/floor-line-con";
+import bigBanner from "~/components/home/activity-view/children/floor-line-con-bigBanner";
+import floorItem from "~/components/home/activity-view/children/floor-line-con-item";
+import floorTwoItem from "~/components/home/activity-view/children/floor-line-con-twoItem";
+import activityArea from "~/components/home/activity-view/children/activity-area";
 import { throttle } from "~/assets/tools.js";
 
 export default {
   components: {
-    Logo,
     "site-nav": siteNav,
     "category-view": category,
     "activity-view": activity,
-    "wonderful-view": wonderful
+    "wonderful-view": wonderful,
+    "mui-lift": muiLift,
+    "search-view": serachView,
+    "brand-item": brandItem,
+    "brand-hot": brandHot,
+    "floor-line": floorLine,
+    "floor-banner": bigBanner,
+    "floor-item": floorItem,
+    "floor-two-item": floorTwoItem,
+    "activity-area": activityArea
   },
   data() {
     return {
       search_key: "",
-      searchShow: false,
       htmlEl: false,
-      liftShow: false
+      show: {
+        lift: false,
+        search: false
+      },
+      download: {
+        lift: false,
+        search: false,
+        brandWall: false,
+        brandHot: false,
+        tmallShop: false,
+        tmallInternational: false,
+        surplus: false,
+        likes: false
+      },
+      brandList: [
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1vDvUKpXXXXaKXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "Apple/苹果"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1CIkXKVXXXXXCXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "第六感"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1gR9vsyrpK1RjSZFhXXXSdXXa?abtest=&pos=3&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥20"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1Z.mzyMmTBuNjy1XbXXaMrVXa?abtest=&pos=4&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥300"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1t.e1m2DH8KJjy1XcXXcpdXXa?abtest=&pos=5&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "Nike/耐克"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1nE3FN9zqK1RjSZFHXXb3CpXa?abtest=&pos=6&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "Dell/戴尔"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1D0sLnHSYBuNjSspiXXXNzpXa?abtest=&pos=7&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥300"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1ilbUHpXXXXb8XXXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "优惠券 ￥1000"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1TJNTPXXXXXcqXVXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "ENFINITAS/蓝臻"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1a3bVRXXXXXbfXFXXXXXXXXXX?abtest=&pos=10&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥110"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1gD8NhDlYBeNjSszcXXbwhFXa?abtest=&pos=11&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥200"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1_aF7pG6qK1RjSZFmXXX0PFXa?abtest=&pos=12&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥30"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB12cBSirGYBuNjy0FoXXciBFXa?abtest=&pos=13&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "LEAGUE OF LEGENDS/英雄联盟"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1Im97lVT7gK0jSZFpXXaTkpXa?abtest=&pos=14&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "上汽大众"
+        },
+        {
+          img:
+            "https://img.alicdn.com/imgextra/i4/928417138/O1CN019OFNEK22bFcXdLUb5_!!928417138.png_100x150q100.jpg_.webp",
+          name: "优惠券 ￥300"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1KH4GQpXXXXb_apXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "scout"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1_kq7j1SSBuNjy0FlXXbBpVXa?abtest=&pos=17&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥210"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1nJxqJXXXXXchapXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "优惠券 ￥1000"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1sM7GSXXXXXb3aXXXXXXXXXXX?abtest=&pos=19&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥50"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1ytKieRWD3KVjSZKPXXap7FXa?abtest=&pos=20&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "帕尔玛之水"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1A9Eicf5TBuNjSspmXXaDRVXa?abtest=&pos=21&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥100"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1R1K4GFmWBuNjSspdSuvugXXa.jpg_100x150q100.jpg_.webp",
+          name: "双心"
+        },
+
+        {
+          img:
+            "https://img.alicdn.com/i2/2/T25cAwXGhXXXXXXXXX-1785908005.jpg_100x150q100.jpg_.webp",
+          name: "hot topic"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB19rJeHNjaK1RjSZFAXXbdLFXa?abtest=&pos=24&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥80"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1aA5EcMsSMeJjSspeXXa77VXa?abtest=&pos=26&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥200"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1OCoUJVXXXXcYXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "优惠券 ￥100"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1G5bXD9BYBeNjy0FeSuvnmFXa.jpg_100x150q100.jpg_.webp",
+          name: "优惠券 ￥100"
+        },
+        {
+          img:
+            "https://img.alicdn.com/i2/2/TB1XcHYHpXXXXXmXXXXSutbFXXX.jpg_100x150q100.jpg_.webp",
+          name: "优惠券 ￥200"
+        },
+        {
+          img:
+            "//img.alicdn.com/i2/2/TB1gOvrmZLJ8KJjy0FnXXcFDpXa?abtest=&pos=25&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
+          name: "优惠券 ￥80"
+        }
+      ]
     };
   },
   methods: {
-    $_scrollHandler() {
+    controlShow() {
       let scroll = this.htmlEl.scrollTop;
       if (scroll >= 500) {
-        this.liftShow = true;
+        this.show.lift = true;
       } else {
-        this.liftShow = false;
+        this.show.lift = false;
       }
       if (scroll >= 700) {
-        this.searchShow = true;
+        this.show.search = true;
       } else {
-        this.searchShow = false;
+        this.show.search = false;
+      }
+    },
+    controlDownload() {
+      let scroll = this.htmlEl.scrollTop;
+      if (scroll >= 500) {
+        this.download.lift = true;
+        if (scroll >= 500) {
+          this.download.search = true;
+        }
+      }
+      if (scroll >= 250) {
+        this.download.brandWall = true;
+        if (scroll >= 600) {
+          this.download.brandHot = true;
+          if (scroll >= 1000) {
+            this.download.tmallShop = true;
+            if (scroll >= 1400) {
+              this.download.tmallInternational = true;
+              if (scroll >= 1800) {
+                this.download.surplus = true;
+                if (scroll >= 3000) {
+                  this.download.likes = true;
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
+
   beforeMount() {
     // 挂载前添加"窗口调整"事件
     this.htmlEl = document.documentElement;
-    window.addEventListener("scroll", throttle(this.$_scrollHandler, 50));
+    this.controlShow();
+    this.controlDownload();
+    window.addEventListener("scroll", throttle(this.controlShow, 50));
+    window.addEventListener("scroll", throttle(this.controlDownload, 50));
   }
 };
 </script>
@@ -256,7 +663,6 @@ export default {
   background-position: center top;
   width: auto;
   min-width: 990px;
-  min-height: 3000px;
   background-color: transparent;
 }
 //----------------- header
@@ -361,242 +767,96 @@ export default {
   position: absolute;
   right: 0px;
 }
-// --------------- search-con
-.search-shelter,
-.search-con {
-  display: block;
-  position: fixed;
-  width: 100%;
-  z-index: 10000;
-  height: 50px;
-  transition: top 0.3s ease-out;
-  &.show {
-    top: 0px;
-  }
-}
-.search-shelter {
-  background-color: #ff0036;
-  opacity: 0.95;
-  top: -50px;
-}
-.search-con {
-  top: -50px;
-  margin: 0 auto;
-  opacity: 1;
-  box-shadow: 0 0 4px #eaeaea;
-  overflow: hidden;
-  .attached-search-container {
-    top: 0;
+//----------------- 活动
+.activity-bg {
+  background: top center no-repeat;
+  .area-con {
+    margin: auto;
+    padding-top: 10px;
     width: 1230px;
     padding-right: 30px;
-    background-color: transparent;
-    position: relative;
-    height: 50px;
-    margin: 0 auto;
-    border: none;
+  }
+  .brandWall {
+    margin: auto;
+    width: 1230px;
+    display: flex;
+    padding-right: 30px;
+  }
+}
+.brandHot {
+  margin: 15px auto 0;
+  width: 1230px;
+  padding-right: 30px;
+  position: relative;
+  .module-body {
+    height: 327px;
+    width: 100%;
     overflow: hidden;
-    .fp-iconfont-new {
-      width: 160px;
-      display: flex;
-      margin-top: 12px;
-      z-index: 20;
-      height: 30px;
-      line-height: 30px;
-      color: #fff;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    #mallSearch {
-      float: none !important;
-      padding-top: 12px;
-      width: 740px !important;
+    background-color: #fff;
+    .brand-list {
+      background-color: #f5f5f5;
+      margin-right: -1px;
+      width: 100%;
+      height: 100%;
+      float: right;
       position: relative;
-      z-index: 10;
-      height: 30px;
-      margin: 0 auto;
-      .mallSearch-form {
-        border: none !important;
-        .mallSearch-input {
-          background: #fff;
-          height: 30px;
-          .s-combobox {
-            height: 30px;
-            width: 650px;
-            float: left;
-            font-size: 12px;
-            .s-combobox-input-wrap {
-              position: relative;
-              height: 30px;
-              vertical-align: middle;
-              .s-combobox-input {
-                width: 640px !important;
-                background: 0 0;
-                outline: transparent dotted 0;
-                opacity: 1;
-              }
-              #mq {
-                color: #666;
-                margin: 0;
-                z-index: 2;
-                width: 289px;
-                height: 20px;
-                line-height: 20px;
-                padding: 5px 3px 5px 8px;
-                outline: 0;
-                border: none;
-                background: url(data:image/gif;base64,R0lGODlhAQADAJEAAObm5t3d3ff39wAAACH5BAAAAAAALAAAAAABAAMAAAICDFQAOw==)
-                  repeat-x;
-                -webkit-box-sizing: content-box;
-                -moz-box-sizing: content-box;
-                box-sizing: content-box;
-                &.input {
-                  font-weight: 900;
-                }
-              }
-            }
-          }
+      .brand-item-body {
+        margin-right: -2px;
+        overflow: hidden;
+      }
+    }
+  }
+  .refresh-btn {
+    width: 122px;
+    height: 108px;
+    display: block;
+    color: #999;
+    background-color: #fff;
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+    z-index: 500;
+    &:hover {
+      color: #fff !important;
+      background-color: #ff0036;
+      .rotate-icon {
+        animation: rotate 0.5s ease-out 0s;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
         }
       }
-      label {
-        color: #666;
-        font-size: 12px;
-        line-height: 30px;
-        height: 30px;
-        position: absolute;
-        left: 8px;
-        top: 0;
-        z-index: 1;
-        max-width: 90%;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-      fieldset {
-        position: relative;
-        border: 0;
-      }
-      legend {
-        display: none;
-      }
     }
-    button {
-      right: -1px;
-      height: 32px;
+    .rotate-icon {
+      width: 40px;
+      height: 40px;
       position: absolute;
-      z-index: 1;
-      top: 0;
-      width: 90px;
-      border: 0;
-      font-size: 16px;
-      letter-spacing: 4px;
-      cursor: pointer;
-      color: #fff;
-      background-color: #ff0036;
-      overflow: hidden;
-      font-family: "\5FAE\8F6F\96C5\9ED1", arial, "\5b8b\4f53";
-      border-radius: 0;
+      left: 50%;
+      top: 50%;
+      margin-left: -20px;
+      margin-top: -30px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 38px;
+      border-radius: 20px;
+    }
+    .btn-text {
+      display: block;
+      font-size: 14px;
+      line-height: 136px;
+      text-align: center;
     }
   }
 }
-
-// --------------- mui-lift
-.mui-lift {
-  margin-left: -673px !important;
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  z-index: 9999;
-  width: 35px;
-  text-align: center;
-  .mui-lift-nav {
-    &.nav-header {
-      background-color: #ff0036;
-    }
-    position: relative;
-    display: block;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 1px;
-    background-color: #666;
-    background-color: rgba(0, 0, 0, 0.6);
-    overflow: hidden;
-    font-size: 12px;
-    .mui-lift-nav-name {
-      line-height: 12px;
-      width: 24px;
-      height: 28px;
-      margin: 6px auto;
-    }
-    .nav-back i {
-      font-size: 14px;
-      margin-top: 5px;
-      display: block;
-    }
-  }
-  .mui-lift-cur-nav {
-    background-color: #ff0036;
-    &:hover {
-      background-color: #000;
-    }
-  }
-  .mui-lift-nav.nav-header,
-  .mui-lift-nav.nav-header:hover {
-    background-color: #ff0036;
-  }
-
-  .mui-lift-nav:hover {
-    background-color: #000;
-  }
-
-  .mui-lift-nav.nav-back {
-    line-height: 13px;
-    background-color: #666;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
-  .mui-lift-nav.nav-back i {
-    font-size: 18px;
-    margin-top: 5px;
-    display: block;
-  }
-
-  .mui-lift-cur-nav {
-    background-color: #ff0036;
-  }
-
-  .color-type-pink.mui-lift-cur-nav,
-  .color-type-pink:hover {
-    background-color: #ea5f8d;
-  }
-
-  .color-type-blue.mui-lift-cur-nav,
-  .color-type-blue:hover {
-    background-color: #0aa6e8;
-  }
-
-  .color-type-green.mui-lift-cur-nav,
-  .color-type-green:hover {
-    background-color: #64c333;
-  }
-
-  .color-type-cyan.mui-lift-cur-nav,
-  .color-type-cyan:hover {
-    background-color: #19c8a9;
-  }
-
-  .color-type-orange.mui-lift-cur-nav,
-  .color-type-orange:hover {
-    background-color: #f7a945;
-  }
-
-  .color-type-red.mui-lift-cur-nav,
-  .color-type-red:hover {
-    background-color: #f15453;
-  }
+.floor-con {
+  margin: 20px auto 0;
+  width: 1230px;
+  padding-right: 30px;
 }
 </style>

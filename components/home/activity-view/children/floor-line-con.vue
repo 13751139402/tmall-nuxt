@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 14:43:04
- * @LastEditTime : 2020-01-08 17:47:24
+ * @LastEditTime : 2020-01-10 16:30:13
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\activity\children\floor-line-con.vue
@@ -20,15 +20,26 @@
     <div class="line-body">
       <slot name="bigBanner"></slot>
       <div class="middle-column-con">
-        <slot></slot>
+        <slot :list="list"></slot>
       </div>
     </div>
   </article>
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ['title', 'subTitle']
+  props: ["title", "subTitle", "httpRequest"],
+  data() {
+    return {
+      list: []
+    };
+  },
+  beforeMount() {
+    axios.get(this.httpRequest).then(({ data }) => {
+      this.list = data;
+    });
+  }
 };
 </script>
 

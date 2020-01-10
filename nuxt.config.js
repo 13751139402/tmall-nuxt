@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-09 10:16:25
+ * @LastEditTime : 2020-01-10 15:55:02
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -9,6 +9,10 @@
 
 export default {
   mode: 'universal',
+  server: {
+    port: 8000, // default: 3000
+    host: '0.0.0.0' // default: localhost
+  },
   /*
   ** Headers of the page
   */
