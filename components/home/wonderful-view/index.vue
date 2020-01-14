@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 17:59:34
- * @LastEditTime : 2020-01-13 17:37:15
+ * @LastEditTime : 2020-01-14 18:07:26
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\wonderful\index.vue
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import floorItem from "@/components/home/activity-view/children/floor-line-con-item";
+import { randGoods } from "@/assets/api/home.js";
 export default {
   components: {
     "floor-item": floorItem
@@ -41,11 +41,9 @@ export default {
     };
   },
   beforeMount() {
-    axios
-      .get("http://localhost:3000/goods/randGoods?num=60")
-      .then(({ data }) => {
-        this.list = data;
-      });
+    randGoods({ num: 60 }).then(({ data }) => {
+      this.list = data;
+    });
   }
 };
 </script>
@@ -113,7 +111,7 @@ export default {
   margin: 0 auto 10px;
   background-size: cover;
   z-index: 9;
-  &.show{
+  &.show {
     display: block;
   }
 }

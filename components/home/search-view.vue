@@ -29,7 +29,9 @@
                     />
                   </div>
                 </div>
-                <button type="submit">搜索</button>
+                <nuxt-link :to="{ path: 'search_product', query: { q: search_key }}">
+                  <button type="submit">搜索</button>
+                </nuxt-link>
               </div>
             </fieldset>
           </form>
@@ -41,7 +43,7 @@
 
 <script>
 export default {
-  props: ["searchShow"],
+  props: ["searchShow"]
 };
 </script>
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-14 17:45:40
+ * @LastEditTime : 2020-01-14 18:23:01
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -62,7 +62,9 @@
           <h1 id="mallLogo" title="天猫Tmall.com">天猫Tmall.com</h1>
           <section id="header_input">
             <input v-model="search_key" class="search_input" placeholder="搜索 天猫 商品/品牌/店铺" />
-            <button class="search_button" @click="searchGoods(search_key)">搜索</button>
+            <nuxt-link :to="{ path: 'search_product', query: { q: search_key }}">
+              <button class="search_button">搜索</button>
+            </nuxt-link>
           </section>
         </article>
       </header>
@@ -409,8 +411,6 @@ import floorTwoItem from "~/components/home/activity-view/children/floor-line-co
 import activityArea from "~/components/home/activity-view/children/activity-area";
 import { throttle } from "~/assets/util/tools.js";
 
-import { getSearchGoods } from "~/assets/api/home.js";
-
 export default {
   components: {
     "site-nav": siteNav,
@@ -644,13 +644,6 @@ export default {
           }
         }
       }
-    },
-    searchGoods(value) {
-      getSearchGoods({ searchKey: value }).then(({ result }) => {
-        this.list = result.data;
-        this.listLoading = false;
-        this.total = result.total;
-      });
     }
   },
 
@@ -704,6 +697,7 @@ export default {
   }
   .search_button {
     width: 132px;
+    cursor: pointer;
     height: 36px;
     font-size: 18px;
     font-weight: 700;

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-14 17:03:38
+ * @LastEditTime : 2020-01-14 18:02:17
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -15,7 +15,7 @@ export default {
   },
   // 配置客户端和服务器共享的环境变量
   env: {
-    baseUrl: 'http://hsid:3000'
+    baseUrl: 'http://hsid.top:3000'
   },
   /*
   ** Headers of the page
