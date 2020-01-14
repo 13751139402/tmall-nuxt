@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 17:59:34
- * @LastEditTime : 2020-01-10 18:06:03
+ * @LastEditTime : 2020-01-13 17:37:15
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\wonderful\index.vue
@@ -113,5 +113,8 @@ export default {
   margin: 0 auto 10px;
   background-size: cover;
   z-index: 9;
+  &.show{
+    display: block;
+  }
 }
 </style>

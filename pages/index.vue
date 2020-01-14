@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-10 17:46:16
+ * @LastEditTime : 2020-01-14 17:45:40
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -62,7 +62,7 @@
           <h1 id="mallLogo" title="天猫Tmall.com">天猫Tmall.com</h1>
           <section id="header_input">
             <input v-model="search_key" class="search_input" placeholder="搜索 天猫 商品/品牌/店铺" />
-            <button class="search_button">搜索</button>
+            <button class="search_button" @click="searchGoods(search_key)">搜索</button>
           </section>
         </article>
       </header>
@@ -174,7 +174,7 @@
             <floor-line
               id="tmall-shop"
               v-if="download.tmallShop"
-              httpRequest="http://localhost:3000/goods/randGoods?num=6"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=6`"
             >
               <template v-slot:title>
                 <img src="https://img.alicdn.com/tfs/TB1Q67hXPihSKJjy0FeXXbJtpXa-428-50.png" />
@@ -203,7 +203,7 @@
             <floor-line
               id="tmall-international"
               v-if="download.tmallInternational"
-              httpRequest="http://localhost:3000/goods/randGoods?num=7"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=7`"
             >
               <template v-slot:title>
                 <img src="https://img.alicdn.com/tfs/TB1R.slXGagSKJjy0FgXXcRqFXa-428-50.png" />
@@ -253,7 +253,7 @@
               title="居家生活"
               subTitle="GROCERY & HEALTH"
               v-if="download.surplus"
-              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=8`"
             >
               <template v-slot:bigBanner>
                 <floor-banner
@@ -279,7 +279,7 @@
               title="潮电酷玩"
               subTitle="ELECTRONICS"
               v-if="download.surplus"
-              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=8`"
             >
               <template v-slot:bigBanner>
                 <floor-banner
@@ -305,7 +305,7 @@
               title="美丽人生"
               subTitle="FASHION & BEAUTY"
               v-if="download.surplus"
-              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=8`"
             >
               <template v-slot:bigBanner>
                 <floor-banner
@@ -331,7 +331,7 @@
               title="户外出行"
               subTitle="FASHION & BEAUTY"
               v-if="download.surplus"
-              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=8`"
             >
               <template v-slot:bigBanner>
                 <floor-banner
@@ -357,7 +357,7 @@
               title="打造爱巢"
               subTitle="HOME"
               v-if="download.surplus"
-              httpRequest="http://localhost:3000/goods/randGoods?num=8"
+              :httpRequest="`http://hsid.top:3000/goods/randGoods?num=8`"
             >
               <template v-slot:bigBanner>
                 <floor-banner
@@ -407,7 +407,9 @@ import bigBanner from "~/components/home/activity-view/children/floor-line-con-b
 import floorItem from "~/components/home/activity-view/children/floor-line-con-item";
 import floorTwoItem from "~/components/home/activity-view/children/floor-line-con-twoItem";
 import activityArea from "~/components/home/activity-view/children/activity-area";
-import { throttle } from "~/assets/tools.js";
+import { throttle } from "~/assets/util/tools.js";
+
+import { getSearchGoods } from "~/assets/api/home.js";
 
 export default {
   components: {
@@ -642,6 +644,13 @@ export default {
           }
         }
       }
+    },
+    searchGoods(value) {
+      getSearchGoods({ searchKey: value }).then(({ result }) => {
+        this.list = result.data;
+        this.listLoading = false;
+        this.total = result.total;
+      });
     }
   },
 
