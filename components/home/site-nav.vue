@@ -1,15 +1,16 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-07 10:03:13
+ * @LastEditTime : 2020-01-15 10:31:50
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
  -->
 <template>
-  <nav id="site-nav">
-    <article class="content">
+  <nav id="site-nav" :style="`background:${background};color:${color};height:${height}px`">
+    <article class="content" :style="`height:${top}px`">
       <section class="login-info">
+        <slot name="left-con"></slot>
         <em>喵，欢迎来天猫</em>
         <a href>请登录</a>
         <a href>免费注册</a>
@@ -18,10 +19,11 @@
         <el-menu
           :default-active="activeIndex"
           class="el-menu-quick-menu"
+          :style="`height: ${height}px;line-height: ${height-3}px;`"
           mode="horizontal"
-          text-color="#fff"
-          active-text-color="#d91e1c"
-          background-color="#d91e1c"
+          :text-color="color"
+          :active-text-color="background"
+          :background-color="background"
           @select="handleSelect"
         >
           <el-submenu index="2">
@@ -32,7 +34,7 @@
             <el-menu-item index="2-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
           <el-menu-item index="3">
-            <i class="iconfont icongouwuchexuanzhong"></i>
+            <i class="iconfont icongouwuchexuanzhong" :style="`color:${iconColor}`"></i>
             <i>购物车</i>
           </el-menu-item>
           <el-submenu index="80">
@@ -43,7 +45,7 @@
             <el-menu-item index="4-2">收藏的店铺</el-menu-item>
           </el-submenu>
           <el-menu-item index="8">
-            <i class="iconfont iconshouji"></i>
+            <i class="iconfont iconshouji" :style="`color:${iconColor}`"></i>
             <i>手机版</i>
           </el-menu-item>
           <el-menu-item index="9">
@@ -58,7 +60,7 @@
           </el-submenu>
           <el-submenu index="10">
             <template slot="title">
-              <i class="iconfont iconliebiao"></i>
+              <i class="iconfont iconliebiao" :style="`color:${iconColor}`"></i>
               <i>网站导航</i>
             </template>
             <el-menu-item index="10-1">已买到的宝贝</el-menu-item>
@@ -73,6 +75,27 @@
 <script>
 export default {
   name: "homeHead",
+  props: {
+    background: {
+      type: String,
+      default: "#f2f2f2"
+    },
+    top: {
+      type: Number
+    },
+    color: {
+      type: String,
+      default: "#999"
+    },
+    height: {
+      type: Number,
+      default: 27
+    },
+    iconColor: {
+      type: String,
+      default: "#ff0036"
+    }
+  },
   data() {
     return {
       activeIndex: "1",
@@ -92,7 +115,7 @@ export default {
 #site-nav {
   height: 40px;
   width: 100%;
-  background: #d91e1c;
+  height: 27px;
   display: flex;
   justify-content: center;
   color: #fff;
@@ -100,11 +123,10 @@ export default {
     "\5b8b\4f53", sans-serif;
 }
 #site-nav a {
-  color: #fff;
+  color: inherit;
 }
 .content {
   width: 1230px;
-  height: 32px;
   display: flex;
   justify-content: space-between;
 }
@@ -112,18 +134,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+}
+.login-info > * {
+  margin-right: 10px;
 }
 .el-menu-quick-menu {
   height: 100%;
 }
-.el-menu-quick-menu i {
-  color: #fff;
-}
 #site-nav {
   position: relative !important;
   border-bottom-color: transparent !important;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
   z-index: 99999;
   border-bottom: 1px solid #e5e5e5;
   box-sizing: content-box;

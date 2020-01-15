@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-14 18:23:01
+ * @LastEditTime : 2020-01-15 10:44:51
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -51,22 +51,19 @@
     </aside>
     <main class="mallPage">
       <a name="mallPage"></a>
-      <nav>
-        <!------- 顶级导航条 ------->
-        <site-nav></site-nav>
-      </nav>
+      <!------- 顶级导航条 ------->
+      <site-nav
+        background="#d91e1c"
+        :top="32"
+        :height="40"
+        color="#fff"
+        iconColor="#fff"
+        style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3)"
+      ></site-nav>
 
       <header>
         <!------- 搜索栏 ------->
-        <article id="header_layout">
-          <h1 id="mallLogo" title="天猫Tmall.com">天猫Tmall.com</h1>
-          <section id="header_input">
-            <input v-model="search_key" class="search_input" placeholder="搜索 天猫 商品/品牌/店铺" />
-            <nuxt-link :to="{ path: 'search_product', query: { q: search_key }}">
-              <button class="search_button">搜索</button>
-            </nuxt-link>
-          </section>
-        </article>
+        <search-view></search-view>
       </header>
 
       <content>
@@ -389,7 +386,7 @@
       <footer></footer>
     </main>
     <!--------- top搜索 ---------->
-    <search-view :searchShow="show.search" v-if="download.search"></search-view>
+    <search-flex-view :searchShow="show.search" v-if="download.search"></search-flex-view>
     <!--------- 锚点导航 ---------->
     <mui-lift :liftShow="show.lift" v-if="download.lift"></mui-lift>
   </div>
@@ -397,7 +394,7 @@
 
 <script>
 import siteNav from "~/components/home/site-nav.vue";
-import serachView from "~/components/home/search-view.vue";
+import serachFlexView from "~/components/home/search-flex-view.vue";
 import category from "~/components/home/category-view";
 import activity from "~/components/home/activity-view";
 import wonderful from "~/components/home/wonderful-view";
@@ -409,6 +406,7 @@ import bigBanner from "~/components/home/activity-view/children/floor-line-con-b
 import floorItem from "~/components/home/activity-view/children/floor-line-con-item";
 import floorTwoItem from "~/components/home/activity-view/children/floor-line-con-twoItem";
 import activityArea from "~/components/home/activity-view/children/activity-area";
+import searchView from "~/components/common/search-view";
 import { throttle } from "~/assets/util/tools.js";
 
 export default {
@@ -418,18 +416,18 @@ export default {
     "activity-view": activity,
     "wonderful-view": wonderful,
     "mui-lift": muiLift,
-    "search-view": serachView,
+    "search-flex-view": serachFlexView,
     "brand-item": brandItem,
     "brand-hot": brandHot,
     "floor-line": floorLine,
     "floor-banner": bigBanner,
     "floor-item": floorItem,
     "floor-two-item": floorTwoItem,
-    "activity-area": activityArea
+    "activity-area": activityArea,
+    "search-view": searchView
   },
   data() {
     return {
-      search_key: "",
       htmlEl: false,
       show: {
         lift: false,
@@ -666,46 +664,6 @@ export default {
   width: auto;
   min-width: 990px;
   background-color: transparent;
-}
-//----------------- header
-#mallLogo {
-  display: none;
-}
-#header_layout {
-  display: flex;
-
-  justify-content: center;
-  height: 130px;
-}
-#header_input {
-  width: 625px;
-  height: 40px;
-  margin-top: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #ff0036;
-  border-width: 2px 0 2px 2px;
-  box-sizing: border-box;
-  .search_input {
-    width: 491px;
-    height: 100%;
-    border: 0;
-    font: 16px/22px arial;
-    padding: 5px 3px 5px 5px;
-    box-sizing: border-box;
-  }
-  .search_button {
-    width: 132px;
-    cursor: pointer;
-    height: 36px;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 5px;
-    background-color: #ff0036;
-    color: #fff;
-    font-family: "\5FAE\8F6F\96C5\9ED1", arial, "\5b8b\4f53";
-  }
 }
 //----------------- content main-nav
 .main-nav {
