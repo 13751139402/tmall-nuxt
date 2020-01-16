@@ -29,7 +29,7 @@
                     />
                   </div>
                 </div>
-                <nuxt-link :to="{ path: 'search_product', query: { searchKey: search_key }}">
+                <nuxt-link :to="{ path: 'searchProduct', query: { searchKey: search_key }}">
                   <button type="submit">搜索</button>
                 </nuxt-link>
               </div>

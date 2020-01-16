@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-15 17:52:56
+ * @LastEditTime : 2020-01-16 15:00:52
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_product.vue
@@ -144,7 +144,9 @@
           >&gt;</a>
         </p>
       </article>
-      <article class="product-con">{{foo}}</article>
+      <article class="product-con">
+        <product-view v-for="item in list" :key="item.spu_no" v-bind="item"></product-view>
+      </article>
     </main>
   </div>
 </template>
@@ -152,11 +154,13 @@
 <script>
 import siteNav from "~/components/home/site-nav.vue";
 import searchView from "~/components/common/search-view";
+import productView from "~/components/searchProduct/product-view";
 import { searchGoods } from "~/assets/api/search_product";
 export default {
   components: {
     "site-nav": siteNav,
-    "search-view": searchView
+    "search-view": searchView,
+    "product-view": productView
   },
   data() {
     return {
@@ -165,10 +169,11 @@ export default {
   },
   asyncData({ query }) {
     const { searchKey, pageNum = 1, pageSize = 60 } = query;
-    return searchGoods({ searchKey, pageNum, pageSize }).then(({ data: list }) => {
-      console.log(list);
-      return { list: 'bar' }
-    });
+    return searchGoods({ searchKey, pageNum, pageSize }).then(
+      ({ data: list }) => {
+        return { list };
+      }
+    );
   }
 };
 </script>
@@ -183,7 +188,6 @@ export default {
 main {
   margin: auto;
   width: 1190px;
-  height: 8999px;
 }
 //------------------------- 品牌
 .crumb {
@@ -633,5 +637,10 @@ b.ui-page-s-len {
   text-align: center;
   background-color: #fff;
   border: 1px solid #e5e5e5;
+}
+.product-con {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>
