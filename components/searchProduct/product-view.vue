@@ -2,7 +2,7 @@
   <section class="product">
     <div class="product-iWrap">
       <figure class="productImg-wrap">
-        <a :href="spu_no">
+        <a :href="id">
           <img :src="cover" />
         </a>
       </figure>
@@ -13,10 +13,10 @@
         </em>
       </p>
       <div class="productTitle productTitle-spu">
-        <a :href="spu_no">{{goods_name}}</a>
+        <a :href="id">{{goods_name}}</a>
       </div>
       <div class="productShop">
-        <a class="productShop-name">{{shop_id}}</a>
+        <a class="productShop-name">{{shop_name}}</a>
       </div>
       <p class="productStatus">
         <span>
@@ -34,7 +34,7 @@
 <script>
 export default {
   props: {
-    spu_no: {
+    id: {
       type: String
     },
     cover: {
@@ -46,7 +46,7 @@ export default {
     goods_name: {
       type: String
     },
-    shop_id: {
+    shop_name: {
       type: String
     }
   }

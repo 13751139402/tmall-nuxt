@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-16 15:00:52
+ * @LastEditTime : 2020-01-17 18:27:27
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_product.vue
@@ -145,7 +145,7 @@
         </p>
       </article>
       <article class="product-con">
-        <product-view v-for="item in list" :key="item.spu_no" v-bind="item"></product-view>
+        <product-view v-for="item in list" :key="item.id" v-bind="item"></product-view>
       </article>
     </main>
   </div>
@@ -170,8 +170,10 @@ export default {
   asyncData({ query }) {
     const { searchKey, pageNum = 1, pageSize = 60 } = query;
     return searchGoods({ searchKey, pageNum, pageSize }).then(
-      ({ data: list }) => {
-        return { list };
+      ([list, total]) => {
+        console.log(list);
+
+        return { list, total };
       }
     );
   }
