@@ -7,7 +7,7 @@
  * @FilePath: \nuxt\pages\search_goods.vue
  -->
 <template>
-  <div style="background:#fff">
+  <div>
     <site-nav>
       <template v-slot:left-con>
         <div>
