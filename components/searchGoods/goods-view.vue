@@ -2,7 +2,7 @@
   <section class="product">
     <div class="product-iWrap">
       <figure class="productImg-wrap">
-        <a :href="id">
+        <a :href="href">
           <img :src="cover" />
         </a>
       </figure>
@@ -13,7 +13,7 @@
         </em>
       </p>
       <div class="productTitle productTitle-spu">
-        <a :href="id">{{goods_name}}</a>
+        <a :href="href">{{goods_name}}</a>
       </div>
       <div class="productShop">
         <a class="productShop-name">{{shop_name}}</a>
@@ -21,7 +21,7 @@
       <p class="productStatus">
         <span>
           月成交
-          <em>5.4万笔</em>
+          <em v-focus="turnover"></em>
         </span>
         <span class="ww-light">
           <a class="ww-online"></a>
@@ -48,6 +48,27 @@ export default {
     },
     shop_name: {
       type: String
+    },
+    turnover: {
+      type: Number
+    }
+  },
+  computed: {
+    href() {
+      return `/goodsDetail?spu_id=${this.id}`;
+    }
+  },
+  directives: {
+    // 注册一个局部的自定义指令 v-focus
+    focus: {
+      // 指令的定义
+      bind: function(el, { value }) {
+        // 聚焦元素
+        if (value > 10000) {
+          value = parseFloat((value / 10000).toFixed(2)) + "万";
+        }
+        el.innerHTML = value;
+      }
     }
   }
 };
@@ -58,6 +79,7 @@ export default {
   width: 220px;
   margin-bottom: 20px;
   font-size: 12px;
+  margin-right: 20px;
   &.product:hover .product-iWrap {
     height: auto;
     margin: -3px;

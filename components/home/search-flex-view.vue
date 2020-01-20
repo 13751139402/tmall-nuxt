@@ -22,6 +22,7 @@
                   <div class="s-combobox-input-wrap">
                     <input
                       type="text"
+                      v-model="searchKey"
                       id="mq"
                       class="s-combobox-input"
                       title="请输入搜索文字"
@@ -29,8 +30,8 @@
                     />
                   </div>
                 </div>
-                <nuxt-link :to="{ path: 'searchProduct', query: { searchKey: search_key }}">
-                  <button type="submit">搜索</button>
+                <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: searchKey }}">
+                  <button class="search_button">搜索</button>
                 </nuxt-link>
               </div>
             </fieldset>
@@ -43,7 +44,12 @@
 
 <script>
 export default {
-  props: ["searchShow"]
+  props: ["searchShow"],
+  data() {
+    return {
+      searchKey: ""
+    };
+  }
 };
 </script>
 

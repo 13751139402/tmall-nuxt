@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-15 10:42:02
- * @LastEditTime: 2020-01-16 10:44:28
- * @LastEditors: your name
+ * @LastEditTime : 2020-01-20 11:09:51
+ * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \nuxt\components\common\search-view.vue
+ * @FilePath: \nuxt\components\common\.vue
  -->
 <!--
  * @Author: your name
@@ -21,8 +21,13 @@
       <h1 id="mallH1" title="天猫Tmall.com">天猫Tmall.com</h1>
       <slot name="logo"></slot>
       <section id="header_input">
-        <input v-model="search_key" class="search_input" placeholder="搜索 天猫 商品/品牌/店铺" />
-        <nuxt-link :to="{ path: 'searchProduct', query: { searchKey: search_key }}">
+        <input
+          v-model="value"
+          class="search_input"
+          placeholder="搜索 天猫 商品/品牌/店铺"
+          @input="$emit('input', $event.target.value)"
+        />
+        <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: value }}">
           <button class="search_button">搜索</button>
         </nuxt-link>
       </section>
@@ -32,10 +37,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      search_key: ""
-    };
+  props: {
+    value: {
+      type: String,
+      default: ""
+    }
   }
 };
 </script>

@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-17 18:27:27
+ * @LastEditTime : 2020-01-20 14:55:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \nuxt\pages\search_product.vue
+ * @FilePath: \nuxt\pages\search_goods.vue
  -->
 <template>
   <div style="background:#fff">
@@ -17,7 +17,7 @@
       </template>
     </site-nav>
     <header>
-      <search-view>
+      <search-view v-model="searchKey">
         <template v-slot:logo>
           <img
             class="tmall-logo-img"
@@ -35,7 +35,7 @@
                 <li>
                   <a
                     class="crumbStrong"
-                    href="/search_product.htm?search_condition=7&amp;style=g&amp;q=%CA%D6%BB%FA&amp;from=sn_1_rightnav#J_crumbs"
+                    href="/search_goods.htm?search_condition=7&amp;style=g&amp;q=%CA%D6%BB%FA&amp;from=sn_1_rightnav#J_crumbs"
                     data-i="cat"
                     data-t="3"
                   >全部</a>
@@ -44,7 +44,7 @@
                 <li class="crumbSearch">
                   <form action id="J_CrumbSearchForm">
                     <label class="crumbSearch-label" for="J_CrumbSearchInuput">
-                      <input type="text" value="手机" class="crumbSearch-input" aria-label="搜索关键词" />
+                      <input type="text" :value="path" class="crumbSearch-input" aria-label="搜索关键词" />
                       <input type="submit" class="crumbSearch-btn" aria-label="搜索" />
                     </label>
                   </form>
@@ -54,10 +54,11 @@
           </div>
           <p class="crumbTitle">
             共
-            <span>1564760</span> 件相关商品
+            <span>{{total}}</span> 件相关商品
           </p>
         </div>
       </article>
+
       <form class="navAttrsForm">
         <div class="brandAttr j_nav_brand">
           <div class="j_Brand attr">
@@ -85,6 +86,7 @@
           </div>
         </div>
       </form>
+
       <article class="filter clearfix">
         <a class="fSort fSort-cur">
           综合
@@ -134,19 +136,56 @@
           </div>
         </form>
         <p class="ui-page-s">
-          <b class="ui-page-s-len">1/80</b>
-          <b class="ui-page-s-prev" title="上一页">&lt;</b>
+          <b class="ui-page-s-len">{{pageSLen}}</b>
+          <b v-if="currentPage===1" class="ui-page-s-prev" title="上一页">&lt;</b>
           <a
-            href="?s=60&amp;q=%CA%D6%BB%FA&amp;sort=s&amp;style=g&amp;from=mallfp..pc_1_searchbutton&amp;spm=875.7931836/B.a2227oh.d100&amp;type=pc#J_Filter"
+            v-else
+            :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage-1}`"
             class="ui-page-s-next"
-            atpanel="1,pagedn,,,,20,fservice,"
+            title="下一页"
+          >&lt;</a>
+          <b v-if="currentPage===Math.ceil(this.total / 60)" class="ui-page-s-prev" title="下一页">&gt;</b>
+          <a
+            v-else
+            :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage+1}`"
+            class="ui-page-s-next"
             title="下一页"
           >&gt;</a>
         </p>
       </article>
-      <article class="product-con">
-        <product-view v-for="item in list" :key="item.id" v-bind="item"></product-view>
+
+      <article class="goods-con">
+        <goods-view
+          v-for="item in list"
+          :key="item.id"
+          :shop_name="item.shop&&item.shop.shop_name"
+          v-bind="item"
+        ></goods-view>
       </article>
+
+      <el-pagination
+        class="pagination"
+        @current-change="handleCurrentChange"
+        :background="true"
+        :current-page="currentPage"
+        :page-size="60"
+        layout=" prev, pager, next,total, jumper"
+        :total="total"
+      ></el-pagination>
+
+      <!-- <article class="hotSale" >
+        <h2 class="hotSale_title">掌柜热卖</h2>
+        <section>
+          <article class="goods-con">
+            <goods-view
+              v-for="item in hotList"
+              :key="item.id"
+              :shop_name="item.shop&&item.shop.shop_name"
+              v-bind="item"
+            ></goods-view>
+          </article>
+        </section>
+      </article>-->
     </main>
   </div>
 </template>
@@ -154,26 +193,42 @@
 <script>
 import siteNav from "~/components/home/site-nav.vue";
 import searchView from "~/components/common/search-view";
-import productView from "~/components/searchProduct/product-view";
-import { searchGoods } from "~/assets/api/search_product";
+import goodsView from "~/components/searchGoods/goods-view";
+import { searchGoods } from "~/assets/api/search_goods";
 export default {
   components: {
     "site-nav": siteNav,
     "search-view": searchView,
-    "product-view": productView
+    "goods-view": goodsView
   },
   data() {
     return {
-      //  list: []
+      currentPage: 1
     };
   },
-  asyncData({ query }) {
-    const { searchKey, pageNum = 1, pageSize = 60 } = query;
+  computed: {
+    pageSLen() {
+      return `${this.currentPage}/${Math.ceil(this.total / 60)}`;
+    }
+  },
+  methods: {
+    handleCurrentChange(pageNum) {
+      this.$router.push({
+        path: "/redirect/searchGoods",
+        query: { searchKey: this.searchKey, pageNum }
+      });
+    }
+  },
+  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
     return searchGoods({ searchKey, pageNum, pageSize }).then(
-      ([list, total]) => {
-        console.log(list);
-
-        return { list, total };
+      ({ data: [list, total] }) => {
+        return {
+          list,
+          total,
+          searchKey,
+          path: searchKey,
+          currentPage: Number(pageNum)
+        };
       }
     );
   }
@@ -181,6 +236,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.hotSale_title {
+  color: #666;
+  border-top: 1px solid #f3f0ee;
+}
+.ui-page-s-len,
+.ui-page-s-next,
+.ui-page-s-prev {
+  float: left;
+  display: inline;
+  margin-left: 3px;
+}
 .tmall-logo-img {
   position: absolute;
   left: 0;
@@ -593,7 +659,7 @@ a.fSort-cur i.f-ico-triangle-mb-slctd {
   font-family: \5b8b\4f53, Helvetica, sans-serif;
 }
 b.ui-page-s-len {
-  background: 0 0;
+  background: 0 0 !important;
   line-height: 20px;
   font-weight: 400;
 }
@@ -640,9 +706,14 @@ b.ui-page-s-len {
   background-color: #fff;
   border: 1px solid #e5e5e5;
 }
-.product-con {
+.goods-con {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  width: 1210px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
 }
 </style>

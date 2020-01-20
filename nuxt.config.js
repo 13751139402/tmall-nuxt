@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-14 18:02:17
+ * @LastEditTime : 2020-01-20 09:47:12
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -67,6 +67,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+   
     extend(config, ctx) {
     }
   }
