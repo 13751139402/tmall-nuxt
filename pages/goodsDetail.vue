@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-21 18:03:29
+ * @LastEditTime : 2020-01-21 22:49:48
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -158,24 +158,21 @@
           <div class="tb-key">
             <div class="tb-skin">
               <div class="tb-sku">
-                <dl class="tb-prop" v-for="item in spec" :key="item.id">
-                  <dt class="tb-metatit">{{item.spec_name}}</dt>
+                <dl class="tb-prop" v-for="spec in spec" :key="spec.id">
+                  <dt class="tb-metatit">{{spec.spec_name}}</dt>
                   <dd>
-                    <ul class="tm-relate-list">
-                      <li v-for="metaData in item.values" :key="metaData.id">
-                        <a title="iPhone 11 Pro">{{metaData.spec_value}}</a>
+                    <ul class="tm-relate-list" :class="{'tb-img':spec.values[0].spec_value_cover}">
+                      <li
+                        v-for="specValue in spec.values"
+                        :key="specValue.id"
+                        :class="{'tb-selected':params.spec[spec.id]===specValue.id}"
+                      >
+                        <a
+                          :style="`background: url(${specValue.spec_value_cover||'#'}) center no-repeat`"
+                          @click="chooseSpec(spec.id,specValue.id)"
+                        >{{specValue.spec_value}}</a>
+                        <i>已选中</i>
                       </li>
-                      <!-- <li class="tm-relate-current">
-                        <span
-                          title="iPhone 11 Pro Max"
-                          role="button"
-                          tabindex="0"
-                          aria-label="iPhone 11 Pro Max当前正在查看的商品，已选择"
-                        >
-                          iPhone 11 Pro Max
-                          <i class="icon tm-relate-arrow">当前正在查看的商品</i>
-                        </span>
-                      </li>-->
                     </ul>
                   </dd>
                 </dl>
@@ -183,25 +180,9 @@
                 <dl class="tb-amount tm-clear">
                   <dt class="tb-metatit">数量</dt>
                   <dd id="J_Amount">
-                    <!-- <span class="tb-amount-widget mui-amount-wrap">
-                      <input
-                        type="text"
-                        class="tb-text mui-amount-input"
-                        value="1"
-                        maxlength="8"
-                        title="请输入购买量"
-                      />
-                      <span
-                        class="mui-amount-btn"
-                        data-spm-anchor-id="a220o.1000855.0.i2.245f5095sJqwmK"
-                      >
-                        <i class="iconfont iconqiehuanqishang mui-amount-increase"></i>
-                        <i class="iconfont iconqiehuanqishang mui-amount-decrease"></i>
-                      </span>
-                    </span>-->
                     <el-input-number
                       style="width: 67px;"
-                      v-model="formParams.num"
+                      v-model="params.num"
                       controls-position="right"
                       :min="1"
                     ></el-input-number>
@@ -243,14 +224,38 @@ export default {
   data() {
     return {
       previewIndex: 0,
-      formParams: {
-        num: 1
+      params: {
+        num: 1,
+        spec: {}
       }
     };
   },
   methods: {
+    /**
+     * @description: 修改预览图下表
+     * @param {index:下标}
+     */
+
     changePrevview(index) {
       this.previewIndex = index;
+    },
+    /**
+     * @description: 修改选中的spec
+     * @param {
+     *  key   : params.spec的属性名
+     *  value : params.spec的属性值
+     * }
+     * @return:
+     */
+
+    chooseSpec(key, value) {
+      let spec = this.params.spec;
+      if (!spec[key]) {
+        this.$set(spec, key, value);
+      } else {
+        spec[key] = value;
+      }
+      console.log(this.params.spec);
     }
   },
   asyncData({ query: { spu_id } }) {
@@ -262,6 +267,45 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.tb-prop .tb-img li a {
+  text-decoration: none;
+  width: auto !important;
+  background-position: left center !important;
+  padding: 0 9px 0 45px;
+  width: 38px !important;
+  height: 38px;
+  padding: 0;
+  line-height: 38px;
+  background-repeat: no-repeat;
+  outline: 0;
+  background-position: center center;
+}
+.tb-key .tb-selected i {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAMAAABhq6zVAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJUExURUxpcf8AN////7f4NBoAAAABdFJOUwBA5thmAAAAMUlEQVQI103MAQ4AMAQEQev/j66i6YrEXIKIX9jY2NjYyDmhZnlCo5rdyWvebfYDVAcSmABbA7WD+QAAAABJRU5ErkJggg==);
+}
+.tb-key .tm-relate-list i {
+  display: none;
+}
+.tb-prop li a:hover,
+.tb-prop li.tb-selected a,
+.tb-prop li.tb-selected a:hover,
+.tm-bundle-dialog .bundle-items .bundle-item .tm-meta li.tb-selected a,
+.tm-bundle-dialog .bundle-items .bundle-item .tm-meta li.tb-selected a:hover {
+  border: 2px solid #ff0036 !important;
+  margin: -1px;
+}
+.tb-key .tb-selected i {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  overflow: hidden;
+  text-indent: -99em;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
 body {
   background: #fff !important;
 }
