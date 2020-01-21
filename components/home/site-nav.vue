@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-15 10:31:50
+ * @LastEditTime : 2020-01-21 14:03:29
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
  -->
 <template>
   <nav id="site-nav" :style="`background:${background};color:${color};height:${height}px`">
-    <article class="content" :style="`height:${top}px`">
+    <article class="content" :style="`height:${top}px;width:${width}px`">
       <section class="login-info">
         <slot name="left-con"></slot>
         <em>喵，欢迎来天猫</em>
@@ -89,11 +89,15 @@ export default {
     },
     height: {
       type: Number,
-      default: 27
+      default: 28
     },
     iconColor: {
       type: String,
       default: "#ff0036"
+    },
+    width: {
+      type: Number,
+      default: 1230
     }
   },
   data() {
@@ -115,7 +119,7 @@ export default {
 #site-nav {
   height: 40px;
   width: 100%;
-  height: 27px;
+  height: 26px;
   display: flex;
   justify-content: center;
   color: #fff;
@@ -126,7 +130,6 @@ export default {
   color: inherit;
 }
 .content {
-  width: 1230px;
   display: flex;
   justify-content: space-between;
 }

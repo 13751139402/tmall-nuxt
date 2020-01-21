@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-15 10:44:51
+ * @LastEditTime : 2020-01-21 14:44:32
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -657,6 +657,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+body {
+  background-color: #f5f5f5;
+}
 .mallPage {
   background-image: url(//img.alicdn.com/tfs/TB1AM7CrYj1gK0jSZFuXXcrHpXa-1702-1356.png);
   background-repeat: no-repeat;

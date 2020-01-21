@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-20 14:55:22
+ * @LastEditTime : 2020-01-21 14:44:23
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
  -->
 <template>
   <div>
-    <site-nav>
+    <site-nav :width="1190">
       <template v-slot:left-con>
         <div>
           <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
@@ -236,6 +236,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+body {
+  background-color: #f5f5f5;
+}
 .hotSale_title {
   color: #666;
   border-top: 1px solid #f3f0ee;
@@ -243,7 +246,6 @@ export default {
 .ui-page-s-len,
 .ui-page-s-next,
 .ui-page-s-prev {
-  float: left;
   display: inline;
   margin-left: 3px;
 }
