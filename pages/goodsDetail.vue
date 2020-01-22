@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-21 22:49:48
+ * @LastEditTime : 2020-01-22 11:11:44
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -11,12 +11,15 @@
   <div>
     <site-nav :width="990">
       <template v-slot:left-con>
-        <div>
-          <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
-          <i>天猫首页</i>
-        </div>
+        <nuxt-link to="/">
+          <div>
+            <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
+            <i class="goHome">天猫首页</i>
+          </div>
+        </nuxt-link>
       </template>
     </site-nav>
+
     <nav class="navigation-con">
       <ul class="navigation-bar">
         <li>
@@ -54,11 +57,16 @@
         </li>
       </ul>
     </nav>
+
     <article id="detail">
       <div class="tm-detail-meta">
         <section class="tb-gallery">
           <div class="tb-booth">
-            <img id="J_ImgBooth" :src="preview[previewIndex].img_url.replace('_60x60','_430x430')" />
+            <img
+              v-show="previewParams.prevImg"
+              id="J_ImgBooth"
+              :src="previewParams.prevImg+'_430x430q90.jpg'"
+            />
           </div>
           <div class="tb-thumb-warp">
             <ul id="J_UlThumb" class="tb-thumb tm-clear">
@@ -66,11 +74,11 @@
               <li
                 v-for="(item,index) of preview "
                 :key="item.id"
-                :class="{'tb-selected':previewIndex===index}"
-                @mouseenter="changePrevview(index)"
+                :class="{'tb-selected':previewParams.previewIndex===index}"
+                @mouseenter="changePrevview(index,item.img_url)"
               >
                 <a>
-                  <img :src="item.img_url" alt="商品预览图" />
+                  <img :src="item.img_url&&item.img_url+'_60x60q90.jpg'" alt="商品预览图" />
                 </a>
               </li>
             </ul>
@@ -168,9 +176,11 @@
                         :class="{'tb-selected':params.spec[spec.id]===specValue.id}"
                       >
                         <a
-                          :style="`background: url(${specValue.spec_value_cover||'#'}) center no-repeat`"
-                          @click="chooseSpec(spec.id,specValue.id)"
+                          v-if="specValue.spec_value_cover"
+                          :style="{background:`url(${specValue.spec_value_cover+'_40x40q90.jpg'}`}"
+                          @click="chooseSpec(spec.id,specValue.id,specValue.spec_value_cover)"
                         >{{specValue.spec_value}}</a>
+                        <a v-else @click="chooseSpec(spec.id,specValue.id)">{{specValue.spec_value}}</a>
                         <i>已选中</i>
                       </li>
                     </ul>
@@ -211,6 +221,31 @@
         </section>
       </div>
     </article>
+
+    <article id="bd">
+      <section style="width:190px;">
+        <div class="side-shop-info">
+          <h3>澳柯玛阿松大阿萨打撒阿</h3>
+          <div>
+            <ul>
+              <li>描述</li>
+              <li>服务</li>
+              <li>物流</li>
+            </ul>
+            <div>
+              <div>进店逛逛</div>
+              <div>收藏店铺</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section style="width:790px">
+        <el-tabs type="border-card">
+          <el-tab-pane label="商品详情">商品详情</el-tab-pane>
+          <el-tab-pane label="累计评价">累计评价</el-tab-pane>
+        </el-tabs>
+      </section>
+    </article>
   </div>
 </template>
 
@@ -223,7 +258,10 @@ export default {
   },
   data() {
     return {
-      previewIndex: 0,
+      previewParams: {
+        previewIndex: 0,
+        prevImg: false
+      },
       params: {
         num: 1,
         spec: {}
@@ -233,45 +271,106 @@ export default {
   methods: {
     /**
      * @description: 修改预览图下表
-     * @param {index:下标}
+     * @param {
+     *  index: 下标
+     *  img  : 预览图img
+     * }
      */
 
-    changePrevview(index) {
-      this.previewIndex = index;
+    changePrevview(index, img) {
+      this.previewParams.previewIndex = index;
+      this.previewParams.prevImg = img;
     },
     /**
      * @description: 修改选中的spec
      * @param {
      *  key   : params.spec的属性名
      *  value : params.spec的属性值
+     *  src   : 预览大图的src
      * }
      * @return:
      */
 
-    chooseSpec(key, value) {
+    chooseSpec(key, value, src) {
       let spec = this.params.spec;
       if (!spec[key]) {
         this.$set(spec, key, value);
       } else {
         spec[key] = value;
       }
-      console.log(this.params.spec);
+
+      if (src) {
+        this.changePrevview(-1, src);
+      }
     }
   },
   asyncData({ query: { spu_id } }) {
     return goodsDetails({ spu_id }).then(({ data }) => {
       return data;
     });
+  },
+  mounted() {
+    this.preview[0]
+      ? (this.previewParams.prevImg = this.preview[0].img_url)
+      : "";
   }
 };
 </script>
 
 <style scoped lang="scss">
+#side-shop-info .shop-intro {
+  background-color: #fff;
+}
+#side-shop-info .hd .shopLink {
+  color: #333;
+  font-size: 12px;
+}
+#side-shop-info .hd {
+  padding: 0 0 0 15px;
+  height: 48px;
+  line-height: 48px;
+  background-color: #fafafa;
+  border-bottom: 1px solid #e5e5e5;
+}
+#bd {
+  width: 990px !important;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+/deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+  color: red;
+  font-weight: bold;
+  position: relative;
+  border-top: 3px solid #ff0036;
+  box-sizing: border-box;
+  &::after {
+    content: " ";
+    display: block;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ff0036 transparent transparent;
+    width: 0;
+    height: 0;
+    font-family: arial;
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    margin-left: -5px;
+  }
+}
 .tb-prop .tb-img li a {
   text-decoration: none;
   width: auto !important;
   background-position: left center !important;
+  background-repeat: no-repeat !important;
   padding: 0 9px 0 45px;
+}
+.tb-prop .tb-img li a {
+  text-decoration: none;
+  width: auto !important;
+  background-position: left center !important;
+  padding: 0 9px 0 45px !important;
   width: 38px !important;
   height: 38px;
   padding: 0;
@@ -539,6 +638,10 @@ body {
   }
 }
 
+.goHome:hover {
+  color: rgb(255, 0, 54);
+  text-decoration: underline;
+}
 .tb-action {
   clear: both;
   padding: 10px 0 0 66px;

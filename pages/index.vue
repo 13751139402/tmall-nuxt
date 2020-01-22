@@ -1,15 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-21 14:44:32
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \nuxt\pages\index.vue
- -->
-<!--
- * @Author: your name
- * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-10 10:05:01
+ * @LastEditTime : 2020-01-22 10:39:56
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue

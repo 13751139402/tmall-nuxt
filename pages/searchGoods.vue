@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-21 14:44:23
+ * @LastEditTime : 2020-01-22 10:43:48
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
@@ -10,10 +10,12 @@
   <div>
     <site-nav :width="1190">
       <template v-slot:left-con>
-        <div>
-          <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
-          <i>天猫首页</i>
-        </div>
+        <nuxt-link to="/">
+          <div>
+            <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
+            <i class="goHome">天猫首页</i>
+          </div>
+        </nuxt-link>
       </template>
     </site-nav>
     <header>
@@ -236,6 +238,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.goHome:hover {
+  color: rgb(255, 0, 54);
+  text-decoration: underline;
+}
 body {
   background-color: #f5f5f5;
 }
