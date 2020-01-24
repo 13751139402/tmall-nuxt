@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 15:54:45
- * @LastEditTime : 2020-01-10 17:19:49
+ * @LastEditTime : 2020-01-24 01:20:20
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\activity\children\floor-line-con-item.vue
@@ -12,6 +12,7 @@
       <slot>
         <div class="floor-item-tag color-type-green" style="visibility:hidden"></div>
         <img class="floor-item-img" :src="img" />
+        
         <div class="floor-item-title">{{name}}</div>
         <div class="floor-price">￥{{price}}</div>
       </slot>

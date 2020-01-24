@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-07 14:27:29
- * @LastEditTime : 2020-01-09 16:34:09
+ * @LastEditTime : 2020-01-24 01:04:17
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\category\children\banner.vue

@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-22 10:39:56
+ * @LastEditTime : 2020-01-24 01:16:17
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
  -->
 <template>
-  <div>
+  <div id="tmallHome">
     <aside class="decorator">
       <div class="side-bg" style="top:2000px;right:0px;">
         <img src="//img.alicdn.com/tfs/TB1UsfZrV67gK0jSZPfXXahhFXa-259-324.png" />
@@ -649,8 +649,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-body {
-  background-color: #f5f5f5;
+html,
+body,
+#tmallHome {
+  background-color: #f5f5f5 !important;
 }
 .mallPage {
   background-image: url(//img.alicdn.com/tfs/TB1AM7CrYj1gK0jSZFuXXcrHpXa-1702-1356.png);

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-22 11:11:44
+ * @LastEditTime : 2020-01-24 01:25:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -23,7 +23,7 @@
     <nav class="navigation-con">
       <ul class="navigation-bar">
         <li>
-          <a>{{shop.shop_name?shop.shop_name:"官网旗舰店"}}</a>
+          <a>{{shop&&shop.shop_name?shop.shop_name:"官网旗舰店"}}</a>
         </li>
         <li>
           <a>首页</a>
@@ -224,24 +224,75 @@
 
     <article id="bd">
       <section style="width:190px;">
-        <div class="side-shop-info">
-          <h3>澳柯玛阿松大阿萨打撒阿</h3>
-          <div>
-            <ul>
-              <li>描述</li>
-              <li>服务</li>
-              <li>物流</li>
-            </ul>
-            <div>
-              <div>进店逛逛</div>
-              <div>收藏店铺</div>
+        <div class="side-shop-info" id="side-shop-info">
+          <h3 class="hd">
+            <div class="name">
+              <a href class="shopLink">{{shop&&shop.shop_name?shop.shop_name:"官网旗舰店"}}</a>
+              <span class="ww-light ww-small">
+                <a class="ww-inline ww-online" title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。"></a>
+              </span>
             </div>
+          </h3>
+          <div class="main-info">
+            <div class="shopdsr-item">
+              <div class="shopdsr-title">描 述</div>
+              <div class="shopdsr-score shopdsr-score-equal-ctrl">
+                <span class="shopdsr-score-con">4.8</span>
+                <i class="iconfont shopdsr-iconfont iconjian"></i>
+              </div>
+            </div>
+            <div class="shopdsr-item">
+              <div class="shopdsr-title">描 述</div>
+              <div class="shopdsr-score shopdsr-score-equal-ctrl">
+                <span class="shopdsr-score-con">4.8</span>
+                <i class="iconfont shopdsr-iconfont iconjian"></i>
+              </div>
+            </div>
+            <div class="shopdsr-item">
+              <div class="shopdsr-title">描 述</div>
+              <div class="shopdsr-score shopdsr-score-equal-ctrl">
+                <span class="shopdsr-score-con">4.8</span>
+                <i class="iconfont shopdsr-iconfont iconjian"></i>
+              </div>
+            </div>
+          </div>
+          <div class="btnArea">
+            <a class="enterShop">进店逛逛</a>
+            <a
+              id="xshop_collection_href"
+              class="J_PopupTrigger collection xshop_sc J_TDialogTrigger J_TokenSign favShop"
+            >收藏店铺</a>
           </div>
         </div>
       </section>
       <section style="width:790px">
         <el-tabs type="border-card">
-          <el-tab-pane label="商品详情">商品详情</el-tab-pane>
+          <el-tab-pane label="商品详情">
+            <div id="attributes" class="attributes">
+              <div class="attributes-list" id="J_AttrList">
+                <div
+                  class="tm-clear tb-hidden tm_brandAttr"
+                  id="J_BrandAttr"
+                  style="display: block;"
+                >
+                  <div class="name">
+                    品牌名称：
+                    <b
+                      class="J_EbrandLogo"
+                      target="_blank"
+                      href="//brand.tmall.com/brandInfo.htm?brandId=30111&amp;type=0&amp;scm=1048.1.1.4"
+                    >Apple/苹果</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="description" class="J_DetailSection tshop-psm tshop-psm-bdetaildes tm-curTab">
+              <h4 class="hd">商品详情</h4>
+              <div class="content ke-post">
+                <el-image v-for="item in content" :key="item.id" :src="item.image" lazy></el-image>
+              </div>
+            </div>
+          </el-tab-pane>
           <el-tab-pane label="累计评价">累计评价</el-tab-pane>
         </el-tabs>
       </section>
@@ -318,14 +369,164 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#side-shop-info .shop-intro {
-  background-color: #fff;
+#J_Attrs, #J_Attrs h4.hd, #description h4.hd, .TMDtemai #J_Reviews, .tm-tabOther #J_DcBottomRightWrap, .tm-tabOther #J_DcTopRightWrap, .tm-tabOther #J_Detail h4.hd, .tm-tabOther #J_LadeMap, .tm-tabOther #J_store, .tm-tabOther #attributes, .tm-tabOther #auto-delivery, .tm-tabOther #autofill, .tm-tabOther #detail div.msg, .tm-tabOther #extra-attributes, .tm-tabOther #item-flash, .tm-tabOther #mall-banner, .tm-tabOther #trydetail, .tm-tabOther .J_DetailSection, .w1190 .tm-tabOther .tm-descCate, .w990 .tm-tabOther .tm-bd-side {
+    display: none;
+}
+#description {
+    width: auto;
+    padding: 0;
+}
+#description .content {
+    width: 100%;
+    margin: 10px 0 0;
+    overflow: hidden;
+}
+/deep/.el-tabs--border-card{
+       border: none; 
+    box-shadow: none; 
+}
+/deep/.el-tabs--border-card>.el-tabs__content {
+    padding: 0;
+}
+/deep/.el-tabs--border-card>.el-tabs__header{
+      border: 1px solid #DCDFE6;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+}
+#J_BrandAttr .name b {
+    color: #333;
+    font-weight: 400;
+}
+#J_BrandAttr .name {
+    color: #666;
+    float: left;
+    margin-right: 15px;
+}
+#J_BrandAttr {
+    padding: 8px 20px 10px;
+    border-top: 1px solid #e6e6e6;
+    height: 40px;
+    line-height: 40px;
+}
+#attributes div.attributes-list {
+    clear: both;
+    border: 1px solid #e6e6e6;
+    border-top: none;
+    margin-bottom: 10px;
+}
+#side-shop-info {
+    border: 1px solid #e5e5e5;
+    padding: 0 0 15px;
+    margin-bottom: 10px;
+}
+#side-shop-info .btnArea .favShop {
+    float: right;
+    text-decoration: none;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+}
+#side-shop-info .btnArea .enterShop, #side-shop-info .btnArea .favShop {
+    float: left;
+    width: 70px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+#side-shop-info .btnArea {
+    overflow: hidden;
+    margin: 15px auto 0;
+    width: 150px;
+}
+#side-shop-info .btnArea .enterShop, #side-shop-info .btnArea .enterShop:hover {
+    text-decoration: none;
+    border: 1px solid #333;
+    background-color: #333;
+    color: #fff;
+}
+.shopdsr-iconfont{
+     margin-top: 2px;
+    margin-left: 2px;
+    font-size: 10px !important;
+}
+#side-shop-info .main-info {
+    overflow: hidden;
+    width: 130px;
+    margin: 0 auto;
+    cursor: pointer;
+    position: relative;
+}
+#side-shop-info .main-info .shopdsr-score-equal {
+    color: #ff0036;
+    background: 0 0;
+    text-decoration: none;
+    height: 9px;
+    width: 8px;
+    right: 2px;
+    top: 5px;
+    position: absolute;
+}
+#side-shop-info .main-info .shopdsr-item {
+    float: left;
+    color: #999;
+    width: 36px;
+    height: 36px;
+    margin: 15px 7px 0 0;
+    position: relative;
+}
+#side-shop-info .main-info .shopdsr-score {
+    color: #ff0036;
+    padding-left: 5px;
+        display: flex;
+    height: 18px;
+    width: 31px;
+    position: relative;
+    overflow: hidden;
+}
+#side-shop-info .main-info .shopdsr-title {
+    text-align: center;
+    font-family: "\5b8b\4f53";
+}
+#side-shop-info .main-info .shopdsr-score {
+    color: #ff0036;
+    padding-left: 5px;
+    height: 18px;
+    width: 31px;
+    position: relative;
+    overflow: hidden;
+}
+.ww-light {
+    overflow: hidden;
+}
+.ww-small .ww-online {
+    background-position: -80px 0;
+}
+.ww-light a {
+    background-image: url(//img.alicdn.com/tps/i1/T15AD7FFFaXXbJnvQ_-130-60.gif);
+    background-image: -webkit-image-set(url(//img.alicdn.com/tps/i1/T15AD7FFFaXXbJnvQ_-130-60.gif) 1x,url(//img.alicdn.com/tps/i4/T1Rsz7FPJaXXbZhKn7-520-240.gif) 4x);
+    background-image: -moz-image-set(url(//img.alicdn.com/tps/i1/T15AD7FFFaXXbJnvQ_-130-60.gif) 1x,url(//img.alicdn.com/tps/i4/T1Rsz7FPJaXXbZhKn7-520-240.gif) 4x);
+    background-image: -o-image-set(url(//img.alicdn.com/tps/i1/T15AD7FFFaXXbJnvQ_-130-60.gif) 1x,url(//img.alicdn.com/tps/i4/T1Rsz7FPJaXXbZhKn7-520-240.gif) 4x);
+    background-image: -ms-image-set(url(//img.alicdn.com/tps/i1/T15AD7FFFaXXbJnvQ_-130-60.gif) 1x,url(//img.alicdn.com/tps/i4/T1Rsz7FPJaXXbZhKn7-520-240.gif) 4x);
+    text-decoration: none!important;
+    width: 20px;
+    height: 20px;
+    zoom: 1;
+}
+.ww-inline {
+    display: inline-block;
+    vertical-align: text-bottom;
 }
 #side-shop-info .hd .shopLink {
   color: #333;
   font-size: 12px;
 }
-#side-shop-info .hd {
+.side-shop-info .shop-intro {
+  background-color: #fff;
+}
+.side-shop-info .hd .shopLink {
+  color: #333;
+  font-size: 12px;
+}
+.side-shop-info .hd {
   padding: 0 0 0 15px;
   height: 48px;
   line-height: 48px;

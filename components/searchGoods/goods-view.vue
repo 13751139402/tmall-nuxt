@@ -3,7 +3,8 @@
     <div class="product-iWrap">
       <figure class="productImg-wrap">
         <a :href="href">
-          <img :src="cover" />
+          <el-image :src="cover" lazy></el-image>
+          <!-- <img :src="cover" /> -->
         </a>
       </figure>
       <p class="productPrice">
@@ -50,7 +51,7 @@ export default {
       type: String
     },
     turnover: {
-      type: Number
+      type: String
     }
   },
   computed: {
