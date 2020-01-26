@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-20 09:47:12
+ * @LastEditTime : 2020-01-26 16:35:06
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -41,7 +41,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/main.scss',
-    '@/assets/iconfont/iconfont.css'
+    '@/static/iconfont/iconfont.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -67,8 +67,17 @@ export default {
     /*
     ** You can extend webpack config here
     */
-   
+
     extend(config, ctx) {
     }
+  },
+  router: {
+    middleware: 'auth'
+  },
+  generate:{
+    routes:[
+      '/redirect/searchGoods',
+      '/redirect/goodsDetail'
+    ]
   }
 }

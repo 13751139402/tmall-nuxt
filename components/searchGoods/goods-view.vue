@@ -2,9 +2,8 @@
   <section class="product">
     <div class="product-iWrap">
       <figure class="productImg-wrap">
-        <a :href="href">
-          <el-image :src="cover" lazy></el-image>
-          <!-- <img :src="cover" /> -->
+        <a @click="linkDetails">
+          <img :src="cover" lazy />
         </a>
       </figure>
       <p class="productPrice">
@@ -14,7 +13,7 @@
         </em>
       </p>
       <div class="productTitle productTitle-spu">
-        <a :href="href">{{goods_name}}</a>
+        <a @click="linkDetails">{{goods_name}}</a>
       </div>
       <div class="productShop">
         <a class="productShop-name">{{shop_name}}</a>
@@ -57,6 +56,17 @@ export default {
   computed: {
     href() {
       return `/goodsDetail?spu_id=${this.id}`;
+    }
+  },
+  methods: {
+    linkDetails() {
+      let routeData = this.$router.resolve({
+        path: "/goodsDetail",
+        query: {
+          spu_id: this.id
+        }
+      });
+      window.open(routeData.href, "_blank");
     }
   },
   directives: {

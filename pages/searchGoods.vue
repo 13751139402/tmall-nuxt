@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-22 10:43:48
+ * @LastEditTime : 2020-01-26 16:46:35
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
@@ -193,7 +193,7 @@
 </template>
 
 <script>
-import siteNav from "~/components/home/site-nav.vue";
+import siteNav from "~/components/common/site-nav.vue";
 import searchView from "~/components/common/search-view";
 import goodsView from "~/components/searchGoods/goods-view";
 import { searchGoods } from "~/assets/api/search_goods";
@@ -221,23 +221,26 @@ export default {
       });
     }
   },
-  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
-    return searchGoods({ searchKey, pageNum, pageSize }).then(
-      ({ data: [list, total] }) => {
-        return {
-          list,
-          total,
-          searchKey,
-          path: searchKey,
-          currentPage: Number(pageNum)
-        };
-      }
-    );
-  }
+  // asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
+  //   return searchGoods({ searchKey, pageNum, pageSize }).then(
+  //     ({ data: [list, total] }) => {
+  //       return {
+  //         list,
+  //         total,
+  //         searchKey,
+  //         path: searchKey,
+  //         currentPage: Number(pageNum)
+  //       };
+  //     }
+  //   );
+  // }
 };
 </script>
 
 <style lang="scss" scoped>
+* {
+  font-family: "Microsoft YaHei", SimSun, "\5b8b\4f53", sans-serif;
+}
 .goHome:hover {
   color: rgb(255, 0, 54);
   text-decoration: underline;

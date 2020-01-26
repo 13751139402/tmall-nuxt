@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-21 14:03:29
+ * @LastEditTime : 2020-01-26 16:36:22
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -11,9 +11,15 @@
     <article class="content" :style="`height:${top}px;width:${width}px`">
       <section class="login-info">
         <slot name="left-con"></slot>
-        <em>喵，欢迎来天猫</em>
-        <a href>请登录</a>
-        <a href>免费注册</a>
+        <template v-if="user">
+          <em>Hi, {{user.name}}</em>
+          <a @click="logout">退出</a>
+        </template>
+        <template v-else>
+          <em>喵，欢迎来天猫</em>
+          <nuxt-link to="/login">请登录</nuxt-link>
+          <a href>免费注册</a>
+        </template>
       </section>
       <section class="quick-menu">
         <el-menu
@@ -24,7 +30,6 @@
           :text-color="color"
           :active-text-color="background"
           :background-color="background"
-          @select="handleSelect"
         >
           <el-submenu index="2">
             <template slot="title">
@@ -100,6 +105,15 @@ export default {
       default: 1230
     }
   },
+  computed: {
+    user() {
+      if (this.$store.getters["auth/isAuthenticated"]) {
+        return this.$store.getters["auth/currentUser"];
+      } else {
+        return false;
+      }
+    }
+  },
   data() {
     return {
       activeIndex: "1",
@@ -107,8 +121,8 @@ export default {
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    logout() {
+      this.$store.dispatch("auth/logout");
     }
   }
 };

@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\assets\api\goodsDetail.js
  */
-import request from '@/assets/util/request'
+import request from '@/assets/common/request'
 
 export function goodsDetails(params) {
     return request({

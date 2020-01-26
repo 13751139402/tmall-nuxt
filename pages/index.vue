@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-24 01:16:17
+ * @LastEditTime : 2020-01-26 12:11:45
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -385,7 +385,7 @@
 </template>
 
 <script>
-import siteNav from "~/components/home/site-nav.vue";
+import siteNav from "~/components/common/site-nav.vue";
 import serachFlexView from "~/components/home/search-flex-view.vue";
 import category from "~/components/home/category-view";
 import activity from "~/components/home/activity-view";
@@ -399,7 +399,7 @@ import floorItem from "~/components/home/activity-view/children/floor-line-con-i
 import floorTwoItem from "~/components/home/activity-view/children/floor-line-con-twoItem";
 import activityArea from "~/components/home/activity-view/children/activity-area";
 import searchView from "~/components/common/search-view";
-import { throttle } from "~/assets/util/tools.js";
+import { throttle } from "~/assets/common/tools.js";
 
 export default {
   components: {
@@ -649,6 +649,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+  font-family: "Microsoft YaHei", SimSun, "\5b8b\4f53", sans-serif;
+}
 html,
 body,
 #tmallHome {

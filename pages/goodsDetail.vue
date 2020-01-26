@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-24 01:25:22
+ * @LastEditTime : 2020-01-26 16:45:24
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -63,7 +63,7 @@
         <section class="tb-gallery">
           <div class="tb-booth">
             <img
-              v-show="previewParams.prevImg"
+              v-if="previewParams.prevImg"
               id="J_ImgBooth"
               :src="previewParams.prevImg+'_430x430q90.jpg'"
             />
@@ -301,7 +301,7 @@
 </template>
 
 <script>
-import siteNav from "~/components/home/site-nav.vue";
+import siteNav from "~/components/common/site-nav.vue";
 import { goodsDetails } from "~/assets/api/goods_detail";
 export default {
   components: {
@@ -355,11 +355,11 @@ export default {
       }
     }
   },
-  asyncData({ query: { spu_id } }) {
-    return goodsDetails({ spu_id }).then(({ data }) => {
-      return data;
-    });
-  },
+  // asyncData({ query: { spu_id } }) {
+  //   return goodsDetails({ spu_id }).then(({ data }) => {
+  //     return data;
+  //   });
+  // },
   mounted() {
     this.preview[0]
       ? (this.previewParams.prevImg = this.preview[0].img_url)

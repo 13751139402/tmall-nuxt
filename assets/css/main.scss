@@ -1,42 +1,37 @@
 em,
 i {
-    font-style: normal;
+  font-style: normal;
 }
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 head,
 footer {
-    font-family: "Microsoft YaHei", tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+  font-family: "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB", "\5b8b\4f53", sans-serif;
 }
-
 body,
 button,
 input,
 select,
 textarea {
-    font: 12px/1.5 tahoma, arial, "\5b8b\4f53";
-    -ms-overflow-style: scrollbar;
+  font: 12px/1.5 tahoma, arial, "\5b8b\4f53";
+  -ms-overflow-style: scrollbar;
+  font-family: "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB", "\5b8b\4f53", sans-serif;
 }
-
 a {
-    cursor: pointer;
-    text-decoration: blink;
+  cursor: pointer;
+  text-decoration: blink;
 }
 
 button {
-    border: 0;
-}
-
-body {
-    font-family: "Microsoft YaHei", SimSun, '\5b8b\4f53', sans-serif;
+  border: 0;
 }
 
 li,
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }

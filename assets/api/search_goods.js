@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\assets\api\home.js
  */
-import request from '@/assets/util/request'
+import request from '@/assets/common/request'
 
 export function searchGoods({ searchKey, pageNum = 1, pageSize = 60 }) {
     return request({

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-15 10:42:02
- * @LastEditTime : 2020-01-20 11:09:51
+ * @LastEditTime : 2020-01-26 10:47:58
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\common\.vue
@@ -22,12 +22,12 @@
       <slot name="logo"></slot>
       <section id="header_input">
         <input
-          v-model="value"
+          v-model="valueData"
           class="search_input"
           placeholder="搜索 天猫 商品/品牌/店铺"
-          @input="$emit('input', $event.target.value)"
+          @input="$emit('input', $event.target.valueData)"
         />
-        <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: value }}">
+        <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: valueData }}">
           <button class="search_button">搜索</button>
         </nuxt-link>
       </section>
@@ -42,6 +42,11 @@ export default {
       type: String,
       default: ""
     }
+  },
+  data() {
+    return {
+      valueData: this.value
+    };
   }
 };
 </script>
