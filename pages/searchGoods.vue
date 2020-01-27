@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-26 16:46:35
+ * @LastEditTime : 2020-01-26 21:37:05
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
@@ -175,7 +175,7 @@
         :total="total"
       ></el-pagination>
 
-      <!-- <article class="hotSale" >
+      <!-- <article class="hotSale">
         <h2 class="hotSale_title">掌柜热卖</h2>
         <section>
           <article class="goods-con">
@@ -198,6 +198,7 @@ import searchView from "~/components/common/search-view";
 import goodsView from "~/components/searchGoods/goods-view";
 import { searchGoods } from "~/assets/api/search_goods";
 export default {
+  watchQuery: true,
   components: {
     "site-nav": siteNav,
     "search-view": searchView,
@@ -216,24 +217,24 @@ export default {
   methods: {
     handleCurrentChange(pageNum) {
       this.$router.push({
-        path: "/redirect/searchGoods",
+        path: "/searchGoods",
         query: { searchKey: this.searchKey, pageNum }
       });
     }
   },
-  // asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
-  //   return searchGoods({ searchKey, pageNum, pageSize }).then(
-  //     ({ data: [list, total] }) => {
-  //       return {
-  //         list,
-  //         total,
-  //         searchKey,
-  //         path: searchKey,
-  //         currentPage: Number(pageNum)
-  //       };
-  //     }
-  //   );
-  // }
+  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
+    return searchGoods({ searchKey, pageNum, pageSize }).then(
+      ({ data: [list, total] }) => {
+        return {
+          list,
+          total,
+          searchKey,
+          path: searchKey,
+          currentPage: Number(pageNum)
+        };
+      }
+    );
+  }
 };
 </script>
 

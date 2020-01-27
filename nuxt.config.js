@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-26 16:35:06
+ * @LastEditTime : 2020-01-27 10:53:03
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -41,7 +41,7 @@ export default {
   css: [
     'element-ui/lib/theme-chalk/index.css',
     '@/assets/css/main.scss',
-    '@/static/iconfont/iconfont.css'
+    '@/assets/iconfont/iconfont.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -74,10 +74,4 @@ export default {
   router: {
     middleware: 'auth'
   },
-  generate:{
-    routes:[
-      '/redirect/searchGoods',
-      '/redirect/goodsDetail'
-    ]
-  }
 }

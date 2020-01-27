@@ -4,12 +4,7 @@
       <div id="J_LoginBox" class="login-box no-longlogin module-static">
         <div class="hd">
           <div class="login-switch" onselectstart="return false;">
-            <i class="iconfont quick" id="J_Static2Quick"></i>
-            <i
-              class="iconfont static"
-              id="J_Quick2Static"
-              data-spm-anchor-id="a2107.1.0.i1.6f7ecvoRcvoR0R"
-            ></i>
+            <i class="iconfont quick icon31erweima" id="J_Static2Quick"></i>
           </div>
           <div class="login-tip">
             <div class="poptip">
@@ -77,7 +72,7 @@
 
               <div class="field username-field ph-hide">
                 <label for="TPL_username_1">
-                  <i class="iconfont" title="会员名"></i>
+                  <i class="iconfont iconkefuyouxian"></i>
                 </label>
                 <span class="ph-label">会员名/邮箱/手机号</span>
                 <input
@@ -94,7 +89,7 @@
 
               <div class="field pwd-field">
                 <label id="password-label" for="TPL_password_1">
-                  <i class="icon iconfont" title="登录密码"></i>
+                  <i class="iconfont icon31mima"></i>
                 </label>
                 <span id="J_StandardPwd">
                   <input
@@ -389,17 +384,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/login_pc.scss";
 @import "@/assets/css/new-login.scss";
-
-@font-face {
-  font-family: "ncpc_iconfont";
-  src: url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.eot");
-  src: url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.eot?#iefix")
-      format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.woff") format("woff"),
-    url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_384029_rhzpmteb25oecdi.svg#ncpc_iconfont")
-      format("svg");
-}
 .nc-container div#nc-loading-circle {
   background: transparent;
   width: 20px;

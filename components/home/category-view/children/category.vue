@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-07 14:21:15
- * @LastEditTime : 2020-01-07 17:47:51
+ * @LastEditTime : 2020-01-27 10:58:25
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\category\children\category.vue

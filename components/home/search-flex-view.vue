@@ -30,7 +30,7 @@
                     />
                   </div>
                 </div>
-                <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: searchKey }}">
+                <nuxt-link :to="{ path: '/searchGoods', query: { searchKey: searchKey }}">
                   <button class="search_button">搜索</button>
                 </nuxt-link>
               </div>

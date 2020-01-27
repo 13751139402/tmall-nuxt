@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-15 10:42:02
- * @LastEditTime : 2020-01-26 10:47:58
+ * @LastEditTime : 2020-01-26 21:43:02
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\common\.vue
@@ -27,7 +27,7 @@
           placeholder="搜索 天猫 商品/品牌/店铺"
           @input="$emit('input', $event.target.valueData)"
         />
-        <nuxt-link :to="{ path: '/redirect/searchGoods', query: { searchKey: valueData }}">
+        <nuxt-link :to="{ path: '/searchGoods', query: { searchKey: valueData }}">
           <button class="search_button">搜索</button>
         </nuxt-link>
       </section>

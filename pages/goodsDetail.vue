@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-26 16:45:24
+ * @LastEditTime : 2020-01-26 21:22:03
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -355,11 +355,11 @@ export default {
       }
     }
   },
-  // asyncData({ query: { spu_id } }) {
-  //   return goodsDetails({ spu_id }).then(({ data }) => {
-  //     return data;
-  //   });
-  // },
+  asyncData({ query: { spu_id } }) {
+    return goodsDetails({ spu_id }).then(({ data }) => {
+      return data;
+    });
+  },
   mounted() {
     this.preview[0]
       ? (this.previewParams.prevImg = this.preview[0].img_url)
