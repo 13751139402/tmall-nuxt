@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-26 21:22:03
+ * @LastEditTime : 2020-01-28 23:21:56
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -302,7 +302,7 @@
 
 <script>
 import siteNav from "~/components/common/site-nav.vue";
-import { goodsDetails } from "~/assets/api/goods_detail";
+import { goodsDetails } from "~/assets/api/goods-detail";
 export default {
   components: {
     "site-nav": siteNav
@@ -355,10 +355,14 @@ export default {
       }
     }
   },
-  asyncData({ query: { spu_id } }) {
-    return goodsDetails({ spu_id }).then(({ data }) => {
-      return data;
-    });
+  asyncData({ params: { id }, error }) {
+    if (id) {
+      return goodsDetails({ spu_id: id }).then(({ data }) => {
+        return data;
+      });
+    } else {
+      //  error({ statusCode: 400, message: "没有spu_id参数" });
+    }
   },
   mounted() {
     this.preview[0]

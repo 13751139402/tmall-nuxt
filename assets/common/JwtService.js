@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-25 09:50:49
- * @LastEditTime : 2020-01-26 16:36:00
+ * @LastEditTime : 2020-01-27 23:58:21
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\assets\util\jwt.js

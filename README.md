@@ -1,6 +1,15 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-01-12 07:59:57
+ * @LastEditTime: 2020-01-29 00:00:20
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \nuxt\README.md
+ -->
 # nuxt
 
 > 测试nuxt
+>
 
 ## Build Setup
 

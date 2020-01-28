@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-26 21:37:05
+ * @LastEditTime : 2020-01-27 23:31:49
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
@@ -196,18 +196,14 @@
 import siteNav from "~/components/common/site-nav.vue";
 import searchView from "~/components/common/search-view";
 import goodsView from "~/components/searchGoods/goods-view";
+import axios from "axios";
 import { searchGoods } from "~/assets/api/search_goods";
 export default {
-  watchQuery: true,
+  watchQuery: true, // 当url query 改变时 页面会刷新
   components: {
     "site-nav": siteNav,
     "search-view": searchView,
     "goods-view": goodsView
-  },
-  data() {
-    return {
-      currentPage: 1
-    };
   },
   computed: {
     pageSLen() {
@@ -222,18 +218,22 @@ export default {
       });
     }
   },
-  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 } }) {
-    return searchGoods({ searchKey, pageNum, pageSize }).then(
-      ({ data: [list, total] }) => {
-        return {
-          list,
-          total,
-          searchKey,
-          path: searchKey,
-          currentPage: Number(pageNum)
-        };
-      }
-    );
+  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 }, error }) {
+    if (searchKey) {
+      return searchGoods({ searchKey, pageNum, pageSize }).then(
+        ({ data: [list, total] }) => {
+          return {
+            list,
+            total,
+            searchKey,
+            path: searchKey,
+            currentPage: Number(pageNum)
+          };
+        }
+      );
+    } else {
+      // error({ statusCode: 400, message: "没有searchKey参数" });
+    }
   }
 };
 </script>

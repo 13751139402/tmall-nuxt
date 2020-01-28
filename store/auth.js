@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-25 09:48:08
- * @LastEditTime : 2020-01-26 16:36:45
+ * @LastEditTime : 2020-01-27 13:03:20
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\store\auth.js
@@ -33,7 +33,6 @@ const actions = {
                 })
                 .catch(({ response }) => {
                     context.commit("SET_ERROR", response.data.errors);
-                    // console.log(response.data.message);
                     reject(response.data.errors)
                 });
         });
@@ -71,7 +70,6 @@ const actions = {
      */
     check_auth(context) {
         return new Promise(async (resolve, reject) => {
-            // console.log(JwtService.getToken());
             if (JwtService.getToken()) {
                 setAxiosAuthHeader();
                 apiCheckAuth()
