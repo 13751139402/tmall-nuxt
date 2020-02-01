@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-25 09:48:08
- * @LastEditTime : 2020-01-27 13:03:20
+ * @LastEditTime : 2020-01-30 15:09:35
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\store\auth.js
@@ -24,10 +24,10 @@ const getters = {
 };
 
 const actions = {
-    login(context, credentials) {
+    login(context, data) {
         return new Promise((resolve, reject) => {
-            api_login(credentials)
-                .then(({ data }) => {
+            this.$axios.$post('/member/login', data)
+                .then((data) => {
                     context.commit("SET_AUTH", data.user);
                     resolve();
                 })
@@ -68,23 +68,22 @@ const actions = {
      * @param {type} 
      * @return: 
      */
-    check_auth(context) {
+    async check_auth({ commit }) {
         return new Promise(async (resolve, reject) => {
             if (JwtService.getToken()) {
-                setAxiosAuthHeader();
-                apiCheckAuth()
-                    .then(({ data }) => {
-                        context.commit("SET_AUTH", data.user);
+                this.$axios.defaults.headers.common["Authorization"] = `Bearer ${JwtService.getToken()}`
+                await this.$axios.$get('/member/user')
+                    .then((data) => {
+                        commit("SET_AUTH", data.user);
                         resolve();
                     })
                     .catch(({ response }) => {
-                        context.commit("SET_ERROR", response.data.errors);
+                        commit("SET_ERROR", response.data.errors);
                         reject(response.data.message); // 认证失败，token错误或过期
                     });
             } else {
-                context.commit('PURGE_AUTH');
+                commit('PURGE_AUTH');
             }
-
         })
     }
 }

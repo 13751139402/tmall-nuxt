@@ -1,0 +1,74 @@
+.order-address .addr-item-wrapper.TwoRow {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 237px;
+  margin: 0 14px 14px 0;
+  color: #666;
+  cursor: pointer;
+}
+.order-address .addr-item-wrapper.TwoRow .inner-infos {
+  z-index: 2;
+  position: relative;
+  padding: 11px 15px;
+  background: url(//img.alicdn.com/tps/i2/T1VPiBXvpeXXbjLKQ7-237-106.png) no-repeat;
+  overflow: hidden;
+}
+.order-address .addr-item-wrapper.TwoRow .curMarker {
+  z-index: 3;
+  position: absolute;
+  background: url(//img.alicdn.com/tfs/TB1zLJRRpXXXXcrXXXXXXXXXXXX-30-600.png) no-repeat;
+  background-position: 0 -272px;
+  width: 28px;
+  height: 28px;
+  top: 77px;
+  right: 1px;
+  visibility: hidden;
+}
+.order-address .addr-item-wrapper.TwoRow .default-tip,
+.order-address .addr-item-wrapper.TwoRow .set-default {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 2px;
+  text-decoration: none;
+  filter: alpha(opacity=70);
+  opacity: 0.7;
+  z-index: 3;
+}
+.order-address .addr-item-wrapper.TwoRow .default-tip {
+  background: #ccc;
+  color: #fff;
+}
+.order-address .addr-item-wrapper.TwoRow .set-default {
+  color: #666;
+  background: #fff;
+}
+.order-address .addr-item-wrapper.TwoRow .set-default:hover {
+  color: #c97;
+}
+.order-address .addr-item-wrapper.TwoRow .failure,
+.order-address .addr-item-wrapper.TwoRow .success {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 2px;
+  opacity: 0.7;
+  z-index: 4;
+  background-color: #fff5cc;
+}
+.order-address .addr-active.addr-item-wrapper.TwoRow .inner-infos,
+.order-address .addr-selected.addr-item-wrapper.TwoRow .inner-infos {
+  background-image: url(//img.alicdn.com/tfs/TB1OVRCRpXXXXaMXFXXXXXXXXXX-237-106.png);
+}
+.order-address .addr-selected.addr-item-wrapper.TwoRow .inner-infos .addr-bd {
+  height: 36px;
+}
+.order-address .addr-selected.addr-item-wrapper.TwoRow .curMarker {
+  visibility: visible;
+}
+.order-address .addr-default.addr-item-wrapper.TwoRow .default-tip,
+.order-address .addr-selected.addr-not-default.addr-active.addr-item-wrapper.TwoRow .set-default {
+  display: block;
+}

@@ -1,23 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-27 23:31:49
+ * @LastEditTime : 2020-01-31 21:22:31
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
  -->
 <template>
   <div>
-    <site-nav :width="1190">
-      <template v-slot:left-con>
-        <nuxt-link to="/">
-          <div>
-            <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
-            <i class="goHome">天猫首页</i>
-          </div>
-        </nuxt-link>
-      </template>
-    </site-nav>
     <header>
       <search-view v-model="searchKey">
         <template v-slot:logo>
@@ -193,7 +183,6 @@
 </template>
 
 <script>
-import siteNav from "~/components/common/site-nav.vue";
 import searchView from "~/components/common/search-view";
 import goodsView from "~/components/searchGoods/goods-view";
 import axios from "axios";
@@ -201,7 +190,6 @@ import { searchGoods } from "~/assets/api/search_goods";
 export default {
   watchQuery: true, // 当url query 改变时 页面会刷新
   components: {
-    "site-nav": siteNav,
     "search-view": searchView,
     "goods-view": goodsView
   },
@@ -218,21 +206,24 @@ export default {
       });
     }
   },
-  asyncData({ query: { searchKey, pageNum = 1, pageSize = 60 }, error }) {
+  async asyncData({
+    query: { searchKey, pageNum = 1, pageSize = 60 },
+    error,
+    $axios
+  }) {
     if (searchKey) {
-      return searchGoods({ searchKey, pageNum, pageSize }).then(
-        ({ data: [list, total] }) => {
-          return {
-            list,
-            total,
-            searchKey,
-            path: searchKey,
-            currentPage: Number(pageNum)
-          };
-        }
-      );
+      const [list, total] = await $axios.$get("/goods/searchGoods", {
+        params: { searchKey, pageNum, pageSize }
+      });
+      return {
+        list,
+        total,
+        searchKey,
+        path: searchKey,
+        currentPage: Number(pageNum)
+      };
     } else {
-      // error({ statusCode: 400, message: "没有searchKey参数" });
+      error({ statusCode: 400, message: "没有searchKey参数" });
     }
   }
 };

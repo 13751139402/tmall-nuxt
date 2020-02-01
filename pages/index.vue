@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-27 23:57:12
+ * @LastEditTime : 2020-01-31 21:21:18
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -402,6 +402,7 @@ import searchView from "~/components/common/search-view";
 import { throttle } from "~/assets/common/tools.js";
 
 export default {
+  layout: "home",
   components: {
     "site-nav": siteNav,
     "category-view": category,

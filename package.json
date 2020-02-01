@@ -1,5 +1,5 @@
 {
-  "name": "nuxt",
+  "name": "tmall-nuxt",
   "version": "1.0.0",
   "description": "测试nuxt",
   "author": "13751139402",
@@ -11,8 +11,13 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/axios": "^5.9.3",
+    "@nuxtjs/dotenv": "^1.4.1",
     "axios": "^0.19.1",
     "element-ui": "^2.4.11",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
     "localforage": "^1.7.3",
     "nuxt": "^2.0.0",
     "standard": "^14.3.1"

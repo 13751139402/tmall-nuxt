@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-25 14:24:25
- * @LastEditTime : 2020-01-25 17:25:32
+ * @LastEditTime : 2020-01-31 21:22:06
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\login.vue
@@ -27,7 +27,7 @@
         <div class="form J_form" style="display: block; right: 233px;">
           <div class="form-inner">
             <div class="form-content">
-              <login-view></login-view>
+              <login-view @loginSucceed="$router.push('/')"></login-view>
             </div>
           </div>
         </div>
@@ -206,6 +206,7 @@
 <script>
 import loginView from "@/components/common/login-view";
 export default {
+  layout: "home",
   components: {
     "login-view": loginView
   }

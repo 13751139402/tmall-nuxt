@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-26 16:36:22
+ * @LastEditTime : 2020-01-31 21:28:37
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -28,7 +28,7 @@
           :style="`height: ${height}px;line-height: ${height-3}px;`"
           mode="horizontal"
           :text-color="color"
-          :active-text-color="background"
+          active-text-color="#909399"
           :background-color="background"
         >
           <el-submenu index="2">
@@ -110,7 +110,7 @@ export default {
       if (this.$store.getters["auth/isAuthenticated"]) {
         return this.$store.getters["auth/currentUser"];
       } else {
-        return false;
+        false;
       }
     }
   },

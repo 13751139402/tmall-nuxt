@@ -1,22 +1,16 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-28 23:38:05
+ * @LastEditTime : 2020-01-29 22:48:57
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
  */
+import dotenv from 'dotenv'
+dotenv.config() // 要在此配置env才能生效
 
 export default {
   mode: 'universal',
-  server: {
-    port: 8000, // default: 3000
-    host: '0.0.0.0' // default: localhost
-  },
-  // 配置客户端和服务器共享的环境变量
-  env: {
-    baseUrl: 'http://hsid.top:3000'
-  },
   /*
   ** Headers of the page
   */
@@ -58,7 +52,33 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
+    // '@nuxtjs/auth',
   ],
+  axios: {
+    
+    changeOrigin: true, // 允许跨域
+    withCredentials: false, // 当跨域请求时发送cookie,当允许发送cookie时,access-contron-allow-origin不能为*,安全
+    timeout: 5000, // 请求超时
+    proxy: true
+  },
+  proxy: {
+    '/api/': { target: 'http://hsid.top:3000', pathRewrite: { '^/api/': '' } },
+  },
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: '/member/user' },
+  //         // logout: { url: '/auth/logout' },
+  //         user: { url: '/member/login', propertyName: false }
+  //       }
+  //       // tokenRequired: true,
+  //       // tokenType: 'bearer'
+  //     }
+  //   }
+  // },
   /*
   ** Build configuration
   */

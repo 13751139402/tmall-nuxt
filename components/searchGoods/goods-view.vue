@@ -2,9 +2,9 @@
   <section class="product">
     <div class="product-iWrap">
       <figure class="productImg-wrap">
-        <nuxt-link :to="{ path: `/goodsDetail/${id}`}">
+        <a @click="linkDetails">
           <img :src="cover" lazy />
-        </nuxt-link>
+        </a>
       </figure>
       <p class="productPrice">
         <em :title="price">
@@ -13,7 +13,7 @@
         </em>
       </p>
       <div class="productTitle productTitle-spu">
-        <nuxt-link :to="{ path: `/goodsDetail/${id}`}">{{goods_name}}</nuxt-link>
+        <a @click="linkDetails">{{goods_name}}</a>
       </div>
       <div class="productShop">
         <a class="productShop-name">{{shop_name}}</a>
@@ -54,15 +54,12 @@ export default {
     }
   },
   methods: {
-    // linkDetails() {
-    //   let routeData = this.$router.resolve({
-    //     path: "/goodsDetail",
-    //     query: {
-    //       spu_id: this.id
-    //     }
-    //   });
-    //   window.open(routeData.href, "_blank");
-    //}
+    linkDetails() {
+      let routeData = this.$router.resolve({
+        path: `/goodsDetail/${this.id}`
+      });
+      window.open(routeData.href, "_blank");
+    }
   },
   directives: {
     // 注册一个局部的自定义指令 v-focus

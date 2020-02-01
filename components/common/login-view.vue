@@ -80,7 +80,7 @@
                   name="TPL_username"
                   id="TPL_username_1"
                   class="login-text J_UserName"
-                  v-model="account"
+                  v-model="username"
                   maxlength="32"
                   tabindex="1"
                   aria-label="会员名/邮箱/手机号"
@@ -352,7 +352,7 @@
 export default {
   data() {
     return {
-      account: "落魄前端在线求职",
+      username: "落魄前端在线求职",
       password: "123456",
       loginloading: false
     };
@@ -362,12 +362,12 @@ export default {
       this.loginloading = true;
       this.$store
         .dispatch("auth/login", {
-          account: this.account,
+          username: this.username,
           password: this.password
         })
         .then(() => {
           this.loginloading = false;
-          this.$router.push("/");
+          this.$emit('loginSucceed')
         })
         .catch(error => {
           this.$message({

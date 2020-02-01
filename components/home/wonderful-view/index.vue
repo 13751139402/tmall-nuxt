@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 17:59:34
- * @LastEditTime : 2020-01-14 18:07:26
+ * @LastEditTime : 2020-01-29 13:17:19
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\wonderful\index.vue
@@ -40,10 +40,8 @@ export default {
       list: []
     };
   },
-  beforeMount() {
-    randGoods({ num: 60 }).then(({ data }) => {
-      this.list = data;
-    });
+  async beforeMount() {
+    this.list = await this.$store.dispatch("randGoods", { num: 60 });
   }
 };
 </script>

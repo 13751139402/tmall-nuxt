@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-28 23:21:56
+ * @LastEditTime : 2020-01-31 21:22:50
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -9,17 +9,6 @@
 
 <template>
   <div>
-    <site-nav :width="990">
-      <template v-slot:left-con>
-        <nuxt-link to="/">
-          <div>
-            <i class="iconfont icon31shouyexuanzhong" style="color:#FF0036"></i>
-            <i class="goHome">天猫首页</i>
-          </div>
-        </nuxt-link>
-      </template>
-    </site-nav>
-
     <nav class="navigation-con">
       <ul class="navigation-bar">
         <li>
@@ -164,7 +153,11 @@
             </li>
           </ul>
           <div class="tb-key">
-            <div class="tb-skin">
+            <div class="tb-skin" :class="{'tb-no-choose':chooseSpecWarn}">
+              <p class="tb-note-title">
+                请选择您要的商品信息
+                <b class="J_PanelCloser" @click="resetSpecWar">x</b>
+              </p>
               <div class="tb-sku">
                 <dl class="tb-prop" v-for="spec in spec" :key="spec.id">
                   <dt class="tb-metatit">{{spec.spec_name}}</dt>
@@ -199,7 +192,7 @@
                   </dd>
                 </dl>
                 <div class="tb-action tm-clear">
-                  <div class="tb-btn-buy tb-btn-sku">
+                  <div class="tb-btn-buy tb-btn-sku" v-show="buyNow.show">
                     <a
                       id="J_LinkBuy"
                       href="#"
@@ -207,11 +200,21 @@
                       data-addfastbuy="true"
                       title="点击此按钮，到下一步确认购买信息。"
                       role="button"
-                    >立即购买</a>
+                      @click="buyNowSumbit"
+                      v-show="buyNow.show"
+                    >{{buyNow.text}}</a>
                   </div>
-                  <div class="tb-btn-basket tb-btn-sku">
-                    <a href="#" rel="nofollow" id="J_LinkBasket" role="button">
-                      <i class="iconfont icongouwuche2"></i>加入购物车
+                  <div class="tb-btn-basket tb-btn-sku" v-show="shopCart.show">
+                    <a
+                      href="#"
+                      rel="nofollow"
+                      id="J_LinkBasket"
+                      role="button"
+                      v-show="shopCart.show"
+                      @click="addToShoppingCart"
+                    >
+                      <i class="iconfont icongouwuche2"></i>
+                      {{shopCart.text}}
                     </a>
                   </div>
                 </div>
@@ -220,6 +223,9 @@
           </div>
         </section>
       </div>
+      <el-dialog :visible.sync="showLoginBox" width="25%" center>
+        <login-view @loginSucceed="showLoginBox=false"></login-view>
+      </el-dialog>
     </article>
 
     <article id="bd">
@@ -301,11 +307,11 @@
 </template>
 
 <script>
-import siteNav from "~/components/common/site-nav.vue";
+import loginView from "@/components/common/login-view";
 import { goodsDetails } from "~/assets/api/goods-detail";
 export default {
   components: {
-    "site-nav": siteNav
+    "login-view": loginView
   },
   data() {
     return {
@@ -313,13 +319,85 @@ export default {
         previewIndex: 0,
         prevImg: false
       },
+      chooseSpecWarn: false,
+      showLoginBox: true,
       params: {
         num: 1,
         spec: {}
-      }
+      },
+      buyNow: {
+        show: true,
+        text: "立即购买"
+      },
+      shopCart: {
+        show: true,
+        text: "加入购物车"
+      },
+      activeBtn: false
     };
   },
   methods: {
+    loginSucceed() {
+      this.showLoginBox = false;
+      
+    },
+    /**
+     * @description: spec 是否未false
+     * @param {type}
+     * @return:
+     */
+    validateSpecIsEmpty() {
+      let spec = this.params.spec;
+      for (let value of Object.values(spec)) {
+        if (!value) {
+          return true;
+        }
+      }
+      return false;
+    },
+    validateIsLogin() {
+      if (this.$store.getters["auth/isAuthenticated"]) {
+        return true;
+      } else {
+        this.showLoginBox = true;
+      }
+    },
+    validateSubmit(activeBtn) {
+      this.activeBtn = activeBtn;
+      if (this.validateSpecIsEmpty()) {
+        this.chooseSpecWarn = true;
+        let handlerBtn = { show: false, text: "确认" };
+        Object.assign(this.buyNow, handlerBtn);
+        Object.assign(this.shopCart, handlerBtn);
+        return false;
+      }
+      if (!this.validateIsLogin()) {
+        return false;
+      }
+      return true;
+    },
+    resetSpecWar() {
+      this.chooseSpecWarn = false;
+      Object.assign(this.buyNow, { show: true, text: "立即购买" });
+      Object.assign(this.shopCart, { show: true, text: "加入购物车" });
+    },
+    addToShoppingCart() {
+      if (this.validateSubmit("shopCart")) {
+
+      }
+    },
+    handleShoppingCart(){
+      
+    },
+    /**
+     * @description: 立即购买
+     * @param {type}
+     * @return:
+     */
+    buyNowSumbit() {
+      if (this.validateSubmit("buyNow")) {
+      }
+    },
     /**
      * @description: 修改预览图下表
      * @param {
@@ -355,24 +433,103 @@ export default {
       }
     }
   },
-  asyncData({ params: { id }, error }) {
+  async asyncData({ params: { id }, error, $axios }) {
     if (id) {
-      return goodsDetails({ spu_id: id }).then(({ data }) => {
-        return data;
+      let data = await $axios.$get("/goods/goodsDetails", {
+        params: { spu_id: id }
       });
+      let spec = {};
+      data.spec.forEach(({ id }) => {
+        spec[id] = false;
+      });
+      data.params = { num: 1, spec };
+      return data;
     } else {
-      //  error({ statusCode: 400, message: "没有spu_id参数" });
+      error({ statusCode: 400, message: "没有spu_id参数" });
     }
   },
   mounted() {
     this.preview[0]
       ? (this.previewParams.prevImg = this.preview[0].img_url)
       : "";
+  },
+  watch: {
+    "params.spec": {
+      handler(to) {
+        if (!this.validateSpecIsEmpty() && this.chooseSpecWarn) {
+          this[this.activeBtn].show = true;
+        }
+      },
+      deep: true
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
+.mui-dialog-header {
+    background-image: url(//img.alicdn.com/tfs/TB1VLoORXXXXXc4XXXXXXXXXXXX-132-41.png)!important;
+    background-color: #ff0036!important;
+    border-bottom: none!important;
+}
+.mui-dialog-header {
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    border-bottom: 1px solid #8c0400;
+    background-color: #B6000C;
+    background-position: 20px 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+.mui-dialog-header,.mui-dialog-close {
+    background: url(//img.alicdn.com/tps/i2/T1CdBMFkNeXXb23GA.-132-41.png) no-repeat;
+}
+.tb-no-choose .tb-note-title{
+  display: block
+}
+.tb-no-choose .tb-btn-sku a {
+    display: block;
+    height: 34px !important;
+    line-height: 34px !important;
+    width: 76px !important;
+    background-color: #ff0036 !important;
+    border: 1px solid #ff0036 !important;
+    color: #fff !important;
+}
+.tb-note-title b {
+    position: absolute;
+    z-index: 10;
+    margin: 0 10px 8px 0;
+    height: 8px;
+    width: 8px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    color: #b40000;
+    font-size: 14px;
+    font-weight: bolder;
+    font-family: arial;
+}
+.tb-note-title {
+    display: none;
+    background-color: #fff8f7;
+    border-bottom: 1px solid #f3e9e7;
+    height: 24px;
+    position: relative;
+    line-height: 24px;
+    margin: -8px -8px 5px;
+    padding-left: 8px;
+    z-index: 10;
+}
+.tb-no-choose{
+      border: 2px solid #c00;
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    padding: 8px 8px 14px !important;
+    margin: -21px 0 0 -10px;
+}
 #J_Attrs, #J_Attrs h4.hd, #description h4.hd, .TMDtemai #J_Reviews, .tm-tabOther #J_DcBottomRightWrap, .tm-tabOther #J_DcTopRightWrap, .tm-tabOther #J_Detail h4.hd, .tm-tabOther #J_LadeMap, .tm-tabOther #J_store, .tm-tabOther #attributes, .tm-tabOther #auto-delivery, .tm-tabOther #autofill, .tm-tabOther #detail div.msg, .tm-tabOther #extra-attributes, .tm-tabOther #item-flash, .tm-tabOther #mall-banner, .tm-tabOther #trydetail, .tm-tabOther .J_DetailSection, .w1190 .tm-tabOther .tm-descCate, .w990 .tm-tabOther .tm-bd-side {
     display: none;
 }
