@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-01-31 21:28:37
+ * @LastEditTime : 2020-02-05 15:09:08
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -30,6 +30,7 @@
           :text-color="color"
           active-text-color="#909399"
           :background-color="background"
+          @select="handleSelect"
         >
           <el-submenu index="2">
             <template slot="title">
@@ -38,9 +39,15 @@
             <el-menu-item index="2-1">已买到的宝贝</el-menu-item>
             <el-menu-item index="2-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
-          <el-menu-item index="3">
+          <el-menu-item index="shopCart">
             <i class="iconfont icongouwuchexuanzhong" :style="`color:${iconColor}`"></i>
-            <i>购物车</i>
+            <i>
+              购物车
+              <template v-if="total">
+                <em class="total">{{total}}</em>
+                件
+              </template>
+            </i>
           </el-menu-item>
           <el-submenu index="80">
             <template slot="title">
@@ -107,11 +114,14 @@ export default {
   },
   computed: {
     user() {
-      if (this.$store.getters["auth/isAuthenticated"]) {
-        return this.$store.getters["auth/currentUser"];
+      if (this.$store.getters["isAuthenticated"]) {
+        return this.$store.getters["currentUser"];
       } else {
         false;
       }
+    },
+    total() {
+      return this.$store.state.goods.total;
     }
   },
   data() {
@@ -122,7 +132,12 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("auth/logout");
+      this.$store.dispatch("logout");
+    },
+    handleSelect(index) {
+      if (index === "shopCart") {
+        this.$router.push('shopCart');
+      }
     }
   }
 };
@@ -167,5 +182,9 @@ export default {
 }
 * {
   box-sizing: border-box;
+}
+.total {
+  font-weight: 700;
+  font-family: Arial;
 }
 </style>

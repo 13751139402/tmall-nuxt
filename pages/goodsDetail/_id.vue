@@ -1,14 +1,14 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-01-31 21:22:50
+ * @LastEditTime : 2020-02-06 10:58:53
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
  -->
 
 <template>
-  <div>
+  <div style="min-height:3000px">
     <nav class="navigation-con">
       <ul class="navigation-bar">
         <li>
@@ -182,13 +182,14 @@
 
                 <dl class="tb-amount tm-clear">
                   <dt class="tb-metatit">数量</dt>
-                  <dd id="J_Amount">
+                  <dd id="J_Amount" style="display: flex;align-items: center;">
                     <el-input-number
                       style="width: 67px;"
                       v-model="params.num"
                       controls-position="right"
                       :min="1"
                     ></el-input-number>
+                    <p class="tb-hidden" v-if="skuData.stock">{{`库存${skuData.stock}件`}}</p>
                   </dd>
                 </dl>
                 <div class="tb-action tm-clear">
@@ -309,6 +310,7 @@
 <script>
 import loginView from "@/components/common/login-view";
 import { goodsDetails } from "~/assets/api/goods-detail";
+import * as JwtService from "@/assets/common/JwtService.js";
 export default {
   components: {
     "login-view": loginView
@@ -320,7 +322,7 @@ export default {
         prevImg: false
       },
       chooseSpecWarn: false,
-      showLoginBox: true,
+      showLoginBox: false,
       params: {
         num: 1,
         spec: {}
@@ -333,13 +335,13 @@ export default {
         show: true,
         text: "加入购物车"
       },
+      skuData: false,
       activeBtn: false
     };
   },
   methods: {
     loginSucceed() {
       this.showLoginBox = false;
-      
     },
     /**
      * @description: spec 是否未false
@@ -356,7 +358,7 @@ export default {
       return false;
     },
     validateIsLogin() {
-      if (this.$store.getters["auth/isAuthenticated"]) {
+      if (this.$store.getters["isAuthenticated"]) {
         return true;
       } else {
         this.showLoginBox = true;
@@ -383,12 +385,41 @@ export default {
     },
     addToShoppingCart() {
       if (this.validateSubmit("shopCart")) {
-
+        if (!this.skuData) {
+          this.$message({
+            showClose: true,
+            message: "购物车错误,请稍后再试",
+            type: "warning"
+          });
+        }
+        let params = {
+          spuId: this.$route.params.id,
+          skuId: this.skuData.id,
+          memberId: String(this.$store.getters["currentUser"].id),
+          product_amount: this.params.num
+        };
+        this.$axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${JwtService.getToken()}`;
+        this.$store
+          .dispatch("goods/addShopCart", params)
+          .then(item => {
+            this.$message({
+              showClose: true,
+              message: "成功加入购物车！你可以去购物车结算",
+              type: "success"
+            });
+          })
+          .catch(error => {
+            this.$message({
+              showClose: true,
+              message: "加入购物车失败,请稍后再试",
+              type: "error"
+            });
+          });
       }
     },
-    handleShoppingCart(){
-      
-    },
+    handleShoppingCart() {},
     /**
      * @description: 立即购买
      * @param {type}
@@ -396,6 +427,9 @@ export default {
      */
     buyNowSumbit() {
       if (this.validateSubmit("buyNow")) {
+        this.$axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${JwtService.getToken()}`;
       }
     },
     /**
@@ -455,9 +489,19 @@ export default {
   },
   watch: {
     "params.spec": {
-      handler(to) {
-        if (!this.validateSpecIsEmpty() && this.chooseSpecWarn) {
-          this[this.activeBtn].show = true;
+      async handler(to) {
+        if (!this.validateSpecIsEmpty()) {
+          if (this.chooseSpecWarn) {
+            this[this.activeBtn].show = true;
+          }
+          let params = { spuId: this.$route.params.id };
+          let tempList = [];
+          for (let value of Object.values(this.params.spec)) {
+            tempList.push(value);
+          }
+          params.specData = tempList;
+          let skuData = await this.$store.dispatch("goods/findSku", params);
+          this.skuData = skuData[0];
         }
       },
       deep: true
@@ -467,6 +511,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.tb-hidden{
+    color: #878787;
+    margin-left: 1.2em;
+}
+/deep/body{
+  min-height: 3000px;
+}
 .mui-dialog-header {
     background-image: url(//img.alicdn.com/tfs/TB1VLoORXXXXXc4XXXXXXXXXXXX-132-41.png)!important;
     background-color: #ff0036!important;

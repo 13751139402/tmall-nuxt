@@ -361,7 +361,7 @@ export default {
     login() {
       this.loginloading = true;
       this.$store
-        .dispatch("auth/login", {
+        .dispatch("login", {
           username: this.username,
           password: this.password
         })

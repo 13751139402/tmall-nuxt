@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-31 20:28:51
- * @LastEditTime : 2020-01-31 21:55:00
+ * @LastEditTime : 2020-02-07 15:04:35
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tmall-nuxt\pages\shopCart.vue
@@ -56,15 +56,8 @@
                 <div class="search-combobox" id="ks-component258">
                   <div class="search-combobox-input-wrap">
                     <input
-                      id="q"
-                      name="q"
                       aria-label="请输入搜索文字"
-                      accesskey="s"
-                      autofocus="true"
-                      autocomplete="off"
                       class="search-combobox-input"
-                      aria-haspopup="true"
-                      aria-combobox="list"
                       role="combobox"
                       x-webkit-grammar="builtin:translate"
                     />
@@ -72,8 +65,6 @@
                 </div>
               </div>
               <input type="hidden" name="spm" value="1.1000386.5803581.d4908513" />
-              <!--[if lt IE 9]><s class="search-fix search-fix-panellt"></s><s class="search-fix search-fix-panellb"></s>
-              <![endif]-->
             </form>
           </div>
         </div>
@@ -87,12 +78,12 @@
               <li class="btn-switch-cart switch-cart-0 current">
                 <a class="J_MakePoint" data-point="tbcart.8.35">
                   <em>全部商品</em>
-                  <span class="number">11</span>
+                  <span class="number">{{total}}</span>
                   <span class="pipe"></span>
                 </a>
               </li>
               <li class="btn-switch-cart switch-cart-2">
-                <a class="J_MakePoint" data-point="tbcart.8.34">
+                <a class="J_MakePoint" data-point="tbcart.8.34" style="cursor: not-allowed;">
                   <em>降价商品</em>
                   <span class="number">0</span>
                   <span class="pipe"></span>
@@ -110,7 +101,8 @@
               <span class="pay-text">已选商品（不含运费）</span>
               <strong class="price">
                 <em id="J_SmallTotal">
-                  <span class="total-symbol">&nbsp;</span>0.00
+                  <span class="total-symbol">&nbsp;</span>
+                  {{goodsCheckedAmount}}
                 </em>
               </strong>
               <a id="J_SmallSubmit" class="submit-btn submit-btn-disabled">结&nbsp;算</a>
@@ -124,16 +116,7 @@
               <div class="wp">
                 <div class="th th-chk">
                   <div id="J_SelectAll1" class="select-all J_SelectAll">
-                    <div class="cart-checkbox">
-                      <input
-                        class="J_CheckBoxShop"
-                        id="J_SelectAllCbx1"
-                        type="checkbox"
-                        name="select-all"
-                        value="true"
-                      />
-                      <label for="J_SelectAllCbx1">勾选购物车内所有商品</label>
-                    </div>&nbsp;&nbsp;全选
+                    <el-checkbox @change="handleCheckedAll" v-model="isChecked"></el-checkbox>&nbsp;全选
                   </div>
                 </div>
                 <div class="th th-item">
@@ -160,232 +143,29 @@
               </div>
             </div>
             <div id="J_OrderList">
-              <div id="J_OrderHolder_s_1666576242_1" style="height: auto;">
-                <div id="J_Order_s_1666576242_1" class="J_Order clearfix order-body">
-                  <div class="J_ItemHead shop clearfix">
-                    <div class="shop-info">
-                      <div class="cart-checkbox">
-                        <input
-                          class="J_CheckBoxShop"
-                          id="J_CheckShop_s_1666576242_1"
-                          type="checkbox"
-                          name="orders[]"
-                          value="s_1666576242_1"
-                        />
-                        <label for="J_CheckShop_s_1666576242_1">勾选此店铺下所有商品</label>
-                      </div>&nbsp;&nbsp;
-                      <span class="shop-icon icon-B"></span>店铺：
-                      <a
-                        href="//store.taobao.com/shop/view_shop.htm?user_number_id=1666576242"
-                        target="_blank"
-                        title="同迅数码专营店"
-                        class="J_MakePoint"
-                        data-point="tbcart.8.15"
-                      >同迅数码专营店</a>
-                      <span
-                        class="ww-light ww-small"
-                        data-items="s_1666576242_1"
-                        data-icon="small"
-                        data-nick="同迅数码专营店"
-                        data-display="inline"
-                      >
-                        <a
-                          href="https://amos.alicdn.com/getcid.aw?v=3&amp;groupid=0&amp;s=1&amp;charset=utf-8&amp;uid=%E5%90%8C%E8%BF%85%E6%95%B0%E7%A0%81%E4%B8%93%E8%90%A5%E5%BA%97&amp;site=cntaobao&amp;fromid=cntaobao维他柠檬哥"
-                          target="_blank"
-                          class="ww-inline ww-online"
-                          title="点此可以直接和卖家交流选好的宝贝，或相互交流网购体验，还支持语音视频噢。"
-                        >
-                          <span>旺旺在线</span>
-                        </a>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="order-content">
-                    <div id="J_BundleList_s_1666576242_1" class="item-list">
-                      <div id="J_Bundle_s_1666576242_1_0" class="bundle bundle-last">
-                        <div id="J_ItemHolder_1111408930574" class="item-holder">
-                          <div
-                            id="J_Item_1111408930574"
-                            class="J_ItemBody item-body clearfix item-normal first-item last-item"
-                          >
-                            <ul class="item-content clearfix">
-                              <li class="td td-chk">
-                                <div class="td-inner">
-                                  <div style="height: 82px;position: relative;">
-                                    <div class="cart-checkbox">
-                                      <input
-                                        class="J_CheckBoxItem"
-                                        id="J_CheckBox_1111408930574"
-                                        type="checkbox"
-                                        name="items[]"
-                                        value="1111408930574"
-                                      />
-                                      <label for="J_CheckBox_1111408930574">勾选商品</label>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                              <li class="td td-item">
-                                <div class="td-inner">
-                                  <div class="item-pic J_ItemPic img-loaded">
-                                    <a
-                                      href="//detail.tmall.com/item.htm?id=611126486748"
-                                      target="_blank"
-                                      data-title="6期免息优惠900当天发HUAWEI/华为 Mate 30 Pro手机官方旗舰店正品华为mate30新款x荣耀p30pro直降5g全网通4g"
-                                      class="J_MakePoint J_GoldReport"
-                                      data-point="tbcart.8.12"
-                                    >
-                                      <img
-                                        src="https://img.alicdn.com/bao/uploaded/i1/2838892713/O1CN01N0hKZZ1Vub5PeqYBs_!!2838892713.png_80x80.jpg"
-                                        class="itempic J_ItemImg"
-                                      />
-                                    </a>
-                                  </div>
-                                  <div class="item-info">
-                                    <div class="item-basic-info">
-                                      <a
-                                        href="//detail.tmall.com/item.htm?id=611126486748"
-                                        target="_blank"
-                                        title="6期免息优惠900当天发HUAWEI/华为 Mate 30 Pro手机官方旗舰店正品华为mate30新款x荣耀p30pro直降5g全网通4g"
-                                        class="item-title J_GoldReport J_MakePoint"
-                                        data-point="tbcart.8.11"
-                                      >6期免息优惠900当天发HUAWEI/华为 Mate 30 Pro手机官方旗舰店正品华为mate30新款x荣耀p30pro直降5g全网通4g</a>
-                                    </div>
-                                    <div class="item-other-info">
-                                      <div class="promo-logos"></div>
-                                      <div class="item-icon-list clearfix">
-                                        <div class="item-icons J_ItemIcons item-icons-fixed">
-                                          <span class="item-icon item-icon-0" title="支持信用卡支付">
-                                            <img
-                                              src="//assets.alicdn.com/sys/common/icon/trade/xcard.png"
-                                              alt
-                                            />
-                                          </span>
-                                          <a
-                                            href="//pages.tmall.com/wow/seller/act/seven-day"
-                                            target="_blank"
-                                            class="item-icon item-icon-1 J_MakePoint"
-                                            data-point="tbcart.8.26"
-                                            title="消费者保障服务，卖家承诺7天退换"
-                                          >
-                                            <img
-                                              src="//img.alicdn.com/tps/i3/T1Vyl6FCBlXXaSQP_X-16-16.png"
-                                              alt
-                                            />
-                                          </a>
-                                          <a
-                                            href="//www.taobao.com/go/act/315/xfzbz_rsms.php?ad_id=&amp;am_id=130011830696bce9eda3&amp;cm_id=&amp;pm_id="
-                                            target="_blank"
-                                            class="item-icon item-icon-2 J_MakePoint"
-                                            data-point="tbcart.8.26"
-                                            title="消费者保障服务，卖家承诺如实描述"
-                                          >
-                                            <img
-                                              src="//img.alicdn.com/tps/i4/T1BCidFrNlXXaSQP_X-16-16.png"
-                                              alt
-                                            />
-                                          </a>
-                                        </div>
-                                      </div>
-                                      <div class="item-tips"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                              <li class="td td-info">
-                                <div class="item-props item-props-can">
-                                  <p class="sku-line" tabindex="0">网络类型：4G全网通</p>
-                                  <p class="sku-line" tabindex="0">机身颜色：星河银</p>
-                                  <p class="sku-line" tabindex="0">套餐类型：官方标配</p>
-                                  <p class="sku-line" tabindex="0">存储容量：8+256GB</p>
-                                  <span
-                                    tabindex="0"
-                                    class="btn-edit-sku J_BtnEditSKU J_MakePoint"
-                                    data-point="tbcart.8.10"
-                                  >修改</span>
-                                </div>
-                              </li>
-                              <li class="td td-price">
-                                <div class="td-inner">
-                                  <div class="item-price price-promo-">
-                                    <div class="price-content">
-                                      <div class="price-line">
-                                        <em class="J_Price price-now" tabindex="0">￥6299.00</em>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                              <li class="td td-amount">
-                                <div class="td-inner">
-                                  <div class="amount-wrapper">
-                                    <div class="item-amount">
-                                      <a href="#" class="J_Minus no-minus">-</a>
-                                      <input
-                                        type="text"
-                                        value="1"
-                                        class="text text-amount J_ItemAmount"
-                                        data-max="5"
-                                        data-now="1"
-                                        autocomplete="off"
-                                      />
-                                      <a href="#" class="J_Plus plus">+</a>
-                                    </div>
-                                    <div class="amount-msg J_AmountMsg"></div>
-                                  </div>
-                                </div>
-                              </li>
-                              <li class="td td-sum">
-                                <div class="td-inner">
-                                  <em tabindex="0" class="J_ItemSum number">￥6299.00</em>
-                                  <div class="J_ItemLottery"></div>
-                                </div>
-                              </li>
-                              <li class="td td-op">
-                                <div class="td-inner">
-                                  <a
-                                    title="移入收藏夹"
-                                    class="btn-fav J_Fav J_MakePoint"
-                                    data-point-url="//www.atpanel.com/jsclick?cache=15804740381031&amp;mycart=collect"
-                                    href="#"
-                                  >移入收藏夹</a>
-                                  <a
-                                    href="javascript:;"
-                                    data-point-url="//www.atpanel.com/jsclick?cache=15804740381032&amp;cartlist=delete"
-                                    class="J_Del J_MakePoint"
-                                  >删除</a>
-                                  <div
-                                    class="find-similar J_find_similar close"
-                                    data-sellerid="1666576242"
-                                    data-itemid="611126486748"
-                                    data-categoryid="1512"
-                                  >
-                                    <div class="J_find_similar_trigger">
-                                      <a href="javascript:;" class="new-find-similar">相似宝贝</a>
-                                      <span class="arrow"></span>
-                                      <i class="icon-bd-title"></i>
-                                    </div>
-                                    <div class="find-similar-body">
-                                      <img
-                                        src="//gtd.alicdn.com/tps/i2/T1Q2BUXaxFXXXXXXXX-32-32.gif"
-                                        class="find-similar-loading"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <shop-item
+                v-for="item in shopCartData"
+                :key="item.key"
+                v-bind="item"
+                @handleCheckedShopChange="handleCheckedShopChange"
+              >
+                <template #default="{goods}">
+                  <shop-item-goods
+                    v-for="item of goods"
+                    :key="item.id"
+                    :data="item"
+                    @handleCheckedGoodsChange="handleCheckedGoodsChange"
+                  ></shop-item-goods>
+                </template>
+              </shop-item>
             </div>
           </div>
           <div id="J_FloatBarHolder" class="float-bar-holder">
-            <div id="J_FloatBar" class="float-bar clearfix default" style="position: static;">
+            <div
+              id="J_FloatBar"
+              class="float-bar clearfix default"
+              :class="{floatBar_float:isBarFloat}"
+            >
               <div
                 id="J_SelectedItems"
                 class="group-wrapper group-popup hidden"
@@ -396,16 +176,7 @@
               </div>
               <div class="float-bar-wrapper">
                 <div id="J_SelectAll2" class="select-all J_SelectAll">
-                  <div class="cart-checkbox" style="margin-top:2px">
-                    <input
-                      class="J_CheckBoxShop"
-                      id="J_SelectAllCbx2"
-                      type="checkbox"
-                      name="select-all"
-                      value="true"
-                    />
-                    <label for="J_SelectAllCbx2">勾选购物车内所有商品</label>
-                  </div>&nbsp;全选
+                  <el-checkbox @change="handleCheckedAll" v-model="isChecked"></el-checkbox>&nbsp;全选
                 </div>
                 <div class="operations">
                   <a href="#" hidefocus="true" class="J_DeleteSelected">删除</a>
@@ -421,7 +192,7 @@
                 <div class="float-bar-right">
                   <div id="J_ShowSelectedItems" class="amount-sum">
                     <span class="txt">已选商品</span>
-                    <em id="J_SelectedItemsCount">0</em>
+                    <em id="J_SelectedItemsCount">{{goodsCheckedCount}}</em>
                     <span class="txt">件</span>
                     <div class="arrow-box">
                       <span class="selected-items-arrow"></span>
@@ -437,7 +208,8 @@
                     <span class="txt">合计（不含运费）：</span>
                     <strong class="price">
                       <em id="J_Total">
-                        <span class="total-symbol">&nbsp;</span>0.00
+                        <span class="total-symbol">&nbsp;</span>
+                        {{goodsCheckedAmount}}
                       </em>
                     </strong>
                   </div>
@@ -463,13 +235,98 @@
 </template>
 
 <script>
+import shopItemGoods from "@/components/shopCart/shop-item-goods";
+import shopItem from "@/components/shopCart/shop-item";
 export default {
-  // components: {
-  // }
+  components: {
+    "shop-item": shopItem,
+    "shop-item-goods": shopItemGoods
+  },
+  data() {
+    return {
+      isChecked: false,
+      floatBartrigger: false,
+      isBarFloat: true
+    };
+  },
+  async fetch({ $axios, store }) {
+    let shopCartData = await $axios.$get("/order/shopCartList");
+    store.commit("shopCart/ADD_shopCartData", shopCartData);
+  },
+  computed: {
+    shopCartData() {
+      return this.$store.state.shopCart.shopCartData;
+    },
+    total() {
+      return this.$store.state.goods.total;
+    },
+    goodsCheckedCount() {
+      return Object.keys(this.$store.state.shopCart.checkedGoods).length;
+    },
+    goodsCheckedAmount() {
+      let checkedGoods = this.$store.state.shopCart.checkedGoods;
+      let checkedAmount = 0.0;
+      for (const {
+        product_amount: amount,
+        sku: { price }
+      } of Object.values(checkedGoods)) {
+        checkedAmount += amount * price;
+      }
+      return checkedAmount.toFixed(2);
+    }
+  },
+  methods: {
+    handleCheckedGoodsChange(value, goodsData) {
+      this.$store.dispatch("shopCart/handleCheckedGoods", {
+        value,
+        goodsData
+      });
+    },
+    handleCheckedShopChange(value, shopGoods) {
+      this.$store.dispatch("shopCart/handleCheckedShop", {
+        value,
+        shopGoods
+      });
+    },
+    handleCheckedAll(value) {
+      this.$store.dispatch("shopCart/handleCheckedAll", {
+        value,
+        shopCartData: this.shopCartData
+      });
+    },
+    handleFloatBar() {
+      let scrollTop = document.documentElement.scrollTop;
+      console.log(scrollTop);
+      this.isBarFloat = scrollTop >= this.floatBartrigger ? false : true;
+    }
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleFloatBar);
+    let {
+      offsetTop: barTop,
+      offsetHeight: barHeight
+    } = document.getElementById("J_FloatBarHolder");
+    let { clientHeight } = document.documentElement;
+    this.floatBartrigger = barTop + barHeight - clientHeight;
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleFloatBar);
+  }
 };
 </script>
 
  <style scoped lang="scss">
 @import "@/assets/css/global.scss";
 @import "@/assets/css/cart-min.scss";
+/deep/.el-checkbox__input.is-checked .el-checkbox__inner,
+/deep/.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: #f40;
+  border-color: #f40;
+}
+.floatBar_float {
+  position: fixed;
+  bottom: 0;
+  background: #e5e5e5;
+  z-index: 9;
+}
 </style>

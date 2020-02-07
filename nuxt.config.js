@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-29 22:48:57
+ * @LastEditTime : 2020-02-07 21:12:05
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -10,6 +10,10 @@ import dotenv from 'dotenv'
 dotenv.config() // 要在此配置env才能生效
 
 export default {
+  server: {
+    port: 3001, // default: 3000
+    host: 'localhost' // default: localhost
+  },
   mode: 'universal',
   /*
   ** Headers of the page
@@ -41,6 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // '@/plugins/axios',
     '@/plugins/element-ui'
   ],
   /*
@@ -57,7 +62,6 @@ export default {
     // '@nuxtjs/auth',
   ],
   axios: {
-    
     changeOrigin: true, // 允许跨域
     withCredentials: false, // 当跨域请求时发送cookie,当允许发送cookie时,access-contron-allow-origin不能为*,安全
     timeout: 5000, // 请求超时
@@ -66,19 +70,6 @@ export default {
   proxy: {
     '/api/': { target: 'http://hsid.top:3000', pathRewrite: { '^/api/': '' } },
   },
-  // auth: {
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: { url: '/member/user' },
-  //         // logout: { url: '/auth/logout' },
-  //         user: { url: '/member/login', propertyName: false }
-  //       }
-  //       // tokenRequired: true,
-  //       // tokenType: 'bearer'
-  //     }
-  //   }
-  // },
   /*
   ** Build configuration
   */
