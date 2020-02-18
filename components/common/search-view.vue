@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-15 10:42:02
- * @LastEditTime : 2020-01-26 21:43:02
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 11:51:13
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\common\.vue
  -->
@@ -26,10 +26,13 @@
           class="search_input"
           placeholder="搜索 天猫 商品/品牌/店铺"
           @input="$emit('input', $event.target.valueData)"
+          @keyup.enter="searchSubmit"
         />
+
         <nuxt-link :to="{ path: '/searchGoods', query: { searchKey: valueData }}">
           <button class="search_button">搜索</button>
         </nuxt-link>
+        <p class="search_warn">数据有限,请搜索"手机","衣服","鞋子"三个关键字</p>
       </section>
     </main>
   </article>
@@ -40,18 +43,33 @@ export default {
   props: {
     value: {
       type: String,
-      default: ""
+      default: '手机'
     }
   },
   data() {
     return {
       valueData: this.value
-    };
+    }
+  },
+  methods: {
+    searchSubmit() {
+      this.$router.push({
+        path: '/searchGoods',
+        query: { searchKey: this.valueData }
+      })
+    }
   }
-};
+}
 </script>
 
 <style scoped lang='scss'>
+.search_warn {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  font-size: 14px;
+  color: #ff0036;
+}
 .header_con {
   width: 1190px;
   display: flex;
@@ -76,6 +94,7 @@ export default {
   border: 2px solid #ff0036;
   border-width: 2px 0 2px 2px;
   box-sizing: border-box;
+  position: relative;
   .search_input {
     width: 491px;
     height: 100%;
@@ -93,7 +112,7 @@ export default {
     letter-spacing: 5px;
     background-color: #ff0036;
     color: #fff;
-    font-family: "\5FAE\8F6F\96C5\9ED1", arial, "\5b8b\4f53";
+    font-family: '\5FAE\8F6F\96C5\9ED1', arial, '\5b8b\4f53';
   }
 }
 </style>

@@ -1,14 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime : 2020-02-06 10:58:53
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 13:10:27
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
  -->
 
 <template>
   <div style="min-height:3000px">
+    <site-nav :width="990"></site-nav>
     <nav class="navigation-con">
       <ul class="navigation-bar">
         <li>
@@ -284,11 +285,7 @@
                 >
                   <div class="name">
                     品牌名称：
-                    <b
-                      class="J_EbrandLogo"
-                      target="_blank"
-                      href="//brand.tmall.com/brandInfo.htm?brandId=30111&amp;type=0&amp;scm=1048.1.1.4"
-                    >Apple/苹果</b>
+                    <b class="J_EbrandLogo" target="_blank">{{brand?brand.brand_name:"无"}}</b>
                   </div>
                 </div>
               </div>
@@ -308,13 +305,16 @@
 </template>
 
 <script>
-import loginView from "@/components/common/login-view";
-import { goodsDetails } from "~/assets/api/goods-detail";
-import * as JwtService from "@/assets/common/JwtService.js";
+import loginView from '@/components/common/login-view'
+import { goodsDetails } from '~/assets/api/goods-detail'
+import * as JwtService from '@/assets/common/JwtService.js'
+import siteNav from '~/components/common/site-nav.vue'
 export default {
   components: {
-    "login-view": loginView
+    'login-view': loginView,
+    'site-nav': siteNav
   },
+  layout: 'noNav',
   data() {
     return {
       previewParams: {
@@ -329,19 +329,19 @@ export default {
       },
       buyNow: {
         show: true,
-        text: "立即购买"
+        text: '立即购买'
       },
       shopCart: {
         show: true,
-        text: "加入购物车"
+        text: '加入购物车'
       },
       skuData: false,
       activeBtn: false
-    };
+    }
   },
   methods: {
     loginSucceed() {
-      this.showLoginBox = false;
+      this.showLoginBox = false
     },
     /**
      * @description: spec 是否未false
@@ -349,74 +349,88 @@ export default {
      * @return:
      */
     validateSpecIsEmpty() {
-      let spec = this.params.spec;
+      let spec = this.params.spec
       for (let value of Object.values(spec)) {
         if (!value) {
-          return true;
+          return true
         }
       }
-      return false;
+      return false
     },
     validateIsLogin() {
-      if (this.$store.getters["isAuthenticated"]) {
-        return true;
+      if (this.$store.getters['isAuthenticated']) {
+        return true
       } else {
-        this.showLoginBox = true;
+        this.showLoginBox = true
       }
     },
     validateSubmit(activeBtn) {
-      this.activeBtn = activeBtn;
+      this.activeBtn = activeBtn
       if (this.validateSpecIsEmpty()) {
-        this.chooseSpecWarn = true;
-        let handlerBtn = { show: false, text: "确认" };
-        Object.assign(this.buyNow, handlerBtn);
-        Object.assign(this.shopCart, handlerBtn);
-        return false;
+        this.chooseSpecWarn = true
+        let handlerBtn = { show: false, text: '确认' }
+        Object.assign(this.buyNow, handlerBtn)
+        Object.assign(this.shopCart, handlerBtn)
+        return false
       }
       if (!this.validateIsLogin()) {
-        return false;
+        return false
       }
-      return true;
+      this.resetSpecWar()
+      return true
     },
     resetSpecWar() {
-      this.chooseSpecWarn = false;
-      Object.assign(this.buyNow, { show: true, text: "立即购买" });
-      Object.assign(this.shopCart, { show: true, text: "加入购物车" });
+      this.chooseSpecWarn = false
+      Object.assign(this.buyNow, { show: true, text: '立即购买' })
+      Object.assign(this.shopCart, { show: true, text: '加入购物车' })
     },
     addToShoppingCart() {
-      if (this.validateSubmit("shopCart")) {
+      if (this.validateSubmit('shopCart')) {
         if (!this.skuData) {
           this.$message({
             showClose: true,
-            message: "购物车错误,请稍后再试",
-            type: "warning"
-          });
+            message: '购物车错误,请稍后再试',
+            type: 'warning'
+          })
         }
         let params = {
           spuId: this.$route.params.id,
           skuId: this.skuData.id,
-          memberId: String(this.$store.getters["currentUser"].id),
+          memberId: String(this.$store.getters['currentUser'].id),
           product_amount: this.params.num
-        };
-        this.$axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${JwtService.getToken()}`;
+        }
         this.$store
-          .dispatch("goods/addShopCart", params)
+          .dispatch('goods/addShopCart', params)
           .then(item => {
+            const h = this.$createElement
             this.$message({
-              showClose: true,
-              message: "成功加入购物车！你可以去购物车结算",
-              type: "success"
-            });
+              showClose: false,
+              message: h('p', { style: 'font-size:16px' }, [
+                h('span', null, '加入'),
+                h(
+                  'a',
+                  {
+                    style:
+                      'color: #ff0036;text-decoration: underline;padding: 5px;',
+                    domProps: {
+                      href: '/shopCart'
+                    }
+                  },
+                  '购物车'
+                ),
+                h('span', null, '成功')
+              ]),
+              type: 'success',
+              duration: 0
+            })
           })
           .catch(error => {
             this.$message({
               showClose: true,
-              message: "加入购物车失败,请稍后再试",
-              type: "error"
-            });
-          });
+              message: '加入购物车失败,请稍后再试',
+              type: 'error'
+            })
+          })
       }
     },
     handleShoppingCart() {},
@@ -426,10 +440,13 @@ export default {
      * @return:
      */
     buyNowSumbit() {
-      if (this.validateSubmit("buyNow")) {
-        this.$axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${JwtService.getToken()}`;
+      if (this.validateSubmit('buyNow')) {
+        let params = {
+          skuId: this.skuData.id,
+          product_amount: this.params.num
+        }
+        this.$store.commit('confirmOrder/CREATE_PARAMS', [params])
+        this.$router.push('/confirmOrder')
       }
     },
     /**
@@ -441,8 +458,8 @@ export default {
      */
 
     changePrevview(index, img) {
-      this.previewParams.previewIndex = index;
-      this.previewParams.prevImg = img;
+      this.previewParams.previewIndex = index
+      this.previewParams.prevImg = img
     },
     /**
      * @description: 修改选中的spec
@@ -455,59 +472,58 @@ export default {
      */
 
     chooseSpec(key, value, src) {
-      let spec = this.params.spec;
+      let spec = this.params.spec
       if (!spec[key]) {
-        this.$set(spec, key, value);
+        this.$set(spec, key, value)
       } else {
-        spec[key] = value;
+        spec[key] = value
       }
-
       if (src) {
-        this.changePrevview(-1, src);
+        this.changePrevview(-1, src)
       }
     }
   },
   async asyncData({ params: { id }, error, $axios }) {
     if (id) {
-      let data = await $axios.$get("/goods/goodsDetails", {
+      let data = await $axios.$get('/goods/goodsDetails', {
         params: { spu_id: id }
-      });
-      let spec = {};
+      })
+      let spec = {}
       data.spec.forEach(({ id }) => {
-        spec[id] = false;
-      });
-      data.params = { num: 1, spec };
-      return data;
+        spec[id] = false
+      })
+      data.params = { num: 1, spec }
+      return data
     } else {
-      error({ statusCode: 400, message: "没有spu_id参数" });
+      error({ statusCode: 400, message: '没有spu_id参数' })
     }
   },
   mounted() {
     this.preview[0]
       ? (this.previewParams.prevImg = this.preview[0].img_url)
-      : "";
+      : ''
   },
   watch: {
-    "params.spec": {
+    'params.spec': {
       async handler(to) {
         if (!this.validateSpecIsEmpty()) {
           if (this.chooseSpecWarn) {
-            this[this.activeBtn].show = true;
+            this[this.activeBtn].show = true
           }
-          let params = { spuId: this.$route.params.id };
-          let tempList = [];
+          let params = { spuId: this.$route.params.id }
+          let tempList = []
           for (let value of Object.values(this.params.spec)) {
-            tempList.push(value);
+            tempList.push(value)
           }
-          params.specData = tempList;
-          let skuData = await this.$store.dispatch("goods/findSku", params);
-          this.skuData = skuData[0];
+          params.specData = tempList
+          let skuData = await this.$store.dispatch('goods/findSku', params)
+          this.skuData = skuData[0]
         }
       },
       deep: true
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

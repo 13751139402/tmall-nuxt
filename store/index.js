@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-01-25 13:40:13
- * @LastEditTime : 2020-02-07 19:10:29
+ * @LastEditTime : 2020-02-08 10:32:30
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\store\index.js
@@ -11,7 +11,6 @@ import { apiCheckAuth, api_register, api_login, setAxiosAuthHeader } from '@/ass
 export const state = () => ({
     errors: null,
     user: {},
-    token: "",
     isAuthenticated: !!JwtService.getToken()
 })
 
@@ -35,7 +34,7 @@ const actions = {
             }, {})
             if (cookieObj.token) {
                 let userObj = JSON.parse(decodeURIComponent(cookieObj.token).replace('j:', ''));
-                // this.$axios.setHeader('Authorization', `Bearer ${userObj.token}`)
+                this.$axios.setHeader('Authorization', `Bearer ${userObj.token}`)
                 await dispatch('goods/selectShopCartTotal')
                 commit("SET_AUTH", userObj);
             }
@@ -47,7 +46,6 @@ const actions = {
         })
     },
     login(context, data) {
-
         return new Promise((resolve, reject) => {
             this.$axios.$post('/member/login', data)
                 .then((data) => {
@@ -121,7 +119,6 @@ const mutations = {
     SET_AUTH(state, user) {
         state.isAuthenticated = true;
         state.user = user;
-        state.token = user.token;
         state.errors = {};
         JwtService.saveToken(state.user.token);
     },

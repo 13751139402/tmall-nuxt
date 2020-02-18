@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-02-07 21:12:05
+ * @LastEditTime : 2020-02-08 10:36:16
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
@@ -45,7 +45,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    // '@/plugins/axios',
+    '@/plugins/axios',
     '@/plugins/element-ui'
   ],
   /*

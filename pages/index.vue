@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-01-31 21:21:18
+ * @LastEditTime : 2020-02-13 11:26:31
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
@@ -47,7 +47,7 @@
       <site-nav
         background="#d91e1c"
         :top="32"
-        :height="40"
+        :height="35"
         color="#fff"
         iconColor="#fff"
         style="box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3)"
@@ -402,7 +402,7 @@ import searchView from "~/components/common/search-view";
 import { throttle } from "~/assets/common/tools.js";
 
 export default {
-  layout: "home",
+  layout: "noNav",
   components: {
     "site-nav": siteNav,
     "category-view": category,

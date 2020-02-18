@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime : 2020-02-05 15:09:08
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 09:48:58
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
  -->
@@ -36,8 +36,12 @@
             <template slot="title">
               <i>我的淘宝</i>
             </template>
-            <el-menu-item index="2-1">已买到的宝贝</el-menu-item>
-            <el-menu-item index="2-2">已卖出的宝贝</el-menu-item>
+            <el-menu-item
+              index="2-1"
+              style="font-size: 14px;height: 30px !important;line-height: 30px !important;"
+            >
+              <nuxt-link to="/boughtList" :style="`color:${color}`">已买到的宝贝</nuxt-link>
+            </el-menu-item>
           </el-submenu>
           <el-menu-item index="shopCart">
             <i class="iconfont icongouwuchexuanzhong" :style="`color:${iconColor}`"></i>
@@ -53,8 +57,6 @@
             <template slot="title">
               <i>收藏夹</i>
             </template>
-            <el-menu-item index="4-1">收藏的宝贝</el-menu-item>
-            <el-menu-item index="4-2">收藏的店铺</el-menu-item>
           </el-submenu>
           <el-menu-item index="8">
             <i class="iconfont iconshouji" :style="`color:${iconColor}`"></i>
@@ -67,16 +69,12 @@
             <template slot="title">
               <i>商家支持</i>
             </template>
-            <el-menu-item index="4-1">已买到的宝贝</el-menu-item>
-            <el-menu-item index="4-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
           <el-submenu index="10">
             <template slot="title">
               <i class="iconfont iconliebiao" :style="`color:${iconColor}`"></i>
               <i>网站导航</i>
             </template>
-            <el-menu-item index="10-1">已买到的宝贝</el-menu-item>
-            <el-menu-item index="10-2">已卖出的宝贝</el-menu-item>
           </el-submenu>
         </el-menu>
       </section>
@@ -86,18 +84,18 @@
 
 <script>
 export default {
-  name: "homeHead",
+  name: 'homeHead',
   props: {
     background: {
       type: String,
-      default: "#f2f2f2"
+      default: '#f2f2f2'
     },
     top: {
       type: Number
     },
     color: {
       type: String,
-      default: "#999"
+      default: '#999'
     },
     height: {
       type: Number,
@@ -105,46 +103,46 @@ export default {
     },
     iconColor: {
       type: String,
-      default: "#ff0036"
+      default: '#ff0036'
     },
     width: {
       type: Number,
-      default: 1230
+      default: 1190
     }
   },
   computed: {
     user() {
-      if (this.$store.getters["isAuthenticated"]) {
-        return this.$store.getters["currentUser"];
+      if (this.$store.getters['isAuthenticated']) {
+        return this.$store.getters['currentUser']
       } else {
-        false;
+        false
       }
     },
     total() {
-      return this.$store.state.goods.total;
+      return this.$store.state.goods.total
     }
   },
   data() {
     return {
-      activeIndex: "1",
-      activeIndex2: "1"
-    };
+      activeIndex: '1',
+      activeIndex2: '1'
+    }
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch('logout')
     },
     handleSelect(index) {
-      if (index === "shopCart") {
-        this.$router.push('shopCart');
+      if (index === 'shopCart') {
+        this.$router.push('/shopCart')
       }
     }
   }
-};
+}
 </script>
 
 <style  scoped lang='scss'>
-@import "@/assets/css/menu.scss";
+@import '@/assets/css/menu.scss';
 #site-nav {
   height: 40px;
   width: 100%;
@@ -152,8 +150,8 @@ export default {
   display: flex;
   justify-content: center;
   color: #fff;
-  font-family: "Microsoft YaHei", tahoma, arial, "Hiragino Sans GB",
-    "\5b8b\4f53", sans-serif;
+  font-family: 'Microsoft YaHei', tahoma, arial, 'Hiragino Sans GB',
+    '\5b8b\4f53', sans-serif;
 }
 #site-nav a {
   color: inherit;

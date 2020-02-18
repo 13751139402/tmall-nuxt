@@ -1,0 +1,179 @@
+.price-font {
+  font-family: verdana, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Tahoma, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, sans-serif;
+}
+.order-itemInfo {
+  display: inline-block;
+  vertical-align: top;
+}
+.order-itemInfo .info-cell {
+  display: inline-block;
+  box-sizing: content-box;
+  margin-right: 1px;
+}
+.order-itemInfo .info-detail {
+  width: 245px;
+  padding: 10px 0 10px 10px;
+}
+.order-itemInfo .info-img {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+.order-itemInfo .info-msg {
+  padding-left: 10px;
+  vertical-align: top;
+}
+.order-itemInfo .info-msg .ext-detail-msg {
+  margin-left: 4px;
+}
+.order-itemInfo .info-title {
+  color: #3c3c3c;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.order-itemInfo .info-title:hover {
+  color: #ff0036;
+}
+.order-itemInfo .info-icon-list {
+  width: 180px;
+}
+.order-itemInfo .icon-main {
+  height: 16px;
+  margin-right: 4px;
+}
+.order-itemInfo .icon-main img {
+  vertical-align: middle;
+  height: 16px;
+}
+.order-itemInfo .icon-main .icon-text {
+  border: 1px solid #ff0036;
+  border-radius: 3px;
+  padding: 2px;
+  position: relative;
+  top: 2px;
+}
+.order-itemInfo .icon-ext {
+  color: #6c6c6c;
+  margin-top: 5px;
+}
+.order-itemInfo .icon-ext .mui-msg-content {
+  padding-left: 3px;
+}
+.order-itemInfo .delivery-time {
+  color: #6c6c6c;
+  display: inline-block;
+  width: 180px;
+}
+.order-itemInfo .shop-info {
+  margin-top: 3px;
+  min-height: 21px;
+}
+.order-itemInfo .info-sku {
+  color: #6c6c6c;
+  width: 180px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 0;
+}
+.order-itemInfo .info-sku p {
+  word-break: break-all;
+}
+.order-itemInfo .info-price {
+  color: #3c3c3c;
+  vertical-align: top;
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  padding: 10px 0;
+}
+.item-row__column-7 .info-sku {
+  width: 170px;
+}
+.item-row__column-7 .info-price {
+  width: 100px;
+}
+.item-row .item-row__select {
+  display: inline-block;
+  width: 180px;
+  vertical-align: top;
+  height: 75px;
+  text-align: center;
+}
+.item-row .item-row__price {
+  display: inline-block;
+  width: 130px;
+  text-align: right;
+  padding-right: 5px;
+}
+.item-row .item-row__price .item-row__prepay-price,
+.item-row .item-row__price .price {
+  font-weight: 700;
+}
+.item-row .item-row__price .prePay .icon {
+  background: #f49291;
+  border: 1px solid #da6a69;
+  color: #fff;
+  border-radius: 2px;
+  margin-right: 3px;
+  padding: 1px 3px;
+  text-decoration: none;
+}
+.item-row .item-row__price .finalPay {
+  color: #666;
+  line-height: 15px;
+  margin-top: 5px;
+  font-weight: 400;
+}
+.item-row .item-row__price-item {
+  padding: 10px 0 5px;
+}
+.item-row .item-row__price-txt {
+  color: #999;
+}
+.item-row .item-row__villager {
+  display: inline-block;
+}
+.item-row .item-row__text {
+  padding: 10px;
+}
+.item-row .error {
+  display: inline-block;
+  width: 84px;
+  background: #fef0e5;
+  border: 1px solid #ffe3d5;
+  border-top: none;
+  color: #dd2727;
+}
+.order-quantity {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  width: 120px;
+  padding: 10px 0;
+  margin-right: 1px;
+}
+.order-quantity .quantity-inner {
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 0 5px;
+}
+.item-row__column-7 .order-quantity {
+  width: 100px;
+}
+.item-row__column-7 .item-row__select {
+  width: 140px;
+}
+.item-row__column-7 .item-row__price {
+  width: 120px;
+}
+.price-font {
+  font-family: verdana, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Tahoma, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, sans-serif;
+}

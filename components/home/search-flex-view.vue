@@ -47,7 +47,7 @@ export default {
   props: ["searchShow"],
   data() {
     return {
-      searchKey: ""
+      searchKey: "手机"
     };
   }
 };

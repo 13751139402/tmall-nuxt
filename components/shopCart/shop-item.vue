@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-05 12:28:21
- * @LastEditTime : 2020-02-06 21:59:10
+ * @LastEditTime : 2020-02-11 20:40:13
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tmall-nuxt\components\shopCart\shop-item.vue
@@ -13,7 +13,7 @@
         <div class="shop-info">
           <el-checkbox @change="handleCheckedShopChange" v-model="isChecked"></el-checkbox>
           <span class="shop-icon icon-B"></span>店铺：
-          <a target="_blank" title="同迅数码专营店" class="J_MakePoint">{{shop_name}}</a>
+          <a target="_blank" :title="shop_name" class="J_MakePoint">{{shop_name}}</a>
           <span
             class="ww-light ww-small"
             data-icon="small"

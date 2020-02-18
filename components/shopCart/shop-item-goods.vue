@@ -158,13 +158,6 @@ export default {
           id: this.data.id,
           value
         })
-        .catch(() => {
-          this.$message({
-            showClose: true,
-            message: "添加数量错误,请稍后再试",
-            type: "error"
-          });
-        });
     },
     delGoods() {
       this.$store
@@ -173,7 +166,7 @@ export default {
           this.$message({
             showClose: true,
             message: "删除成功",
-            type: "scuess"
+            type: "success"
           });
         })
         .catch(() => {

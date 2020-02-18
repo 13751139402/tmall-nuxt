@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-14 18:10:06
- * @LastEditTime : 2020-01-31 21:22:31
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 11:07:43
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\search_goods.vue
  -->
@@ -46,164 +46,165 @@
           </div>
           <p class="crumbTitle">
             共
-            <span>{{total}}</span> 件相关商品
+            <span>{{total?total:"0"}}</span> 件相关商品
           </p>
         </div>
       </article>
 
-      <form class="navAttrsForm">
-        <div class="brandAttr j_nav_brand">
-          <div class="j_Brand attr">
-            <div class="attrKey">品牌</div>
-            <div class="attrValues showLogo">
-              <ul class="av-collapse row-1" data-atp="{loc},{brand},,,{f},4,{c},">
-                <li>
-                  <a
-                    data-f="spu-brand-qp"
-                    data-c="brand-qp"
-                    href="?brand=3506680&amp;q=%CA%D6%BB%FA&amp;sort=s&amp;style=g&amp;search_condition=2&amp;from=sn_1_brand-qp&amp;spm=a220m.1000858.0.0.549d7f1fmWTxJF#J_crumbs"
-                    title="Xiaomi/小米"
-                    atpanel="1,3506680,,,spu-brand-qp,4,brand-qp,"
-                  >
-                    <img
-                      style
-                      src="//img.alicdn.com/bao/uploaded/TB1wh2sj.z1gK0jSZLewu29kVXa.png"
-                      alt="Xiaomi/小米"
-                    />
-                    Xiaomi/小米
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </form>
-
-      <article class="filter clearfix">
-        <a class="fSort fSort-cur">
-          综合
-          <i class="f-ico-arrow-d"></i>
-        </a>
-        <a class="fSort">
-          销量
-          <i class="f-ico-arrow-d"></i>
-        </a>
-        <a class="fSort">
-          价格
-          <i class="f-ico-triangle-mt"></i>
-          <i class="f-ico-triangle-mb f-ico-triangle-mb-slctd"></i>
-        </a>
-        <form>
-          <div class="fPrice" id="J_FPrice">
-            <b class="fPb-item">
-              <i class="ui-price-plain">¥</i>
-              <input
-                type="text"
-                name="start_price"
-                autocomplete="off"
-                maxlength="6"
-                class="j_FPInput"
-                aria-label="最低价"
-                placeholder="请输入最低价"
-              />
-            </b>
-            <i class="fPb-split"></i>
-            <b class="fPb-item">
-              <i class="ui-price-plain">¥</i>
-              <input
-                type="text"
-                name="end_price"
-                autocomplete="off"
-                maxlength="6"
-                class="j_FPInput"
-                aria-label="最高价"
-                placeholder="请输入最高价"
-              />
-            </b>
-
-            <div class="fP-expand" style="display: none;">
-              <a class="ui-btn-s">清空</a>
-              <a class="ui-btn-s-primary">确定</a>
+      <template v-if="list.length">
+        <form class="navAttrsForm">
+          <div class="brandAttr j_nav_brand">
+            <div class="j_Brand attr">
+              <div class="attrKey">品牌</div>
+              <div class="attrValues showLogo">
+                <ul class="av-collapse row-1" data-atp="{loc},{brand},,,{f},4,{c},">
+                  <li>
+                    <a
+                      data-f="spu-brand-qp"
+                      data-c="brand-qp"
+                      href="?brand=3506680&amp;q=%CA%D6%BB%FA&amp;sort=s&amp;style=g&amp;search_condition=2&amp;from=sn_1_brand-qp&amp;spm=a220m.1000858.0.0.549d7f1fmWTxJF#J_crumbs"
+                      title="Xiaomi/小米"
+                      atpanel="1,3506680,,,spu-brand-qp,4,brand-qp,"
+                    >
+                      <img
+                        style
+                        src="//img.alicdn.com/bao/uploaded/TB1wh2sj.z1gK0jSZLewu29kVXa.png"
+                        alt="Xiaomi/小米"
+                      />
+                      Xiaomi/小米
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </form>
-        <p class="ui-page-s">
-          <b class="ui-page-s-len">{{pageSLen}}</b>
-          <b v-if="currentPage===1" class="ui-page-s-prev" title="上一页">&lt;</b>
-          <a
-            v-else
-            :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage-1}`"
-            class="ui-page-s-next"
-            title="下一页"
-          >&lt;</a>
-          <b v-if="currentPage===Math.ceil(this.total / 60)" class="ui-page-s-prev" title="下一页">&gt;</b>
-          <a
-            v-else
-            :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage+1}`"
-            class="ui-page-s-next"
-            title="下一页"
-          >&gt;</a>
-        </p>
-      </article>
 
-      <article class="goods-con">
-        <goods-view
-          v-for="item in list"
-          :key="item.id"
-          :shop_name="item.shop&&item.shop.shop_name"
-          v-bind="item"
-        ></goods-view>
-      </article>
+        <article class="filter clearfix">
+          <a class="fSort fSort-cur">
+            综合
+            <i class="f-ico-arrow-d"></i>
+          </a>
+          <a class="fSort">
+            销量
+            <i class="f-ico-arrow-d"></i>
+          </a>
+          <a class="fSort">
+            价格
+            <i class="f-ico-triangle-mt"></i>
+            <i class="f-ico-triangle-mb f-ico-triangle-mb-slctd"></i>
+          </a>
+          <form>
+            <div class="fPrice" id="J_FPrice">
+              <b class="fPb-item">
+                <i class="ui-price-plain">¥</i>
+                <input
+                  type="text"
+                  name="start_price"
+                  autocomplete="off"
+                  maxlength="6"
+                  class="j_FPInput"
+                  aria-label="最低价"
+                  placeholder="请输入最低价"
+                />
+              </b>
+              <i class="fPb-split"></i>
+              <b class="fPb-item">
+                <i class="ui-price-plain">¥</i>
+                <input
+                  type="text"
+                  name="end_price"
+                  autocomplete="off"
+                  maxlength="6"
+                  class="j_FPInput"
+                  aria-label="最高价"
+                  placeholder="请输入最高价"
+                />
+              </b>
 
-      <el-pagination
-        class="pagination"
-        @current-change="handleCurrentChange"
-        :background="true"
-        :current-page="currentPage"
-        :page-size="60"
-        layout=" prev, pager, next,total, jumper"
-        :total="total"
-      ></el-pagination>
+              <div class="fP-expand" style="display: none;">
+                <a class="ui-btn-s">清空</a>
+                <a class="ui-btn-s-primary">确定</a>
+              </div>
+            </div>
+          </form>
+          <p class="ui-page-s">
+            <b class="ui-page-s-len">{{pageSLen}}</b>
+            <b v-if="currentPage===1" class="ui-page-s-prev" title="上一页">&lt;</b>
+            <a
+              v-else
+              :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage-1}`"
+              class="ui-page-s-next"
+              title="下一页"
+            >&lt;</a>
+            <b
+              v-if="currentPage===Math.ceil(this.total / 60)"
+              class="ui-page-s-prev"
+              title="下一页"
+            >&gt;</b>
+            <a
+              v-else
+              :href="`?searchKey=${this.searchKey}&pageNum=${this.currentPage+1}`"
+              class="ui-page-s-next"
+              title="下一页"
+            >&gt;</a>
+          </p>
+        </article>
 
-      <!-- <article class="hotSale">
-        <h2 class="hotSale_title">掌柜热卖</h2>
-        <section>
-          <article class="goods-con">
-            <goods-view
-              v-for="item in hotList"
-              :key="item.id"
-              :shop_name="item.shop&&item.shop.shop_name"
-              v-bind="item"
-            ></goods-view>
-          </article>
-        </section>
-      </article>-->
+        <article class="goods-con">
+          <goods-view
+            v-for="item in list"
+            :key="item.id"
+            :shop_name="item.shop&&item.shop.shop_name"
+            v-bind="item"
+          ></goods-view>
+        </article>
+
+        <el-pagination
+          class="pagination"
+          @current-change="handleCurrentChange"
+          :background="true"
+          :current-page="currentPage"
+          :page-size="60"
+          layout=" prev, pager, next,total, jumper"
+          :total="total"
+        ></el-pagination>
+      </template>
+
+      <template v-else>
+        <div class="nrt">
+          <p>
+            喵~没找到与
+            <em>{{`“${searchKey?searchKey:""} ”`}}</em>相关的商品哦。
+          </p>
+        </div>
+      </template>
     </main>
   </div>
 </template>
 
 <script>
-import searchView from "~/components/common/search-view";
-import goodsView from "~/components/searchGoods/goods-view";
-import axios from "axios";
-import { searchGoods } from "~/assets/api/search_goods";
+import searchView from '~/components/common/search-view'
+import goodsView from '~/components/searchGoods/goods-view'
+import axios from 'axios'
+import { searchGoods } from '~/assets/api/search_goods'
 export default {
   watchQuery: true, // 当url query 改变时 页面会刷新
   components: {
-    "search-view": searchView,
-    "goods-view": goodsView
+    'search-view': searchView,
+    'goods-view': goodsView
   },
   computed: {
     pageSLen() {
-      return `${this.currentPage}/${Math.ceil(this.total / 60)}`;
+      return `${this.currentPage}/${Math.ceil(this.total / 60)}`
     }
   },
   methods: {
     handleCurrentChange(pageNum) {
       this.$router.push({
-        path: "/searchGoods",
+        path: '/searchGoods',
         query: { searchKey: this.searchKey, pageNum }
-      });
+      })
     }
   },
   async asyncData({
@@ -212,26 +213,56 @@ export default {
     $axios
   }) {
     if (searchKey) {
-      const [list, total] = await $axios.$get("/goods/searchGoods", {
+      const data = await $axios.$get('/goods/searchGoods', {
         params: { searchKey, pageNum, pageSize }
-      });
-      return {
-        list,
-        total,
-        searchKey,
-        path: searchKey,
-        currentPage: Number(pageNum)
-      };
+      })
+      if (data) {
+        let [list, total] = data
+        return {
+          list,
+          total,
+          searchKey,
+          path: searchKey,
+          currentPage: Number(pageNum)
+        }
+      } else {
+        return {
+          list:[],
+          total:0,
+          searchKey,
+          path: searchKey,
+          currentPage: Number(pageNum)
+        }
+      }
     } else {
-      error({ statusCode: 400, message: "没有searchKey参数" });
+      error({ statusCode: 400, message: '没有searchKey参数' })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 * {
-  font-family: "Microsoft YaHei", SimSun, "\5b8b\4f53", sans-serif;
+  font-family: 'Microsoft YaHei', SimSun, '\5b8b\4f53', sans-serif;
+}
+.nrt {
+  background: url(//img.alicdn.com/tfs/TB1QJqdPFXXXXccXFXXXXXXXXXX-65-48.png)
+    35px center no-repeat #fff8f6;
+  color: #595959;
+  margin-bottom: 10px;
+  padding: 20px 0 20px 123px;
+  line-height: 27px;
+  font-size: 14px;
+}
+.lrt,
+.nrt {
+  border: 1px solid #f7eae7;
+}
+.nrt a,
+.nrt em {
+  color: #790103;
+  font-weight: bolder;
+  margin: 0 10px;
 }
 .goHome:hover {
   color: rgb(255, 0, 54);
@@ -695,7 +726,7 @@ b.ui-page-s-len {
 .headerCon:after,
 .headerCon:before {
   display: table;
-  content: "";
+  content: '';
   overflow: hidden;
 }
 .ui-page-s-next,

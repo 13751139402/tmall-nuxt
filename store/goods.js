@@ -1,13 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2020-02-01 20:37:49
- * @LastEditTime : 2020-02-07 12:20:32
+ * @LastEditTime : 2020-02-07 23:47:56
  * @LastEditors  : Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tmall-nuxt\store\goods.js
  */
 export const state = () => ({
-    total: false
+    total: 0
 })
 
 const actions = {
