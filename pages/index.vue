@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-02-13 11:26:31
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 18:14:41
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\index.vue
  -->
@@ -184,7 +184,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -233,7 +233,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -259,7 +259,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -285,7 +285,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -311,7 +311,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -337,7 +337,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -363,7 +363,7 @@
                   v-for="item in list"
                   :key="item.spu_no"
                   :price="item.price"
-                  href="/"
+                  :href="`/goodsDetail/${item.spu_no}`"
                   :name="item.goods_name"
                   :img="item.cover"
                 ></floor-item>
@@ -385,39 +385,39 @@
 </template>
 
 <script>
-import siteNav from "~/components/common/site-nav.vue";
-import serachFlexView from "~/components/home/search-flex-view.vue";
-import category from "~/components/home/category-view";
-import activity from "~/components/home/activity-view";
-import wonderful from "~/components/home/wonderful-view";
-import muiLift from "~/components/home/mui-lift";
-import brandItem from "~/components/home/activity-view/children/brand-item";
-import brandHot from "~/components/home/activity-view/children/brand-hot";
-import floorLine from "~/components/home/activity-view/children/floor-line-con";
-import bigBanner from "~/components/home/activity-view/children/floor-line-con-bigBanner";
-import floorItem from "~/components/home/activity-view/children/floor-line-con-item";
-import floorTwoItem from "~/components/home/activity-view/children/floor-line-con-twoItem";
-import activityArea from "~/components/home/activity-view/children/activity-area";
-import searchView from "~/components/common/search-view";
-import { throttle } from "~/assets/common/tools.js";
+import siteNav from '~/components/common/site-nav.vue'
+import serachFlexView from '~/components/home/search-flex-view.vue'
+import category from '~/components/home/category-view'
+import activity from '~/components/home/activity-view'
+import wonderful from '~/components/home/wonderful-view'
+import muiLift from '~/components/home/mui-lift'
+import brandItem from '~/components/home/activity-view/children/brand-item'
+import brandHot from '~/components/home/activity-view/children/brand-hot'
+import floorLine from '~/components/home/activity-view/children/floor-line-con'
+import bigBanner from '~/components/home/activity-view/children/floor-line-con-bigBanner'
+import floorItem from '~/components/home/activity-view/children/floor-line-con-item'
+import floorTwoItem from '~/components/home/activity-view/children/floor-line-con-twoItem'
+import activityArea from '~/components/home/activity-view/children/activity-area'
+import searchView from '~/components/common/search-view'
+import { throttle } from '~/assets/common/tools.js'
 
 export default {
-  layout: "noNav",
+  layout: 'noNav',
   components: {
-    "site-nav": siteNav,
-    "category-view": category,
-    "activity-view": activity,
-    "wonderful-view": wonderful,
-    "mui-lift": muiLift,
-    "search-flex-view": serachFlexView,
-    "brand-item": brandItem,
-    "brand-hot": brandHot,
-    "floor-line": floorLine,
-    "floor-banner": bigBanner,
-    "floor-item": floorItem,
-    "floor-two-item": floorTwoItem,
-    "activity-area": activityArea,
-    "search-view": searchView
+    'site-nav': siteNav,
+    'category-view': category,
+    'activity-view': activity,
+    'wonderful-view': wonderful,
+    'mui-lift': muiLift,
+    'search-flex-view': serachFlexView,
+    'brand-item': brandItem,
+    'brand-hot': brandHot,
+    'floor-line': floorLine,
+    'floor-banner': bigBanner,
+    'floor-item': floorItem,
+    'floor-two-item': floorTwoItem,
+    'activity-area': activityArea,
+    'search-view': searchView
   },
   data() {
     return {
@@ -439,196 +439,196 @@ export default {
       brandList: [
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1vDvUKpXXXXaKXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "Apple/苹果"
+            'https://img.alicdn.com/i2/2/TB1vDvUKpXXXXaKXFXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: 'Apple/苹果'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1CIkXKVXXXXXCXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "第六感"
+            'https://img.alicdn.com/i2/2/TB1CIkXKVXXXXXCXFXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: '第六感'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1gR9vsyrpK1RjSZFhXXXSdXXa?abtest=&pos=3&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥20"
+            'https://img.alicdn.com/i2/2/TB1gR9vsyrpK1RjSZFhXXXSdXXa?abtest=&pos=3&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥20'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1Z.mzyMmTBuNjy1XbXXaMrVXa?abtest=&pos=4&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥300"
+            'https://img.alicdn.com/i2/2/TB1Z.mzyMmTBuNjy1XbXXaMrVXa?abtest=&pos=4&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥300'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1t.e1m2DH8KJjy1XcXXcpdXXa?abtest=&pos=5&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "Nike/耐克"
+            'https://img.alicdn.com/i2/2/TB1t.e1m2DH8KJjy1XcXXcpdXXa?abtest=&pos=5&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: 'Nike/耐克'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1nE3FN9zqK1RjSZFHXXb3CpXa?abtest=&pos=6&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "Dell/戴尔"
+            'https://img.alicdn.com/i2/2/TB1nE3FN9zqK1RjSZFHXXb3CpXa?abtest=&pos=6&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: 'Dell/戴尔'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1D0sLnHSYBuNjSspiXXXNzpXa?abtest=&pos=7&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥300"
+            'https://img.alicdn.com/i2/2/TB1D0sLnHSYBuNjSspiXXXNzpXa?abtest=&pos=7&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥300'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1ilbUHpXXXXb8XXXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "优惠券 ￥1000"
-        },
-
-        {
-          img:
-            "https://img.alicdn.com/i2/2/TB1TJNTPXXXXXcqXVXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "ENFINITAS/蓝臻"
-        },
-        {
-          img:
-            "https://img.alicdn.com/i2/2/TB1a3bVRXXXXXbfXFXXXXXXXXXX?abtest=&pos=10&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥110"
-        },
-        {
-          img:
-            "https://img.alicdn.com/i2/2/TB1gD8NhDlYBeNjSszcXXbwhFXa?abtest=&pos=11&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥200"
-        },
-        {
-          img:
-            "https://img.alicdn.com/i2/2/TB1_aF7pG6qK1RjSZFmXXX0PFXa?abtest=&pos=12&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥30"
+            'https://img.alicdn.com/i2/2/TB1ilbUHpXXXXb8XXXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: '优惠券 ￥1000'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB12cBSirGYBuNjy0FoXXciBFXa?abtest=&pos=13&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "LEAGUE OF LEGENDS/英雄联盟"
+            'https://img.alicdn.com/i2/2/TB1TJNTPXXXXXcqXVXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: 'ENFINITAS/蓝臻'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1Im97lVT7gK0jSZFpXXaTkpXa?abtest=&pos=14&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "上汽大众"
+            'https://img.alicdn.com/i2/2/TB1a3bVRXXXXXbfXFXXXXXXXXXX?abtest=&pos=10&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥110'
         },
         {
           img:
-            "https://img.alicdn.com/imgextra/i4/928417138/O1CN019OFNEK22bFcXdLUb5_!!928417138.png_100x150q100.jpg_.webp",
-          name: "优惠券 ￥300"
+            'https://img.alicdn.com/i2/2/TB1gD8NhDlYBeNjSszcXXbwhFXa?abtest=&pos=11&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥200'
         },
-
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1KH4GQpXXXXb_apXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "scout"
-        },
-
-        {
-          img:
-            "https://img.alicdn.com/i2/2/TB1_kq7j1SSBuNjy0FlXXbBpVXa?abtest=&pos=17&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥210"
+            'https://img.alicdn.com/i2/2/TB1_aF7pG6qK1RjSZFmXXX0PFXa?abtest=&pos=12&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥30'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1nJxqJXXXXXchapXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "优惠券 ￥1000"
+            'https://img.alicdn.com/i2/2/TB12cBSirGYBuNjy0FoXXciBFXa?abtest=&pos=13&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: 'LEAGUE OF LEGENDS/英雄联盟'
+        },
+        {
+          img:
+            'https://img.alicdn.com/i2/2/TB1Im97lVT7gK0jSZFpXXaTkpXa?abtest=&pos=14&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '上汽大众'
+        },
+        {
+          img:
+            'https://img.alicdn.com/imgextra/i4/928417138/O1CN019OFNEK22bFcXdLUb5_!!928417138.png_100x150q100.jpg_.webp',
+          name: '优惠券 ￥300'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1sM7GSXXXXXb3aXXXXXXXXXXX?abtest=&pos=19&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥50"
+            'https://img.alicdn.com/i2/2/TB1KH4GQpXXXXb_apXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: 'scout'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1ytKieRWD3KVjSZKPXXap7FXa?abtest=&pos=20&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "帕尔玛之水"
+            'https://img.alicdn.com/i2/2/TB1_kq7j1SSBuNjy0FlXXbBpVXa?abtest=&pos=17&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥210'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1A9Eicf5TBuNjSspmXXaDRVXa?abtest=&pos=21&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥100"
+            'https://img.alicdn.com/i2/2/TB1nJxqJXXXXXchapXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: '优惠券 ￥1000'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1R1K4GFmWBuNjSspdSuvugXXa.jpg_100x150q100.jpg_.webp",
-          name: "双心"
+            'https://img.alicdn.com/i2/2/TB1sM7GSXXXXXb3aXXXXXXXXXXX?abtest=&pos=19&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥50'
         },
 
         {
           img:
-            "https://img.alicdn.com/i2/2/T25cAwXGhXXXXXXXXX-1785908005.jpg_100x150q100.jpg_.webp",
-          name: "hot topic"
+            'https://img.alicdn.com/i2/2/TB1ytKieRWD3KVjSZKPXXap7FXa?abtest=&pos=20&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '帕尔玛之水'
+        },
+
+        {
+          img:
+            'https://img.alicdn.com/i2/2/TB1A9Eicf5TBuNjSspmXXaDRVXa?abtest=&pos=21&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥100'
+        },
+
+        {
+          img:
+            'https://img.alicdn.com/i2/2/TB1R1K4GFmWBuNjSspdSuvugXXa.jpg_100x150q100.jpg_.webp',
+          name: '双心'
+        },
+
+        {
+          img:
+            'https://img.alicdn.com/i2/2/T25cAwXGhXXXXXXXXX-1785908005.jpg_100x150q100.jpg_.webp',
+          name: 'hot topic'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB19rJeHNjaK1RjSZFAXXbdLFXa?abtest=&pos=24&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥80"
+            'https://img.alicdn.com/i2/2/TB19rJeHNjaK1RjSZFAXXbdLFXa?abtest=&pos=24&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥80'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1aA5EcMsSMeJjSspeXXa77VXa?abtest=&pos=26&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥200"
+            'https://img.alicdn.com/i2/2/TB1aA5EcMsSMeJjSspeXXa77VXa?abtest=&pos=26&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥200'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1OCoUJVXXXXcYXFXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "优惠券 ￥100"
+            'https://img.alicdn.com/i2/2/TB1OCoUJVXXXXcYXFXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: '优惠券 ￥100'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1G5bXD9BYBeNjy0FeSuvnmFXa.jpg_100x150q100.jpg_.webp",
-          name: "优惠券 ￥100"
+            'https://img.alicdn.com/i2/2/TB1G5bXD9BYBeNjy0FeSuvnmFXa.jpg_100x150q100.jpg_.webp',
+          name: '优惠券 ￥100'
         },
         {
           img:
-            "https://img.alicdn.com/i2/2/TB1XcHYHpXXXXXmXXXXSutbFXXX.jpg_100x150q100.jpg_.webp",
-          name: "优惠券 ￥200"
+            'https://img.alicdn.com/i2/2/TB1XcHYHpXXXXXmXXXXSutbFXXX.jpg_100x150q100.jpg_.webp',
+          name: '优惠券 ￥200'
         },
         {
           img:
-            "//img.alicdn.com/i2/2/TB1gOvrmZLJ8KJjy0FnXXcFDpXa?abtest=&pos=25&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp",
-          name: "优惠券 ￥80"
+            '//img.alicdn.com/i2/2/TB1gOvrmZLJ8KJjy0FnXXcFDpXa?abtest=&pos=25&abbucket=&acm=09042.1003.1.1200415&scm=1007.13029.131809.100200300000000_100x150q100.jpg_.webp',
+          name: '优惠券 ￥80'
         }
       ]
-    };
+    }
   },
   methods: {
     controlShow() {
-      let scroll = this.htmlEl.scrollTop;
+      let scroll = this.htmlEl.scrollTop
       if (scroll >= 500) {
-        this.show.lift = true;
+        this.show.lift = true
       } else {
-        this.show.lift = false;
+        this.show.lift = false
       }
       if (scroll >= 700) {
-        this.show.search = true;
+        this.show.search = true
       } else {
-        this.show.search = false;
+        this.show.search = false
       }
     },
     controlDownload() {
-      let scroll = this.htmlEl.scrollTop;
+      let scroll = this.htmlEl.scrollTop
       if (scroll >= 500) {
-        this.download.lift = true;
+        this.download.lift = true
         if (scroll >= 500) {
-          this.download.search = true;
+          this.download.search = true
         }
       }
       if (scroll >= 250) {
-        this.download.brandWall = true;
+        this.download.brandWall = true
         if (scroll >= 600) {
-          this.download.brandHot = true;
+          this.download.brandHot = true
           if (scroll >= 1000) {
-            this.download.tmallShop = true;
+            this.download.tmallShop = true
             if (scroll >= 1400) {
-              this.download.tmallInternational = true;
+              this.download.tmallInternational = true
               if (scroll >= 1800) {
-                this.download.surplus = true;
+                this.download.surplus = true
                 if (scroll >= 3000) {
-                  this.download.likes = true;
+                  this.download.likes = true
                 }
               }
             }
@@ -640,18 +640,18 @@ export default {
 
   beforeMount() {
     // 挂载前添加"窗口调整"事件
-    this.htmlEl = document.documentElement;
-    this.controlShow();
-    this.controlDownload();
-    window.addEventListener("scroll", throttle(this.controlShow, 50));
-    window.addEventListener("scroll", throttle(this.controlDownload, 50));
+    this.htmlEl = document.documentElement
+    this.controlShow()
+    this.controlDownload()
+    window.addEventListener('scroll', throttle(this.controlShow, 50))
+    window.addEventListener('scroll', throttle(this.controlDownload, 50))
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
 * {
-  font-family: "Microsoft YaHei", SimSun, "\5b8b\4f53", sans-serif;
+  font-family: 'Microsoft YaHei', SimSun, '\5b8b\4f53', sans-serif;
 }
 html,
 body,

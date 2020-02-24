@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-08 15:54:45
- * @LastEditTime : 2020-01-24 01:20:20
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 18:17:04
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\activity\children\floor-line-con-item.vue
  -->
 <template>
-  <a class="grid one-grid-price" :href="href">
+  <a class="grid one-grid-price" :href="href" target="_blank">
     <div class="floor-item-content-wrap">
       <slot>
         <div class="floor-item-tag color-type-green" style="visibility:hidden"></div>

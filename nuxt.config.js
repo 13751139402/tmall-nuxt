@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime : 2020-02-08 10:36:16
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 18:22:45
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
  */
@@ -11,7 +11,7 @@ dotenv.config() // 要在此配置env才能生效
 
 export default {
   server: {
-    port: 3001, // default: 3000
+    port: 80, // default: 3000
     host: 'localhost' // default: localhost
   },
   mode: 'universal',

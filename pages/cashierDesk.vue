@@ -313,9 +313,7 @@
                 id="J_authSubmit"
                 type="submit"
                 value="确认付款"
-                data-reactid=".1.1"
-                seed="jSubmit-J_authSubmit"
-                smartracker="on"
+                @click.prevent="payOrder"
               />
               <span class="ui-fm-status fn-hide" data-reactid=".1.2">正在提交中...</span>
             </div>
@@ -365,6 +363,22 @@ export default {
       return this.$store.state.cashierDesk.price
     }
   },
+  methods: {
+    payOrder() {
+      this.$store
+        .dispatch('cashierDesk/payOrder')
+        .then(() => {
+          this.$router.push('boughtList')
+        })
+        .catch(() => {
+          this.$message({
+            showClose: true,
+            message: '确认付款失败,请稍后再试',
+            type: 'error'
+          })
+        })
+    }
+  }
 }
 </script>
 

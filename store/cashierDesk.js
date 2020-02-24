@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-09 11:00:56
- * @LastEditTime : 2020-02-12 21:43:45
+ * @LastEditTime: 2020-02-18 17:29:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tmall-nuxt\store\confimOrder.js
@@ -15,7 +15,19 @@ export const state = () => ({
   orderIdList: []
 });
 
-const actions = {};
+const actions = {
+  payOrder({ state }) {
+    return new Promise(async (resolve, reject) => {
+      if (!state.orderIdList.length) {
+        throw new error("没有orderList");
+      }
+      await this.$axios.$put("/order/payOrder", {
+        orderList: state.orderIdList
+      });
+      resolve();
+    });
+  }
+};
 
 const mutations = {
   CREATE_TITLEDATA(state, { productName, shopName }, count) {

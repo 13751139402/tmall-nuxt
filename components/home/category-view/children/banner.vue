@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-07 14:27:29
- * @LastEditTime : 2020-01-24 01:04:17
- * @LastEditors  : Please set LastEditors
+ * @LastEditTime: 2020-02-18 18:09:01
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home\category\children\banner.vue
  -->
@@ -31,16 +31,26 @@ export default {
   data() {
     return {
       bannerList: [
-        { href: "", src: "http://hsid.top/images/1578558771089-1.jpg" },
-        { href: "", src: "http://hsid.top/images/1578558773748-2.jpg" },
-        { href: "", src: "http://hsid.top/images/1578558775749-3.jpg" },
-        { href: "", src: "http://hsid.top/images/1578558778163-4.jpg" },
-        { href: "", src: "http://hsid.top/images/1578558780547-5.jpg" },
-        { href: "", src: "http://hsid.top/images/1578558782602-6.jpg" }
+        {
+          href: '',
+          src: 'https://img.alicdn.com/tps/i4/TB18G8QvUH1gK0jSZSySuttlpXa.jpg'
+        },
+        {
+          href: '',
+          src:
+            'https://img.alicdn.com/imgextra/i1/161/O1CN01Gjg9zF1D3mLs76oSw_!!161-0-luban.jpg_q100.jpg_.webp'
+        },
+        {
+          href: '',
+          src: 'https://img.alicdn.com/tps/i4/TB13ytWiaL7gK0jSZFBSutZZpXa.jpg'
+        },
+        { href: '', src: 'https://img.alicdn.com/imgextra/i3/71/O1CN0103VpmH1COYhjGyjHc_!!71-0-luban.jpg_q100.jpg_.webp' },
+        { href: '', src: 'https://img.alicdn.com/imgextra/i1/139/O1CN01ERiHeT1Cthdbx1h0f_!!139-0-luban.jpg_q100.jpg_.webp' },
+        { href: '', src: 'https://img.alicdn.com/imgextra/i1/35/O1CN01UuRatx1C84RiaA3CN_!!35-0-luban.jpg_q100.jpg_.webp' }
       ]
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

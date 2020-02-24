@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-02-14 18:44:59
- * @LastEditTime : 2020-02-15 12:29:18
+ * @LastEditTime: 2020-02-18 17:52:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tmall-nuxt\components\boughtList\order.vue
@@ -142,7 +142,7 @@
                 </div>
               </td>
               <td class>
-                <div>
+                <div v-if="status===1">
                   <p style="margin-bottom:3px;">
                     <a
                       class="button-mod__button___3XSV8 button-mod__primary___17-Uv button-mod__button___2WM0P"
@@ -172,6 +172,45 @@
                       target="_blank"
                       rel="noopener noreferrer"
                     >修改订单</a>
+                  </p>
+                </div>
+                <div v-else>
+                  <p
+                    style="margin-bottom:3px;"
+                    data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$0"
+                  >
+                    <a
+                      href="//trade.tmall.com/detail/orderDetail.htm?op=m&amp;bizOrderId=590684621979733601"
+                      class="text-mod__link___19F14 text-mod__hover___ew25K"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$0.0"
+                    >修改订单</a>
+                  </p>
+                  <p
+                    style="margin-bottom:3px;"
+                    data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$1"
+                  >
+                    <span
+                      class="text-mod__link___19F14 text-mod__primary___24vmt text-mod__hover___ew25K"
+                      action="a1"
+                      id="notifyDelivery"
+                      data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$1.0"
+                    >提醒卖家发货</span>
+                  </p>
+                  <p
+                    style="margin-bottom:3px;"
+                    data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$2"
+                  >
+                    <a
+                      href="//invoice-ua.taobao.com/user/invoice/applyPcRoute?orderId=590684621979733601"
+                      class="text-mod__link___19F14 text-mod__hover___ew25K"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      action="b4"
+                      id="applyInvoice"
+                      data-reactid=".0.7:$order-590684621979733601.$590684621979733601.0.1:1:0.$0.$6.0.$2.0"
+                    >申请开票</a>
                   </p>
                 </div>
               </td>
@@ -230,6 +269,7 @@ export default {
   },
   methods: {
     pay() {
+      this.$store.commit('cashierDesk/CREATE_ORDERIdList', [this.id])
       this.$store.commit('cashierDesk/CREATE_TITLEDATA', {
         productName: this.firstProduct[0].product_name,
         shopName: this.shopName,
