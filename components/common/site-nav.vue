@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-02 11:04:49
- * @LastEditTime: 2020-02-18 09:48:58
+ * @LastEditTime: 2020-02-24 22:17:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\components\home-head.vue
@@ -131,6 +131,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout')
+      this.$router.push('/')
     },
     handleSelect(index) {
       if (index === 'shopCart') {

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-01-21 08:56:41
- * @LastEditTime: 2020-02-18 13:10:27
+ * @LastEditTime: 2020-02-24 22:28:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\pages\goodsDetail.vue
@@ -226,7 +226,7 @@
         </section>
       </div>
       <el-dialog :visible.sync="showLoginBox" width="25%" center>
-        <login-view @loginSucceed="showLoginBox=false"></login-view>
+        <login-view @loginSucceed="loginSucceed"></login-view>
       </el-dialog>
     </article>
 
@@ -342,6 +342,11 @@ export default {
   methods: {
     loginSucceed() {
       this.showLoginBox = false
+      if (this.activeBtn === 'shopCart') {
+        this.addToShoppingCart()
+      } else if (this.activeBtn === 'buyNow') {
+        this.buyNowSumbit()
+      }
     },
     /**
      * @description: spec 是否未false

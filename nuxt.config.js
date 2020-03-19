@@ -1,64 +1,62 @@
 /*
  * @Author: your name
  * @Date: 2019-12-31 09:37:11
- * @LastEditTime: 2020-02-18 18:22:45
+ * @LastEditTime: 2020-02-24 22:06:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \nuxt\nuxt.config.js
  */
-import dotenv from 'dotenv'
-dotenv.config() // 要在此配置env才能生效
+import dotenv from "dotenv";
+dotenv.config(); // 要在此配置env才能生效
 
 export default {
   server: {
     port: 80, // default: 3000
-    host: 'localhost' // default: localhost
+    host: "localhost" // default: localhost
   },
-  mode: 'universal',
+  mode: "universal",
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.npm_package_name || "",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: process.env.npm_package_description || ""
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
+   ** Customize the progress-bar color
+   */
+  loading: { color: "#fff" },
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: [
-    'element-ui/lib/theme-chalk/index.css',
-    '@/assets/css/main.scss',
-    '@/assets/iconfont/iconfont.css'
+    "element-ui/lib/theme-chalk/index.css",
+    "@/assets/css/main.scss",
+    "@/assets/iconfont/iconfont.css"
   ],
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    '@/plugins/axios',
-    '@/plugins/element-ui'
-  ],
+   ** Plugins to load before mounting the App
+   */
+  plugins: ["@/plugins/axios", "@/plugins/element-ui", "@/plugins/route"],
   /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-  ],
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv',
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv"
     // '@nuxtjs/auth',
   ],
   axios: {
@@ -68,21 +66,20 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/': { target: 'http://hsid.top:3000', pathRewrite: { '^/api/': '' } },
+    "/api/": { target: "http://hsid.top:3000", pathRewrite: { "^/api/": "" } }
   },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     transpile: [/^element-ui/],
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
 
-    extend(config, ctx) {
-    }
+    extend(config, ctx) {}
   },
   router: {
-    middleware: 'auth'
-  },
-}
+    middleware: "auth"
+  }
+};
