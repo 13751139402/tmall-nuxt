@@ -19,7 +19,7 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "localforage": "^1.7.3",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "standard": "^14.3.1"
   },
   "devDependencies": {
